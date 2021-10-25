@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '07bd79d684015528ebd5da4aa630f660f48fc026',
+        'reference' => 'f1f8bfcec9e6fde7ad13a5de2df51a7ef580fdae',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -28,6 +28,15 @@
             'reference' => 'ca57d18f028f84f777b2168cd1911b0dee2343ae',
             'dev_requirement' => false,
         ),
+        'composer/package-versions-deprecated' => array(
+            'pretty_version' => '1.11.99.4',
+            'version' => '1.11.99.4',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/./package-versions-deprecated',
+            'aliases' => array(),
+            'reference' => 'b174585d1fe49ceed21928a945138948cb394600',
+            'dev_requirement' => true,
+        ),
         'cordoval/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -39,6 +48,42 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'doctrine/cache' => array(
+            'pretty_version' => '2.1.1',
+            'version' => '2.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/cache',
+            'aliases' => array(),
+            'reference' => '331b4d5dbaeab3827976273e9356b3b453c300ce',
+            'dev_requirement' => true,
+        ),
+        'doctrine/dbal' => array(
+            'pretty_version' => '3.1.3',
+            'version' => '3.1.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/dbal',
+            'aliases' => array(),
+            'reference' => '96b0053775a544b4a6ab47654dac0621be8b4cf8',
+            'dev_requirement' => true,
+        ),
+        'doctrine/deprecations' => array(
+            'pretty_version' => 'v0.5.3',
+            'version' => '0.5.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/deprecations',
+            'aliases' => array(),
+            'reference' => '9504165960a1f83cc1480e2be1dd0a0478561314',
+            'dev_requirement' => true,
+        ),
+        'doctrine/event-manager' => array(
+            'pretty_version' => '1.1.1',
+            'version' => '1.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/event-manager',
+            'aliases' => array(),
+            'reference' => '41370af6a30faa9dc0368c4a6814d596e81aba7f',
+            'dev_requirement' => true,
         ),
         'doctrine/inflector' => array(
             'pretty_version' => '2.0.4',
@@ -370,6 +415,15 @@
                 0 => 'v8.67.0',
             ),
         ),
+        'kitloong/laravel-migrations-generator' => array(
+            'pretty_version' => 'v5.0.1',
+            'version' => '5.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kitloong/laravel-migrations-generator',
+            'aliases' => array(),
+            'reference' => '9f0f00bb37e4965091697a1ace3792efb1b7cb1b',
+            'dev_requirement' => true,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -391,7 +445,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '07bd79d684015528ebd5da4aa630f660f48fc026',
+            'reference' => 'f1f8bfcec9e6fde7ad13a5de2df51a7ef580fdae',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -528,6 +582,12 @@
             'aliases' => array(),
             'reference' => '3004cfa49c022183395eabc6d0e5207dfe498d00',
             'dev_requirement' => true,
+        ),
+        'ocramius/package-versions' => array(
+            'dev_requirement' => true,
+            'replaced' => array(
+                0 => '1.11.99',
+            ),
         ),
         'opis/closure' => array(
             'pretty_version' => '3.6.2',
