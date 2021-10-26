@@ -1,14 +1,51 @@
 $(document).ready(function() {   
+    //LOGIN FORM
+    $("#eyeIcon").click(function (event) {
+        if($("#login-password").attr("type") == "password")
+        {
+            $("#login-password").attr("type", "text");
+            $("#eyeIcon").text("visibility");
+        }
+        else
+        {
+            $("#login-password").attr("type", "password");
+            $("#eyeIcon").text("visibility_off");
+        }
+    });
+    $("#loginForm").submit(function(event) {
+        if($("#login-username").val() == "" || $("#login-password").val() == "")
+        {
+            $("#error-message").html("<br><div class='alert alert-danger alert-dismissible'>" + 
+                                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + 
+                                    "Nebylo zadáno uživatelské jméno nebo heslo.</div>");
+            event.preventDefault();
+        }
+    });
+
+    $("#login-username").focusout(function() {
+        if($("#login-username").val() == "")
+            $("#invalid-username").text("Nebylo zadáno uživatelské jméno.");
+        else
+            $("#invalid-username").text("");
+    });
+
+    $("#login-password").focusout(function() {
+        if($("#login-password").val() == "")
+            $("#invalid-password").text("Nebylo zadáno heslo.");
+        else
+            $("#invalid-username").text("");
+    });
+
+    //REGISTER FORM
     $('[data-toggle="popover"]').popover();   
 
     $("#username").focusout(VerifyUsername);
-    $("#email").focusout(VerifyMail);
+    
     $("#password").on("input", function() {
         VerifyPasswords();
         if($("#password-reenter").val() == "")
             $("#nonmatching-passwords").text("");
     });
-    $("#password-reenter").on("input", VerifyPasswords);
 
     function VerifyUsername()
     {
@@ -23,49 +60,6 @@ $(document).ready(function() {
                 "Nebylo zadáno uživatelské jméno." : "Formát uživatelského jména není platný. (viz. ikona vpravo)");
     }
 
-    function VerifyMail()
-    {
-        $("#invalid-email").text(IsMailValid($("#email").val()) ? "" :
-            $("#email").val() == "" ? 
-                "E-mailová adresa je povinný údaj." : "Tento formát e-mailové adresy není správný.");
-    }
-
-    function VerifyPasswords()
-    {
-        var passwordStrength = GetPasswordStrenght($("#password").val());
-
-        if($("#password").val() == "")
-        {
-            if($("#invalid-password").hasClass("warn-label"))
-                $("#invalid-password").removeClass("warn-label");
-            if(!$("#invalid-password").hasClass("err-label"))
-                $("#invalid-password").addClass("err-label");
-            $("#invalid-password").text("Nebylo zadáno heslo.");
-        }
-        else if(passwordStrength < 0)
-        {
-            if($("#invalid-password").hasClass("warn-label"))
-                $("#invalid-password").removeClass("warn-label");
-            if(!$("#invalid-password").hasClass("err-label"))
-                $("#invalid-password").addClass("err-label");
-            $("#invalid-password").text("Heslo není dostatečně silné.");
-        }
-        else if(passwordStrength == 0)
-        {
-            if($("#invalid-password").hasClass("err-label"))
-                $("#invalid-password").removeClass("err-label");
-            if(!$("#invalid-password").hasClass("warn-label"))
-                $("#invalid-password").addClass("warn-label");
-            $("#invalid-password").text("Heslo splňuje minimální požadavky, přesto doporučujeme zvolit silnější variantu.");
-        }
-        else
-            $("#invalid-password").text("");
-
-        if($("#password").val() != $("#password-reenter").val())
-            $("#nonmatching-passwords").text("Zadaná hesla nejsou shodná.");
-        else
-            $("#nonmatching-passwords").text("");
-    }
 
     $("#registerForm").submit(function(event) {
         if(!IsUsernameValid($("#username").val()) || !IsMailValid($("#email").val()) ||

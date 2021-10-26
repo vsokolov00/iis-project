@@ -3,7 +3,8 @@
 @section('content')
 <div class="container page">
     <div class="jumbotron-fluid">
-    <h1 id="register-header">Registrace</h1>
+        <h1 id="register-header">Registrace</h1>
+        
         <form method="POST" action="{{ route('register') }}" id="registerForm" name="registerForm">
             @csrf
             <div class="input-group col-xs-4">
