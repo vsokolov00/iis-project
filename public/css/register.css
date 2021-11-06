@@ -22,7 +22,7 @@
     font-size: large !important;
 }
 
-.button-yellow:hover 
+.button-yellow:hover
 {
     background-color: #F0D200 !important;
     border-color: #F0D200 !important;
@@ -41,6 +41,6 @@
 input { padding-right: 25px !important; }
 body { font-family: Roboto !important; }
 .form-icon { margin-left: -30px; z-index: 3; }
-a.form-icon { margin-top: 5px; }
+a.form-icon { margin-top: 5px; color: black; }
 .err-label { color: red; font-size: smaller; }
 .warn-label { color: orange; font-size: smaller; }
