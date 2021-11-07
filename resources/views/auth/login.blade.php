@@ -7,7 +7,7 @@
         <h1 id="login-header">Přihlášení</h1>
 
         <form method="POST" id="loginForm" name="loginForm">
-
+            @csrf
             <div class="input-group col-lg-5 col-xs-5">
                 <div class="login">
                     <input id="login-username" type="email" class="form-control @error('email') is-invalid @enderror text-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-mailová adresa">
