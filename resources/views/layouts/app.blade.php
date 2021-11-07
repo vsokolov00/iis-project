@@ -23,12 +23,14 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/auction_style.css') }}">
+    <!--Auction js script-->
+    <script src="{{ asset('js/auction-scripts.js') }}" defer></script>
 </head>
 <body>
     <div id="app">
         @component('components.navbar')
         @endcomponent
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
