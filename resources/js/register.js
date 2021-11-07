@@ -1,5 +1,5 @@
-$(document).ready(function() {   
-    $('[data-toggle="popover"]').popover();   
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
 
     $("#username").focusout(VerifyUsername);
     $("#email").focusout(VerifyMail);
@@ -17,8 +17,8 @@ $(document).ready(function() {
                 if(response == "NOT_FREE")
                     $("#invalid-username").text("Účet s daným uživatelským jménem již existuje.");
             });
-        
-        $("#invalid-username").text(IsUsernameValid($("#username").val()) ? "" : 
+
+        $("#invalid-username").text(IsUsernameValid($("#username").val()) ? "" :
             $("#username").val() == "" ?
                 "Nebylo zadáno uživatelské jméno." : "Formát uživatelského jména není platný. (viz. ikona vpravo)");
     }
@@ -26,7 +26,7 @@ $(document).ready(function() {
     function VerifyMail()
     {
         $("#invalid-email").text(IsMailValid($("#email").val()) ? "" :
-            $("#email").val() == "" ? 
+            $("#email").val() == "" ?
                 "E-mailová adresa je povinný údaj." : "Tento formát e-mailové adresy není správný.");
     }
 
@@ -76,8 +76,8 @@ $(document).ready(function() {
             VerifyMail();
             VerifyPasswords();
 
-            $("#error-message").html("<br><div class='alert alert-danger alert-dismissible'>" + 
-                                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + 
+            $("#error-message").html("<br><div class='alert alert-danger alert-dismissible'>" +
+                                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                                     "Zadané údaje jsou nesprávné, pro více informací klikněte na ikonu vedle zadávacího pole.</div>");
         }
     });
