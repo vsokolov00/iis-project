@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" style="box-shadow: 0px 0px 5px #888888;">
     <div class="container">
         <a class="navbar-brand mr-auto" href="{{ route('home') }}">
             <img src="{{ url('/') }}/assets/logo.png" width="75" style="margin: -10px 0px -10px 0px;"/>

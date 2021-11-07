@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container page">
+<div class="container page register-page">
     <div class="jumbotron-fluid">
         <h1 id="register-header">Registrace</h1>
 

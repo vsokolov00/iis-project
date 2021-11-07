@@ -1,7 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="background-grey">
+    <div class="container">
+        <div class="d-flex jumbotron justify-content-center flex-column bg-white">
+            <h2>Online aukční portál pro věci všeho druhu.<br>Každá věc má u nás svou hodnotu!</h2>
+
+            <div class="d-flex flex-md-nowrap flex-wrap justify-content-start flex-row">
+                <a class="btn btn-success nav-link m-2 col-xs-2" href="#" role="button">
+                    <div class="d-flex justify-content-center">
+                        Všechny aukce
+                    </div>
+                </a>
+
+                <a class="btn btn-warning nav-link m-2 col-xs-2" href="#" role="button">
+                    <div class="d-flex justify-content-center">
+                        Vytvořit aukci
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+	<div class="background-grey pt-5 pb-5">
 			<div class="container">
 					<div class="d-flex justify-content-center py-3">
 							<h1 class="">Aukční informační systém</h1>
@@ -13,7 +32,7 @@
 											<div class="material-icons-outlined md-48" id="newAuctionLeft" onclick="leftScroll('#newAuctionList')">
 													arrow_back_ios
 											</div>
-									</div>	
+									</div>
 									<div class="d-flex mainPage-auctionv -list" id="newAuctionList">
 										@foreach ($auctions as $auction)
 											<div class="mainPage-auction">
@@ -49,11 +68,11 @@
 											<div class="material-icons-outlined md-48" id="newAuctionLeft" onclick="leftScroll('#favouriteAuctionList')">
 													arrow_back_ios
 											</div>
-									</div>	
+									</div>
 									<div class="d-flex mainPage-auction-list" id="favouriteAuctionList">
-											<?php for($i=0; $i < 6; $i++){ 
+											<?php for($i=0; $i < 6; $i++){
 													echo '
-											
+
 															<div class="mainPage-auction">
 																	<img class="img-fluid" src="./img/vaza.jpg" alt="Položka aukce"/>
 																	<h4>Malovaná váza</h4>
