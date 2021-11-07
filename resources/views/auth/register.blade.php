@@ -7,10 +7,10 @@
 
         <form method="POST" action="{{ route('register') }}" id="registerForm" name="registerForm">
             @csrf
-            <div class="input-group col-xs-4">
-                <b>Uživatelské jméno</b><br>
+            <div class="input-group col-lg-5 col-xs-5">
+                <b>Uživatelské jméno</b>
                 <div class="register">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    <input id="username" type="text" class="form-control @error('name') is-invalid @enderror text-input" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Formát uživatelského jména" data-placement="bottom"
                                 data-content="Uživatelské jméno musí být alespoň 4 znaky dlouhé a může obsahovat pouze malá/velká písmena, číslice a některé speciální znaky. (., -, _)">
                             <i class="material-icons">person</i>
@@ -24,10 +24,10 @@
                 </b>
             </div>
 
-            <div class="input-group col-xs-4">
-                <b>E-mailová adresa</b><br>
+            <div class="input-group col-lg-5 col-xs-5">
+                <b>E-mailová adresa</b>
                 <div class="register">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror text-input" name="email" value="{{ old('email') }}" required autocomplete="email">
                         <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Vaše E-mailová adresa" data-placement="bottom"
                             data-content="Zadaná adresa bude použita pouze jako možnost obnovy v případě zapomenutého hesla.">
                             <i class="material-icons">alternate_email</i>
@@ -41,10 +41,10 @@
                 </b>
             </div>
 
-            <div class="input-group col-xs-4">
-            <b>Heslo</b><br>
+            <div class="input-group col-lg-5 col-xs-5">
+            <b>Heslo</b>
                 <div class="register">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror text-input" name="password" required autocomplete="new-password">
                         <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Doporučený formát hesla" data-placement="bottom"
                             data-content="Heslo musí být alespoň 6 znaků dlouhé a obsahovat přinejmenším alespoň jednu číslici. Doporučujeme použít heslo o délce alespoň 8 znaků s použitím speciálních znaků a číslic.">
                             <i class="material-icons">password</i>
@@ -58,21 +58,31 @@
                 </b>
             </div>
 
-            <div class="input-group col-xs-4">
+            <div class="input-group col-lg-5 col-xs-5">
                 <b>Ověření hesla</b>
                 <div class="register">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    <input id="password-confirm" type="password" class="form-control text-input" name="password_confirmation" required autocomplete="new-password">
                         <i class="material-icons form-icon">password</i>
                     </input>
                 </div>
                 <b class="err-label" id="nonmatching-passwords"></b>
             </div>
 
-            <div class="input-group col-xs-3">
+            <div class="input-group col-7 col-lg-4">
                     <button type="submit" class="btn btn-primary button-yellow btn-group-lg btn-block">
                         Registrovat
                     </button>
             </div>
+
+            <div class="col-lg-5 col-xs-5">
+                @if (Route::has('login'))
+                    <center>
+                        <a href="{{ route('login') }}">Máte již u nás účet? Přihlašte se.</a>
+                    </center>
+                @endif
+            </div>
+
+            <div class='col-xs-6' id="error-message"></div>
         </form>
     </div>
 </div>

@@ -8,9 +8,9 @@
 
         <form method="POST" id="loginForm" name="loginForm">
 
-            <div class="input-group col-xs-4">
+            <div class="input-group col-lg-5 col-xs-5">
                 <div class="login">
-                    <input id="login-username" type="email" class="form-control @error('email') is-invalid @enderror text-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Uživatelské jméno">
+                    <input id="login-username" type="email" class="form-control @error('email') is-invalid @enderror text-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="E-mailová adresa">
                         <i class="material-icons form-icon">person</i>
                     </input>
                 </div>
@@ -21,7 +21,7 @@
                 </b>
             </div>
 
-            <div class="input-group col-xs-4">
+            <div class="input-group col-lg-5 col-xs-5">
                 <div class="login">
                     <input id="login-password" type="password" class="form-control @error('password') is-invalid @enderror text-input" name="password" required autocomplete="current-password" placeholder="Heslo">
                         <a href="#" class="form-icon"><i id="eyeIcon" class="material-icons">visibility_off</i></a>
@@ -34,8 +34,16 @@
                 </b>
             </div>
 
-            <div class="input-group col-xs-3">
+            <div class="input-group col-7 col-lg-4">
                 <button type="submit" class="btn btn-primary button-yellow btn-group-lg btn-block">Přihlásit</button>
+            </div>
+
+            <div class="col-lg-5 col-xs-5">
+                @if (Route::has('register'))
+                    <center>
+                        <a href="{{ route('register') }}">Nemáte účet? Registrujte se u nás!</a>
+                    </center>
+                @endif
             </div>
         </form>
     </div>
