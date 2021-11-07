@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container">
         <a class="navbar-brand mr-auto" href="{{ route('home') }}">
-            <img src="{{ url('/') }}/assets/logo.png" width="50"/>
+            <img src="{{ url('/') }}/assets/logo.png" width="75" style="margin: -10px 0px -10px 0px;"/>
         </a>
 
         <a class="btn btn-success nav-link mx-1" href="{{ url('form') }}" role="button">
