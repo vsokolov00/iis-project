@@ -44,7 +44,7 @@ jQuery(function() {
     $("#email").on("focusout", VerifyMail);
     $("#password").on("input", function() {
         VerifyPasswords();
-        if($("#password-reenter").val() == "")
+        if($("#password-confirm").val() == "")
             $("#nonmatching-passwords").text("");
     });
     $("#password-confirm").on("input", VerifyPasswords);
@@ -102,7 +102,7 @@ jQuery(function() {
 
     $("#registerForm").on("submit", function(event) {
         if(!IsUsernameValid($("#username").val()) || !IsMailValid($("#email").val()) ||
-            GetPasswordStrenght($("#password").val()) < 0 || $("#password-reenter").val() != $("#password").val())
+            GetPasswordStrenght($("#password").val()) < 0 || $("#password-confirm").val() != $("#password").val())
         {
             event.preventDefault();
             VerifyUsername();
