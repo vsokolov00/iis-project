@@ -1,5 +1,5 @@
 jQuery(function() {
-    $('[data-toggle="popover"]').popover();
+    $("[data-toggle=popover]").popover();
 
     //LOGIN FORM
     $("#eyeIcon").on("click", function (event) {
