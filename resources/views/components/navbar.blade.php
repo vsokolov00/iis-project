@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container">
-        <a class="navbar-brand mr-auto" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+        <a class="navbar-brand mr-auto" href="{{ route('home') }}">
+            <img src="{{ url('/') }}/assets/logo.png" width="50"/>
         </a>
 
         <a class="btn btn-success nav-link mx-1" href="#" role="button">
