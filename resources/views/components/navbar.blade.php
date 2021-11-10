@@ -18,7 +18,7 @@
         </div>
         </a>
         <div class="nav-item dropdown d-none d-lg-block">
-        <span class="material-icons md-48 nav-link " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">account_circle</span>
+        <span id="account_circle" class="material-icons md-48 nav-link " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">account_circle</span>
         <div class="dropdown-menu dropdown-menu-right">
             @guest
                 @if (Route::has('login'))

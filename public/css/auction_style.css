@@ -12,6 +12,10 @@ body{
 .material-icons-outlined.md-36 { font-size: 36px; }
 .material-icons-outlined.md-48 { font-size: 48px; }
 
+#account_circle {
+    cursor: pointer;
+}
+
 .navbar .dropdown-menu-right { 
     right: 0; 
     left: auto; 
