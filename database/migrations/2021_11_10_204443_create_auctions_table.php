@@ -15,7 +15,7 @@ class CreateAuctionsTable extends Migration
     {
         Schema::create('auctions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('item')->nullable()->index('item_fk');
+            $table->unsignedInteger('item')->index('item_fk');
             $table->tinyInteger('is_open');
             $table->tinyInteger('is_selling');
             $table->tinyInteger('is_approved')->default(0);
@@ -26,8 +26,9 @@ class CreateAuctionsTable extends Migration
             $table->float('closing_price', 10, 0)->nullable();
             $table->dateTime('time_limit')->nullable();
             $table->tinyInteger('is_finished')->nullable()->default(0);
-            $table->unsignedInteger('owner')->nullable()->index('owner_fk');
             $table->unsignedInteger('winner')->nullable()->index('winner_fk');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
         });
     }
 

@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->string('password')->nullable();
-            $table->date('birthday')->nullable();
         });
     }
 
