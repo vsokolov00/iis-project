@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Auction;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = Auction::with('auctionItem')->orderBy('start_time')->take(7)->get();
+
+        return view('home', ["auctions" => $data]);
     }
 }

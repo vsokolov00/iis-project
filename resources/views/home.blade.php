@@ -15,18 +15,21 @@
 											</div>
 									</div>	
 									<div class="d-flex mainPage-auction-list" id="newAuctionList">
-											<?php for($i=0; $i < 6; $i++){ 
-													echo '
-											
-															<div class="mainPage-auction">
-																	<img class="img-fluid" src="./img/vaza.jpg" alt="Položka aukce"/>
-																	<h4>Malovaná váza</h4>
-																	<div class="mainPage-offer">Nabídka</div>
-																	<h3>5000Kč</h3>
-																	<span>Začátek: 10.11.2021 13:30</span>
-															</div>
-													';
-											}?>
+										@foreach ($auctions as $auction)
+											<div class="mainPage-auction">
+													<img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
+													<h4>{{ $auction->auctionItem->item_name }}</h4>
+													<div class="mainPage-offer">
+														@if ($auction->is_selling)
+															Nabídka
+														@else
+															Poptávka
+														@endif
+													</div>
+													<h3>{{ $auction->starting_price }} Kč</h3>
+													<span>Začátek: {{ $auction->start_time }}</span>
+											</div>
+										@endforeach
 									</div>
 									<div class = "d-flex align-items-center list-arrow-right hidesRight">
 											<div class="list-arrow" id="newAuctionRight" onclick="rightScroll('#newAuctionList')">

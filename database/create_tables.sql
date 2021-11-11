@@ -79,8 +79,14 @@ CREATE TABLE `auctioneers_of` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO `auction_items` (`id`, `owner`, `item_name`, `description`, `created_at`)
-VALUES (1, 1, 'Test item', 'The best item!', now());
+INSERT INTO `auction_items` (`id`, `owner`, `item_name`, `description`, `created_at`, `image`)
+VALUES (1, 1, 'Test item', 'The best item!', now(), `ps_image.jpg`);
+
+INSERT INTO `auction_items` (`id`, `owner`, `item_name`, `description`, `created_at`, `image`)
+VALUES (2, 1, 'Playstation', 'Ps4 slim with games', now(), `krava.jpg`);
 
 INSERT INTO `auctions` (`id`, `item`, `is_open`, `is_selling`, `is_approved`, `starting_price`, `is_active`, `closing_price`, `created_at`)
 VALUES (1, 1, 1, 1, 1, 100, 1, 500, now());
+
+INSERT INTO `auctions` (`id`, `item`, `is_open`, `is_selling`, `is_approved`, `starting_price`, `is_active`, `closing_price`, `created_at`, `start_time`)
+VALUES (2, 2, 1, 0, 1, 3000, 1, 2500, now(), now());

@@ -16,6 +16,11 @@ body{
     cursor: pointer;
 }
 
+.img-fluid {
+    max-height: 200px;
+    width: auto;
+}
+
 .navbar .dropdown-menu-right { 
     right: 0; 
     left: auto; 
@@ -265,7 +270,8 @@ nav .container{
     position: relative;
     align-items: center;
     -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */    
+    scrollbar-width: none;  /* Firefox */   
+    cursor: pointer;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
