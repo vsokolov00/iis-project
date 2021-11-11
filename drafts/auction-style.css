@@ -1,0 +1,433 @@
+
+body{ 
+    font-family: 'Roboto', sans-serif;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons-outlined.md-18 { font-size: 18px; }
+.material-icons-outlined.md-24 { font-size: 24px; }
+.material-icons-outlined.md-36 { font-size: 36px; }
+.material-icons-outlined.md-48 { font-size: 48px; }
+
+.navbar .dropdown-menu-right { 
+    right: 0; 
+    left: auto; 
+}
+
+@media (min-width: 992px){
+    .navbar-expand-lg .navbar-collapse{
+        display: none !important;;
+    }
+}  
+
+.img-auction-detail{
+    display: block;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 20px;
+    flex:1;
+} 
+
+.img-auction-detail img{
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+
+@media (max-width: 768px){
+    .img-auction-detail{
+        max-width:100%;
+    }
+}
+
+.auction-detail-panel{
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.two-columns{
+    gap: 40px;
+}
+
+.yellow-text{
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 64px;
+}
+
+.green-text{
+    color: #42AA1F;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+h4{
+    font-weight: bold;
+    margin: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button{  
+    opacity: 1
+}
+
+.container{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    overflow-y: auto;
+}
+
+nav .container{
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow-y: unset;
+}
+
+
+.auction-description{
+    background-color: #EEEEEE;
+    padding: 1px 0 1px 0;
+}
+
+.font-size-25 {
+    max-width:200px;
+    font-size:25px;
+}
+
+@media (min-width: 768px){
+.table-display-lg{
+    display:table;
+}
+
+.table-display-sm{
+    display:none;
+}
+}
+
+@media (max-width: 768px){
+    .table-display-lg{
+        display:none;
+    }
+    .table-display-sm{
+        display:table;
+    }
+}
+
+.table-plain, .table-plain tr, .table-plain td, .table-plain th{ 
+    border:none!important;
+    background-color: transparent!important;
+}
+
+.table-plain tr:hover{
+    box-shadow:none!important;
+}
+
+.table-striped tbody tr:hover{
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px, rgb(0 0 0 / 10%) 0px 3px 10px 0px;
+    transition: box-shadow 100ms linear 0s;
+}
+
+.detail-container{
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 4;
+}
+
+.detail-background{
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 3;
+    background-color: #DDDDDD;
+    opacity: 50%;
+}
+
+.detail-view-hide{
+    display: none!important;;
+    z-index:0;
+}
+.detail-form{
+    max-width:1000px;
+    background-color: #FFFFFF;
+    z-index: 5;
+    opacity:1;
+    padding:20px;
+    border-radius:20px;
+    margin: 10px;
+    overflow-x: auto;
+    max-height: 90%;
+}
+
+.detail-list-view{
+    max-height:500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior:smooth;
+}
+
+.material-switch > input[type="checkbox"] {
+    display: none;   
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative; 
+    width: 40px;  
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
+}
+
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+
+#auctionTypeSwitch > label::after{
+    background: #42AA1F;
+}
+
+#auctionTypeSwitch > input[type="checkbox"]:not(:checked) + label::before {
+    background: #42AA1F;
+    opacity: 0.5;
+}
+
+#auctionTypeSwitch > input[type="checkbox"]:checked + label::after {
+    background: #FFD700;
+    left: 20px;
+}
+
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
+}
+
+.label-green{
+  background: #42AA1F;
+  color: #42AA1F;
+}
+
+.label-yellow{
+  background: #FFD700;
+  color: #FFD700;
+}
+
+.auctionTypeLabel.label-green {
+    background: transparent;
+    color: #42AA1F;
+  }
+  
+.auctionTypeLabel.label-yellow{
+    background: transparent;
+    color: #FFD700;
+  }
+
+.chooseBtn{
+    color: #FFFFFF;
+    padding: 5px;
+    cursor: context-menu;
+}
+
+.chooseBtn-not-checked{
+    background: #CCCCCC;
+    color: #333333;
+}
+.choose-from-2{
+    border-radius: 5px;
+    overflow: hidden;
+}
+.mainPage-auction-list{
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom:25px;
+    padding-left: 5px;
+    overflow-x: scroll;
+    position: relative;
+    align-items: center;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */    
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.mainPage-auction-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+
+.mainPage-auction{
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.mainPage-auction:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.mainPage-offer{
+    color: #42AA1F;
+}
+
+.background-grey{
+    background-color: #EEEEEE;
+}
+
+.list-arrow-right{
+    z-index: 2;
+    background: linear-gradient(to right, rgba(238,238,238,0), 40%, rgba(238,238,238,1));
+    margin-left: -48px;
+    display: flex;
+}
+
+.list-arrow-left{
+    z-index: 2;
+    background: linear-gradient(to left, rgba(238,238,238,0), 40%, rgba(238,238,238,1));
+    margin-right: -48px;
+    display: flex;
+}
+
+@media only screen and (hover: none) and (pointer: coarse){
+    .list-arrow-left, .list-arrow-right{
+        visibility: hidden;
+    }
+}
+
+.mainPage-auction-list-container{
+    overflow-x: hidden;
+}
+.mainPage-auction-list-container .hidesLeft{
+    margin-left: -48px;
+    margin-right: 0px;
+    animation: moveArrowLeft 0.5s ease;
+}
+
+.mainPage-auction-list-container:hover .hidesLeft{
+    margin-left:0px;
+    margin-right: -48px;
+    animation: moveArrowRight 0.5s ease;
+}
+
+.mainPage-auction-list-container .hidesRight{
+    margin-left: 0;
+    margin-right: -48px;
+    animation: moveArrowRight 0.5s ease;
+}
+
+.mainPage-auction-list-container:hover .hidesRight{
+    margin-left: -48px;
+    margin-right: 0;
+    animation: moveArrowLeft 0.5s ease;
+}
+
+@keyframes moveArrowRight {
+    from {
+        margin-left: -48px;
+        margin-right: 0;
+        
+    }
+    to {
+        margin-left: 0;
+        margin-right: -48px;
+       
+    }
+  }
+
+@keyframes moveArrowLeft {
+    from {
+        margin-left: 0px;
+        margin-right: -48px;
+        
+    }
+    to {
+        margin-left: -48px;
+        margin-right: 0;
+        
+    }
+}
+
+.all-aution-list{
+    padding: 10px;
+    gap: 10px;
+}
+
+.allAuctions-item{
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    flex-shrink: 1;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+}
+
+@media (max-width: 990px){
+    .allAuctions-item{
+        min-width: 200px;
+    }
+}
+@media (max-width: 520px){
+    .allAuctions-item{
+        min-width: 160px;
+    }
+}
+
+/*@media (min-width: 700px){
+    .detail-view-list tbody{
+        display: block;
+        max-height: 400px;
+        overflow-y: auto;
+        width:100%
+    }
+    .detail-view-list thead tr{
+        display: flex;
+    }
+}*/
+.material-icons{
+    cursor: context-menu;
+}
