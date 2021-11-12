@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Auction;
 use App\Models\AuctionItem;
@@ -14,6 +15,22 @@ class CreateAuctionFormController extends Controller
     }
 
     public function create(Request $req) {
+        //TODO
+        // $validator = Validator::make($req->toArray(),
+        // [
+        //     'item_name' => 'required|string|max:255',
+        //     'description' => 'required|string|max:255',
+        //     'image' => 'string|max:255',
+        //     'password' => 'required|string|min:6|confirmed',
+        //     'start_time' => 'required|integer',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json(['errors'=>$validator->errors()]);
+        // } else {
+        //     return "";
+        // }
+
         $auction_item = new AuctionItem();
         $auction = new Auction();
 
@@ -38,6 +55,7 @@ class CreateAuctionFormController extends Controller
 
         Auction::create($auction->toArray());
 
+        #redirect to the list of created auctions TODO
         return redirect('/');
     }
 }

@@ -7,18 +7,18 @@
       <div class="d-sm-flex  flex-md-row my-1">
         <div class="col">
           <label for="name">Název</label>
-          <input type="text" class="form-control" id="name" name="name">
+          <input type="text" class="form-control" id="name" name="name" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
         </div>
         <div class="col">
           <label for="startPrice">Počáteční cena</label>
-          <input type="text" class="form-control" id="stratPrice" name="stratPrice">
+          <input type="text" class="form-control" id="stratPrice" name="stratPrice" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
         </div>
       </div>
 
       <div class="d-sm-flex  flex-md-row my-1">
         <div class="col">
           <label for="name">Popis</label>
-          <input type="text" class="form-control" id="description" name="description">
+          <input type="text" class="form-control" id="description" name="description" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
         </div>
       </div>
 
@@ -32,7 +32,7 @@
       <div class="d-sm-flex  flex-sm-row my-1">
         <div class="col">
           <label for="auctionStart">Začátek aukce</label>
-          <input type="datetime-local" class="form-control" id="auctionStart" name="auctionStart"/>
+          <input type="datetime-local" class="form-control" id="auctionStart" name="auctionStart" required oninvalid="this.setCustomValidity('Vyplnite toto policko')"/>
         </div>
         <div class="col">
           <label for="auctionEnd">Konec aukce</label>
@@ -59,9 +59,9 @@
             <div class="col chooseBtn label-green text-center chooseBtn-not-checked" id="buy" onclick="chooseFromClicked('#buy', '#sell')">Nákup</div>
             <div class="col chooseBtn label-yellow text-center" id="sell" onclick="chooseFromClicked('#sell', '#buy')">Prodej</div>
             <!--EASIER FOR THE MODEL, SOLVE LATER-->
-            <input type="radio" checked="checked" name="is_selling" id="buy" value="0" />
+            <input type="radio" name="is_selling" id="buy" value="0" />
             <label for="buy">Nakup</label>
-            <input type="radio" name="is_selling" id="sell" value="1" />
+            <input type="radio" checked="checked" name="is_selling" id="sell" value="1" />
             <label for="sell">Prodej</label>
             <!---->
           </div>
@@ -88,7 +88,7 @@
         </div>
 
         <!--TODO styles!!!-->
-        <input type="file" accept="image/*" name="image" required>
+        <input type="file" accept="image/*" name="image">
 
         <input type="submit" value="Vytvorit">
 
