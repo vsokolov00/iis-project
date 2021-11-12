@@ -19,5 +19,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::view('/form', 'create-auction');
 
+Route::post('create_auction', [App\Http\Controllers\CreateAuctionFormController::class, 'create']);
 

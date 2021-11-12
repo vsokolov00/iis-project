@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuctionItem extends Model
 {
-    use HasFactory;
+    protected $fillable = ['item_name', 'owner', 'description', 'image'];
 
     public function owner() {
         return $this->belongsTo(User::class, 'owner', 'id');

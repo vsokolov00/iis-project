@@ -4,14 +4,14 @@
             <img src="{{ url('/') }}/assets/logo.png" width="50"/>
         </a>
 
-        <a class="btn btn-success nav-link mx-1" href="#" role="button">
+        <a class="btn btn-success nav-link mx-1" href="{{ url('form') }}" role="button">
             <div class="d-flex align-items-center">
             <span class="material-icons-outlined">shopping_cart</span>
             <span class="d-none d-lg-block">Chci koupit</span>
             </div>
         </a>
 
-        <a class="btn btn-warning nav-link mx-1" href="#" role="button">
+        <a class="btn btn-warning nav-link mx-1" href="{{ url('form') }}" role="button">
         <div class="d-flex align-items-center">
             <span class="material-icons-outlined">sell</span>
             <span class="d-none d-lg-block">Chci prodat</span>
