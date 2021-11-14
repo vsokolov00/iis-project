@@ -6,13 +6,14 @@
         <h1 id="register-header">Profil</h1>
 
         <form method="POST" id="change-username">
+            @csrf
             <div class="m-3">
-                <h5>Uživatelské jméno<h5>
+                <h5>Jméno<h5>
                 <div class="d-flex align-items-center">
                     <div class="col-sm-9 col-md-7 col-lg-4">
-                        <input id="username" type="text" class="form-control" value="{{ Auth::user()->name }}" disabled/>
+                        <input id="username" type="text" name="username" class="form-control" value="{{ Auth::user()->name }}" readonly/>
                     </div>
-                    <button class="rounded border d-flex p-1">
+                    <button type="submit" class="rounded border d-flex p-1">
                         <i id="change-username-submit" class="material-icons md-24 color-warning">edit</i>
                     </button>
                 </div>
@@ -20,13 +21,14 @@
         </form>
 
         <form method="POST" id="change-email">
+            @csrf
             <div class="m-3">
                 <h5>E-mailová adresa</h5>
                 <div class="d-flex align-items-center">
                     <div class="col-sm-9 col-md-7 col-lg-4">
-                        <input id="email" type="email" class="form-control" value="{{ Auth::user()->email }}" disabled/>
+                        <input id="email" type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly/>
                     </div>
-                    <button class="rounded border d-flex p-1">
+                    <button type="submit" class="rounded border d-flex p-1">
                         <i id="change-email-submit" class="material-icons md-24 color-warning">edit</i>
                     </button>
                 </div>
@@ -51,10 +53,11 @@
             <h5>Změna hesla</h5>
             <div class="d-flex flex-column">
                 <form method="POST" class="d-flex flex-column align-items-center">
+                    @csrf
                     <div class="input-group col-lg-5 col-xs-5">
                         <b>Nové heslo</b>
                         <div class="register">
-                            <input id="password" type="password" class="form-control text-input" name="password" required autocomplete="new-password" placeholder="Vaše nové heslo">
+                            <input id="password" type="password" class="form-control text-input" name="new-password" required autocomplete="new-password" placeholder="Vaše nové heslo">
                                 <a class="form-icon" data-toggle="popover" data-trigger="click" title="Doporučený formát hesla" data-placement="bottom"
                                     data-content="Heslo musí být alespoň 6 znaků dlouhé a obsahovat přinejmenším alespoň jednu číslici. Doporučujeme použít heslo o délce alespoň 8 znaků s použitím speciálních znaků a číslic.">
                                     <i class="material-icons">password</i>
@@ -68,7 +71,7 @@
                     <div class="input-group col-lg-5 col-xs-5">
                         <b>Ověření hesla</b>
                         <div class="register">
-                            <input id="password-confirm" type="password" class="form-control text-input" name="password_confirmation" required autocomplete="new-password" placeholder="Nové heslo znovu">
+                            <input id="password-confirm" type="password" class="form-control text-input" name="password-confirm" required autocomplete="new_password" placeholder="Nové heslo znovu">
                                 <i class="material-icons form-icon">password</i>
                             </input>
                         </div>
@@ -78,7 +81,7 @@
                     <div class="input-group col-lg-5 col-xs-5">
                         <b>Staré heslo</b>
                         <div class="login">
-                            <input id="login-password" type="password" class="form-control text-input" name="password" required autocomplete="current-password" placeholder="Staré heslo">
+                            <input id="login-password" type="password" class="form-control text-input" name="old_password" required autocomplete="current_password" placeholder="Staré heslo">
                                 <a class="form-icon"><i id="eyeIcon" class="material-icons">visibility_off</i></a>
                             </input>
                         </div>
