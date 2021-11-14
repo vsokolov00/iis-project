@@ -116,6 +116,45 @@ jQuery(function() {
     });
 });
 
+// EDIT FORM
+$("#change-username").on("submit", function(action) {
+    console.log("here");
+    if($("#change-username-submit").text() == "edit")
+    {
+        $("#change-username-submit").text("done");
+        $("#change-username-submit").removeClass("color-warning");
+        $("#change-username-submit").addClass("color-success");
+        $("#username").prop("disabled", false);
+        action.preventDefault();
+    }
+    else
+    {
+        $("#change-username-submit").text("edit");
+        $("#change-username-submit").removeClass("color-success");
+        $("#change-username-submit").addClass("color-warning");
+        $("#username").prop("disabled", true);
+    }
+});
+
+$("#change-email").on("submit", function(action) {
+    console.log("there");
+    if($("#change-email-submit").text() == "edit")
+    {
+        $("#change-email-submit").text("done");
+        $("#change-email-submit").removeClass("color-warning");
+        $("#change-email-submit").addClass("color-success");
+        $("#email").prop("disabled", false);
+        action.preventDefault();
+    }
+    else
+    {
+        $("#change-email-submit").text("edit");
+        $("#change-email-submit").removeClass("color-success");
+        $("#change-email-submit").addClass("color-warning");
+        $("#email").prop("disabled", true);
+    }
+});
+
 function IsMailValid(email)
 {
     const mailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

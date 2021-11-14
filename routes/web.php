@@ -23,3 +23,4 @@ Route::view('/form', 'create-auction');
 
 Route::post('create_auction', [App\Http\Controllers\CreateAuctionFormController::class, 'create']);
 
+Route::get('profile', [App\Http\Controllers\EditUserController::class, 'index']);
