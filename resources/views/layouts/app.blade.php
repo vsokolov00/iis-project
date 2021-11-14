@@ -38,7 +38,7 @@
     <div id="app">
         @component('components.navbar')
         @endcomponent
-        <main class="py-4">
+        <main class="py-4 mt-5 pt-5">
             @yield('content')
         </main>
     </div>
