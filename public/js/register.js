@@ -174,8 +174,7 @@ function IsMailValid(email)
 
 function IsUsernameValid(username)
 {
-    const usernameRegex = /^[a-zA-Z0-9.\-_]+$/;
-    return usernameRegex.test(String(username)) && username.length < 50 && username.length > 3;
+    return username.length < 50 && username.length > 3;
 }
 
 function GetPasswordStrenght(password)
