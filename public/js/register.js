@@ -121,39 +121,50 @@ $("#change-username").on("submit", function(action) {
     console.log("here");
     if($("#change-username-submit").text() == "edit")
     {
+        disableAllEditInputs();
         $("#change-username-submit").text("done");
         $("#change-username-submit").removeClass("color-warning");
         $("#change-username-submit").addClass("color-success");
-        $("#username").prop("disabled", false);
+        $("#username").prop("readonly", false);
+        document.getElementById("username").focus();
         action.preventDefault();
     }
     else
-    {
-        $("#change-username-submit").text("edit");
-        $("#change-username-submit").removeClass("color-success");
-        $("#change-username-submit").addClass("color-warning");
-        $("#username").prop("disabled", true);
-    }
+        disableAllEditInputs();
 });
 
 $("#change-email").on("submit", function(action) {
     console.log("there");
     if($("#change-email-submit").text() == "edit")
     {
+        disableAllEditInputs();
         $("#change-email-submit").text("done");
         $("#change-email-submit").removeClass("color-warning");
         $("#change-email-submit").addClass("color-success");
-        $("#email").prop("disabled", false);
+        $("#email").prop("readonly", false);
+        document.getElementById("email").focus();
         action.preventDefault();
     }
     else
-    {
-        $("#change-email-submit").text("edit");
-        $("#change-email-submit").removeClass("color-success");
-        $("#change-email-submit").addClass("color-warning");
-        $("#email").prop("disabled", true);
-    }
+        disableAllEditInputs();
 });
+
+function disableAllEditInputs()
+{
+    $("#change-email-submit").text("edit");
+    $("#change-email-submit").removeClass("color-success");
+    $("#change-email-submit").removeClass("color-warning");
+    $("#change-email-submit").addClass("color-warning");
+    $("#email").prop("readonly", true);
+
+    $("#change-username-submit").text("edit");
+    $("#change-username-submit").removeClass("color-success");
+    $("#change-username-submit").removeClass("color-warning");
+    $("#change-username-submit").addClass("color-warning");
+    $("#ne-username-submit").addClass("disabled");
+
+    $("#password").prop("readonly", true);
+}
 
 function IsMailValid(email)
 {
