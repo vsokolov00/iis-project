@@ -48,16 +48,25 @@
         </div>
     </div>
 
-    <div class="collapse" id="new-password">
-        <div class="background-grey m-5 rounded p-5">
+    @if(($password ?? "") == "changed")
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Vaše heslo bylo úspěšně změněno.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    <div class="collapse @if(isset($password) && $password != 'changed') show @endif" id="new-password">
+        <div class="background-grey m-3 rounded p-2 m-2 p-md-5 p-md-5">
             <h5>Změna hesla</h5>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column" id="editProfileForm">
                 <form method="POST" class="d-flex flex-column align-items-center">
                     @csrf
                     <div class="input-group col-lg-5 col-xs-5">
                         <b>Nové heslo</b>
                         <div class="register">
-                            <input id="password" type="password" class="form-control text-input" name="new-password" required autocomplete="new-password" placeholder="Vaše nové heslo">
+                            <input id="password" type="password" class="form-control text-input" name="new_password" value="{{ old('new_password') }}" required autocomplete="new-password" placeholder="Vaše nové heslo">
                                 <a class="form-icon" data-toggle="popover" data-trigger="click" title="Doporučený formát hesla" data-placement="bottom"
                                     data-content="Heslo musí být alespoň 6 znaků dlouhé a obsahovat přinejmenším alespoň jednu číslici. Doporučujeme použít heslo o délce alespoň 8 znaků s použitím speciálních znaků a číslic.">
                                     <i class="material-icons">password</i>
@@ -71,7 +80,7 @@
                     <div class="input-group col-lg-5 col-xs-5">
                         <b>Ověření hesla</b>
                         <div class="register">
-                            <input id="password-confirm" type="password" class="form-control text-input" name="password-confirm" required autocomplete="new_password" placeholder="Nové heslo znovu">
+                            <input id="password-confirm" type="password" class="form-control text-input" name="password_confirm" value="{{ old('password_confirm') }}" required autocomplete="new_password" placeholder="Nové heslo znovu">
                                 <i class="material-icons form-icon">password</i>
                             </input>
                         </div>
@@ -81,7 +90,7 @@
                     <div class="input-group col-lg-5 col-xs-5">
                         <b>Staré heslo</b>
                         <div class="login">
-                            <input id="login-password" type="password" class="form-control text-input" name="old_password" required autocomplete="current_password" placeholder="Staré heslo">
+                            <input id="login-password" type="password" class="form-control text-input" name="old_password" value="{{ old('old_password') }}" required autocomplete="current_password" placeholder="Staré heslo">
                                 <a class="form-icon"><i id="eyeIcon" class="material-icons">visibility_off</i></a>
                             </input>
                         </div>
@@ -93,6 +102,23 @@
                         <button class="btn btn-success" type="submit">Uložit</button>
                     </div>
                 </form>
+
+                @if(isset($password))
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" id="passwordAlert" role="alert">
+                        @if($password == 'invalid')
+                            Nesprávně zadané staré heslo.
+                        @elseif($password == 'nonmatching')
+                            Zadaná nová hesla nejsou stejná.
+                        @endif
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <script>
+                        window.scrollTo(0, document.getElementById('passwordAlert').offsetTop);
+                    </script>
+                @endif
             </div>
         </div>
     </div>
