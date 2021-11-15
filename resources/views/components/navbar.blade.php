@@ -29,7 +29,7 @@
                     <a class="dropdown-item" href="{{ route('register') }}">Registrovat</a>
                 @endif
             @else
-                <h4 class="dropdown-item">{{ Auth::user()->name }}</h4>
+                <a href="{{ route('profile') }}" class="dropdown-item"><h4>{{ Auth::user()->name }}</h4></a>
                 <a class="dropdown-item" href="#">Moje nabídky</a>
                 <a class="dropdown-item" href="#">Registrované aukce</a>
                 <a class="dropdown-item" href="#">Nastavení</a>

@@ -8,11 +8,11 @@
         <form method="POST" action="{{ route('register') }}" id="registerForm" name="registerForm">
             @csrf
             <div class="input-group col-lg-5 col-xs-5">
-                <b>Uživatelské jméno</b>
+                <b>Jméno</b>
                 <div class="register">
                     <input id="username" type="text" class="form-control @error('name') is-invalid @enderror text-input" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                        <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Formát uživatelského jména" data-placement="bottom"
-                                data-content="Uživatelské jméno musí být alespoň 4 znaky dlouhé a může obsahovat pouze malá/velká písmena, číslice a některé speciální znaky. (., -, _)">
+                        <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Vaše jméno" data-placement="bottom"
+                                data-content="Zvolte své jméno či libovolnou přezdívku o délce minimálně 4 znaky. Toto jméno se bude zobrazovat u Vámi vytvořených aukcí.">
                             <i class="material-icons">person</i>
                         </a>
                     </input>

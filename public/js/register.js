@@ -114,7 +114,67 @@ jQuery(function() {
                                     "Zadané údaje jsou nesprávné, pro více informací klikněte na ikonu vedle zadávacího pole.</div>");
         }
     });
+
+    // EDIT FORM
+    $("#editProfileForm").on("submit", function(event) {
+        if(GetPasswordStrenght($("#password").val()) < 0 || $("#password-confirm").val() != $("#password").val())
+        {
+            event.preventDefault();
+            VerifyPasswords();
+        }
+    });
+
+    $("#change-username").on("submit", function(action) {
+        console.log("here");
+        if($("#change-username-submit").text() == "edit")
+        {
+            disableAllEditInputs();
+            $("#change-username-submit").text("done");
+            $("#change-username-submit").removeClass("color-warning");
+            $("#change-username-submit").addClass("color-success");
+            $("#username").prop("readonly", false);
+            document.getElementById("username").focus();
+            action.preventDefault();
+        }
+        else
+            disableAllEditInputs();
+    });
+
+    $("#change-email").on("submit", function(action) {
+        console.log("there");
+        if($("#change-email-submit").text() == "edit")
+        {
+            disableAllEditInputs();
+            $("#change-email-submit").text("done");
+            $("#change-email-submit").removeClass("color-warning");
+            $("#change-email-submit").addClass("color-success");
+            $("#email").prop("readonly", false);
+            document.getElementById("email").focus();
+            action.preventDefault();
+        }
+        else
+            disableAllEditInputs();
 });
+});
+
+function disableAllEditInputs()
+{
+    $("#new-password").removeClass("show");
+
+    $("#change-email-submit").text("edit");
+    $("#change-email-submit").removeClass("color-success");
+    $("#change-email-submit").removeClass("color-warning");
+    $("#change-email-submit").addClass("color-warning");
+    $("#email").prop("readonly", true);
+
+    $("#change-username-submit").text("edit");
+    $("#change-username-submit").removeClass("color-success");
+    $("#change-username-submit").removeClass("color-warning");
+    $("#change-username-submit").addClass("color-warning");
+    $("#ne-username-submit").addClass("disabled");
+
+    $("#password").prop("readonly", true);
+}
 
 function IsMailValid(email)
 {
@@ -124,8 +184,7 @@ function IsMailValid(email)
 
 function IsUsernameValid(username)
 {
-    const usernameRegex = /^[a-zA-Z0-9.\-_]+$/;
-    return usernameRegex.test(String(username)) && username.length < 50 && username.length > 3;
+    return username.length < 50 && username.length > 3;
 }
 
 function GetPasswordStrenght(password)
