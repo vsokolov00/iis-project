@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Auction;
 use App\Models\AuctionItem;
@@ -10,6 +8,11 @@ use Auth;
 
 class CreateAuctionFormController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() {
         return view('create-auction');
     }
@@ -35,7 +38,7 @@ class CreateAuctionFormController extends Controller
         $auction = new Auction();
 
         $auction_item->item_name = $req->name;
-        
+
         if ($req->hasFile('image')) {
             $auction_item->image = basename($req->image->store('public/images'));
         }
@@ -43,7 +46,7 @@ class CreateAuctionFormController extends Controller
         $auction_item->owner = Auth::user()->id;
 
         $auction->item = AuctionItem::create($auction_item->toArray())->id;
-        
+
         $auction->is_open = $req->is_open;
         $auction->is_selling = $req->is_selling;
         #TODO approved
