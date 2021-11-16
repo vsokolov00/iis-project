@@ -6,13 +6,7 @@
             <h2>Online aukční portál pro věci všeho druhu.<br>Každá věc má u nás svou hodnotu!</h2>
 
             <div class="d-flex flex-md-nowrap flex-wrap justify-content-start flex-row">
-                <a class="btn btn-success nav-link m-2 col-xs-2" href="#" role="button">
-                    <div class="d-flex justify-content-center">
-                        Všechny aukce
-                    </div>
-                </a>
-
-                <a class="btn btn-warning nav-link m-2 col-xs-2" href="#" role="button">
+                <a class="btn btn-warning nav-link m-2 col-xs-2" href="{{ route('newAuction') }}" role="button">
                     <div class="d-flex justify-content-center">
                         Vytvořit aukci
                     </div>

@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <form action="create_auction" method="POST" files="true" enctype="multipart/form-data">
+    <form action="{{ route('newAuction') }}" method="POST" files="true" enctype="multipart/form-data">
       @csrf
       <div class="d-sm-flex  flex-md-row my-1">
         <div class="col">
@@ -41,8 +41,8 @@
           <script>
             function getToday(){
               var date = new Date();
-              var dateTime = date.toISOString().slice(0, 16);    
-            return dateTime;  
+              var dateTime = date.toISOString().slice(0, 16);
+            return dateTime;
             }
             $(document).ready(function (){
               $("#auctionStart").val(getToday());

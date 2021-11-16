@@ -19,8 +19,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/form', [App\Http\Controllers\CreateAuctionFormController::class, 'index']);
-Route::post('/form', [App\Http\Controllers\CreateAuctionFormController::class, 'create']);
+Route::get('/auction/new', [App\Http\Controllers\CreateAuctionFormController::class, 'index'])->name('newAuction');
+Route::post('/auction/new', [App\Http\Controllers\CreateAuctionFormController::class, 'create'])->name('newAuction');
 
 Route::get('profile', [App\Http\Controllers\EditUserController::class, 'index'])->name('profile');
-Route::post('profile', [App\Http\Controllers\EditUserController::class, 'updateProfile']);
+Route::post('profile', [App\Http\Controllers\EditUserController::class, 'updateProfile'])->name('profile');
