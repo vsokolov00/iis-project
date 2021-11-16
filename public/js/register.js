@@ -129,6 +129,7 @@ jQuery(function() {
         if($("#change-username-submit").text() == "edit")
         {
             disableAllEditInputs();
+            $("#new-password").removeClass("show");
             $("#change-username-submit").text("done");
             $("#change-username-submit").removeClass("color-warning");
             $("#change-username-submit").addClass("color-success");
@@ -136,8 +137,6 @@ jQuery(function() {
             document.getElementById("username").focus();
             action.preventDefault();
         }
-        else
-            disableAllEditInputs();
     });
 
     $("#change-email").on("submit", function(action) {
@@ -145,6 +144,7 @@ jQuery(function() {
         if($("#change-email-submit").text() == "edit")
         {
             disableAllEditInputs();
+            $("#new-password").removeClass("show");
             $("#change-email-submit").text("done");
             $("#change-email-submit").removeClass("color-warning");
             $("#change-email-submit").addClass("color-success");
@@ -152,15 +152,15 @@ jQuery(function() {
             document.getElementById("email").focus();
             action.preventDefault();
         }
-        else
-            disableAllEditInputs();
-});
+    })
+
+    $("#change-password-collapse").on("click", function() {
+        disableAllEditInputs();
+    });
 });
 
 function disableAllEditInputs()
 {
-    $("#new-password").removeClass("show");
-
     $("#change-email-submit").text("edit");
     $("#change-email-submit").removeClass("color-success");
     $("#change-email-submit").removeClass("color-warning");
@@ -172,8 +172,7 @@ function disableAllEditInputs()
     $("#change-username-submit").removeClass("color-warning");
     $("#change-username-submit").addClass("color-warning");
     $("#ne-username-submit").addClass("disabled");
-
-    $("#password").prop("readonly", true);
+    $("#username").prop("readonly", true);
 }
 
 function IsMailValid(email)

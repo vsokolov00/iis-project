@@ -38,7 +38,7 @@
         <div class="m-3">
             <h5>Heslo</h5>
             <div class="col-lg-3 col-xs-3">
-                <button type="button" data-toggle="collapse" data-target="#new-password" class="btn btn-warning m-2 btn-sm">
+                <button type="button" data-toggle="collapse" id="change-password-collapse" data-target="#new-password" class="btn btn-warning m-2 btn-sm">
                     <div class="d-flex align-items-center justify-content-center">
                         <i class="material-icons md-18">edit</i>
                         <div class="ml-2 align-middle text-center">Změnit heslo</div>
