@@ -423,3 +423,23 @@ nav .container{
 .material-icons{
     cursor: context-menu;
 }
+
+.previewImg{
+    max-height: 200px;
+}
+
+.addImgBtn{
+    margin-left: -60px;
+    background-color:#42AA1F;
+    padding: 7px;
+    padding-bottom: 0px;
+    border-radius: 60px;
+    color: #FFFFFF;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    cursor: pointer;
+}
+
+.addImgBtn:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
