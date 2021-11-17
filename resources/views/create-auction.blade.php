@@ -17,17 +17,17 @@
       </div>
       <div class="col">
           <label for="name">Název</label>
-          <input type="text" class="form-control" id="name" name="name" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
+          <input type="text" class="form-control" id="name" name="name" required oninvalid="this.setCustomValidity('Zadejte název aukce')">
 
           <label for="name">Popis</label>
-          <textarea class="form-control" id="description" name="description" rows="4" required oninvalid="this.setCustomValidity('Vyplnite toto policko')"></textarea>
+          <textarea class="form-control" id="description" name="description" rows="4"></textarea>
 
       </div>
       </div>
       <div class="d-md-flex  flex-lg-row my-1">
         <div class="col">
           <label for="startPrice">Počáteční cena</label>
-          <input type="text" class="form-control" id="stratPrice" name="stratPrice" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
+          <input type="number" class="form-control" id="stratPrice" name="stratPrice" required oninvalid="this.setCustomValidity('Zadejte počáteční cenu')">
         </div>
         <div class="col">
           <label for="bidRange">Rozsah příhozů</label>
