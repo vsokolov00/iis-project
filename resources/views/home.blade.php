@@ -27,14 +27,16 @@
 													arrow_back_ios
 											</div>
 									</div>
-									<div class="d-flex mainPage-auction-list" id="newAuctionList">
+									<div class="d-flex mainPage-auction-list align-items-stretch" id="newAuctionList">
 										@foreach ($auctions as $auction)
 											<div class="mainPage-auction">
-													@if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
-														<img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
-													@else
-														<img class="img-fluid" src="{{ url('/') }}/assets/default_image.png" alt="Položka aukce"/>
-													@endif
+													<div class="img-container d-flex align-items-center">
+														@if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
+															<img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
+														@else
+															<img class="img-fluid" src="{{ url('/') }}/assets/default_image.png" alt="Položka aukce"/>
+														@endif
+													</div>
 													<h4>{{ $auction->auctionItem->item_name }}</h4>
 													<div class="mainPage-offer">
 														@if ($auction->is_selling)
