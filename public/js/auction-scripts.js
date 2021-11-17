@@ -106,6 +106,8 @@
   function chooseFromClicked(activeId, inactiveId){
     $(inactiveId).addClass("chooseBtn-not-checked");
     $(activeId).removeClass("chooseBtn-not-checked");
+    $('#'+inactiveId.slice(4)).prop("checked", false);
+    $('#'+activeId.slice(4)).prop("checked", true);
   }
 
   function leftScroll(listId){
@@ -119,3 +121,18 @@
       scrollLeft: "+=260px"
     },800);
   }
+
+  function showPreview(input){
+    var file = $("input[type=file]").get(0).files[0];
+ 
+        if(file){
+            var reader = new FileReader();
+ 
+            reader.onload = function(){
+                $("#previewImg").attr("src", reader.result);
+            }
+ 
+            reader.readAsDataURL(file);
+        }
+  }
+ 

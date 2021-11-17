@@ -27,7 +27,7 @@
 													arrow_back_ios
 											</div>
 									</div>
-									<div class="d-flex mainPage-auctionv -list" id="newAuctionList">
+									<div class="d-flex mainPage-auction-list" id="newAuctionList">
 										@foreach ($auctions as $auction)
 											<div class="mainPage-auction">
 													@if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
