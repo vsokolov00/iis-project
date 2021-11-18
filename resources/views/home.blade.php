@@ -38,13 +38,17 @@
 														@endif
 													</div>
 													<h4>{{ $auction->auctionItem->item_name }}</h4>
-													<div class="mainPage-offer">
-														@if ($auction->is_selling)
+												
+													@if ($auction->is_selling)
+														<div class="mainPage-offer">
 															Nabídka
-														@else
+														</div>	
+													@else
+														<div class="mainPage-buy">
 															Poptávka
-														@endif
-													</div>
+														</div>
+													@endif
+													
 													<h3>{{ $auction->starting_price }} Kč</h3>
 													<span>Začátek: {{ $auction->start_time }}</span>
 											</div>
