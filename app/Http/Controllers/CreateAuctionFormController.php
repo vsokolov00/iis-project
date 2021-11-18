@@ -14,7 +14,7 @@ class CreateAuctionFormController extends Controller
     }
 
     public function index() {
-        return view('create-auction');
+        return view('auction/create-auction');
     }
 
     public function create(Request $req) {

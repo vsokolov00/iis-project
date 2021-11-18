@@ -43,8 +43,9 @@
 															Poptávka
 														@endif
 													</div>
-													<h3>{{ $auction->starting_price }} Kč</h3>
+													<h3>{{ $auction->starting_price + $bids[$auction->id] }} Kč</h3>
 													<span>Začátek: {{ $auction->start_time }}</span>
+													<a href="{{ route('auctionDetail', ['id' => "$auction->id"]) }}">Podrobneji</a>
 											</div>
 										@endforeach
 									</div>

@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function items() {
         return $this->hasMany(AuctionItem::class, 'owner');
     }
+
+    public function participatesIn() {
+        return $this->hasMany(ParticipantsOf::class, 'participant');
+    }
 }
