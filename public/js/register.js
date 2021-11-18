@@ -157,6 +157,29 @@ jQuery(function() {
     $("#change-password-collapse").on("click", function() {
         disableAllEditInputs();
     });
+
+    $("#editModal").on("show.bs.modal", function(event) {
+        var source = $(event.relatedTarget);
+
+        $("#edit-previewImg").attr("src", source.data('img'));
+        $("#edit-name").val(source.data('name'));
+        $("#edit-description").val(source.data('description'));
+        $("#edit-startPrice").val(source.data('sprice'));
+        $("#edit-startRange").val(source.data('minbid'));
+        $("#edit-endRange").val(source.data('maxbid'));
+        $("#edit-auctionStart").val(source.data('stime'));
+        $("#edit-auctionEnd").val(source.data('etime'));
+
+        if(source.data('issell') == "1")
+            chooseFromClicked('#btnsell', '#btnbuy');
+        else
+            chooseFromClicked('#btnbuy', '#btnsell');
+
+        if(source.data('isopen') == "1")
+            chooseFromClicked('#btnopen', '#btnclosed');
+        else
+            chooseFromClicked('#btnclosed', '#btnopen');
+    });
 });
 
 function disableAllEditInputs()
