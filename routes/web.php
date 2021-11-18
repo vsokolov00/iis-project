@@ -24,3 +24,5 @@ Route::post('/auction/new', [App\Http\Controllers\CreateAuctionFormController::c
 
 Route::get('profile', [App\Http\Controllers\EditUserController::class, 'index'])->name('profile');
 Route::post('profile', [App\Http\Controllers\EditUserController::class, 'updateProfile'])->name('profile');
+
+Route::get('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'index'])->name('userAuctions');
