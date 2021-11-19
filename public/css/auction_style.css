@@ -480,3 +480,8 @@ nav .container{
 .img-container{
     flex:2;
 }
+
+a.lists-links{
+    text-decoration: none;
+    color: black;
+}
