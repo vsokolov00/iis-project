@@ -57,20 +57,10 @@
 			<table class="table table-striped table-display-sm" >
 				<tbody>
 					@foreach ($auctions as $auction)
-                        <tr>
+                        <tr onclick="openModal('{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', '{{ $auction->auctionItem->description }}',
+                        '{{ $auction->starting_price }}', '-1', '-1', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                             <td>
-                                <a href="#" data-toggle="modal" data-target="#editModal"
-                                    data-img="{{ $auction->auctionItem->image }}"
-                                    data-name="{{ $auction->auctionItem->item_name }}"
-                                    data-description="{{ $auction->auctionItem->description }}"
-                                    data-sprice="{{ $auction->starting_price }}"
-                                    data-minbid="-1"
-                                    data-maxbid="-1"
-                                    data-stime="{{ $auction->start_time }}"
-                                    data-etime="-1"
-                                    data-isopen="{{ $auction->is_open  }}"
-                                    data-issell="{{ $auction->is_selling }}">
-                                    <table class="table-plain">
+                                <table class="table-plain">
                                     <tbody>
                                         <tr>
                                         <th scope="row">Název</th>
@@ -111,14 +101,13 @@
                                             @if($auction->closing_price == null)
                                                 <td class="text-center">-</td>
                                             @else
-                                                <td class="text-right">
-                                                        {{number_format($auction->closing_price ,0 ,"", " ")}}	Kč
+                                                <td>
+                                                    {{number_format($auction->closing_price ,0 ,"", " ")}}	Kč
                                                 </td>
                                             @endif
                                         </tr>
-                                        </tbody>
-                                    </table>
-                                </a>
+                                    </tbody>
+                                </table>
                             </td>
                         </tr>
 					@endforeach
