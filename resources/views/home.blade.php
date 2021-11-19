@@ -14,10 +14,9 @@
             </div>
         </div>
     </div>
-	<div class="background-grey pt-5 pb-5">
+	<div class="background-grey pt-2 pb-4">
 			<div class="container">
 					<div class="d-flex justify-content-center py-3">
-							<h1 class="">Aukční informační systém</h1>
 					</div>
 					<div>
 							<h2 class="mr-auto">Nejbližší aukce</h2>
@@ -38,17 +37,17 @@
 														@endif
 													</div>
 													<h4>{{ $auction->auctionItem->item_name }}</h4>
-												
+
 													@if ($auction->is_selling)
 														<div class="mainPage-offer">
 															Nabídka
-														</div>	
+														</div>
 													@else
 														<div class="mainPage-buy">
 															Poptávka
 														</div>
 													@endif
-													
+
 													<h3>{{ $auction->starting_price }} Kč</h3>
 													<span>Začátek: {{ $auction->start_time }}</span>
 											</div>
@@ -61,7 +60,7 @@
 									</div>
 							</div>
 					</div>
-					<div>
+					<div class="mt-5">
 							<h2>Oblíbené aukce</h2>
 							<div class="d-flex align-items-stretch mainPage-auction-list-container">
 									<div class = "align-items-center list-arrow-left hidesLeft">
