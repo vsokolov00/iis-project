@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="background-grey pt-5" style="margin-top:-30px;">
+    <div class="background-grey pt-5 pb-5" style="margin-top:-30px; margin-bottom:-30px">
 			<div class="container">
-				<h1>Všechny aukce</h1>
+				<h1>{{ $title }}</h1>
 				<div class="d-flex flex-wrap align-items-stretch  mainPage-auction-list" id="allAuctionsList">
-					@foreach($auctions as $auction) 
+					@foreach($auctions as $auction)
 						<div class="allAuctions-item">
 							<div class="img-container d-flex align-items-center justify-content-center">
-								<div> 
+								<div>
 									<img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
 								</div>
 							</div>

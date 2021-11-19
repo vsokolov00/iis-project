@@ -17,16 +17,27 @@ class AllAuctionsController extends Controller
     {
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function sellingAuctions()
+    {
+        $data = Auction::with('auctionItem')->where('is_selling', '=', '1')->orderBy('start_time')->get();
+
+        App::setLocale('cs');
+        return view('allAuctions', ["auctions" => $data, "title" => "Lidé prodávají"]);
+    }
+
+    public function buyingAuctions()
+    {
+        $data = Auction::with('auctionItem')->where('is_selling', '=', '0')->orderBy('start_time')->get();
+
+        App::setLocale('cs');
+        return view('allAuctions', ["auctions" => $data, "title" => "Lidé shánějí"]);
+    }
+
+    public function closestAuctions()
     {
         $data = Auction::with('auctionItem')->orderBy('start_time')->get();
-        
+
         App::setLocale('cs');
-        return view('allAuctions', ["auctions" => $data]);
+        return view('allAuctions', ["auctions" => $data, "title" => "Nejbližší aukce"]);
     }
 }
