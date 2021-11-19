@@ -416,6 +416,14 @@ nav .container{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
+.allAuctions-item-fill{
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    flex-shrink: 1;
+    padding-left: 20px;
+}
+
 #allAuctionsList{
     overflow-x: visible;
 }
@@ -424,12 +432,12 @@ nav .container{
 }
 
 @media (max-width: 990px){
-    .allAuctions-item{
+    .allAuctions-item, .allAuctions-item-fill{
         min-width: 200px;
     }
 }
 @media (max-width: 520px){
-    .allAuctions-item{
+    .allAuctions-item, .allAuctions-item-fill{
         min-width: 160px;
     }
 }

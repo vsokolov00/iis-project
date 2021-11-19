@@ -26,6 +26,10 @@
 							<span>Začátek: {{ $auction->start_time }}</span>
 						</div>
 					@endforeach
+					<!-- divs to fill free space-->
+					<div class="allAuctions-item-fill"></div>
+					<div class="allAuctions-item-fill"></div>
+					<div class="allAuctions-item-fill"></div>
 				</div>
 			</div>
 		</div>
