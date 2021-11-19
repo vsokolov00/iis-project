@@ -110,6 +110,15 @@
     $('#'+activeId.slice(4)).prop("checked", true);
   }
 
+  function chooseFromClickedRoles(activeRole, inactiveRole1, inactiveRole2){
+    $(inactiveRole1).addClass("chooseBtn-not-checked");
+    $(inactiveRole2).addClass("chooseBtn-not-checked");
+    $(activeRole).removeClass("chooseBtn-not-checked");
+    $('#'+inactiveRole1.slice(4)).prop("checked", false);
+    $('#'+inactiveRole2.slice(4)).prop("checked", false);
+    $('#'+activeRole.slice(4)).prop("checked", true);
+  }
+
   function leftScroll(listId){
     $(listId).animate({
       scrollLeft: "-=260px"
@@ -135,4 +144,15 @@
             reader.readAsDataURL(file);
         }
   }
+
+$("input:checkbox.role").click(function(){
+    var user_id = $(this).attr("id").match(/\d+/)[0];
+    console.log(user_id);
+    
+    var group = "input[type=checkbox][id^='"+user_id+"r']";
+    $(group).prop('checked', false);
+    $(this).prop('checked', true);
+});
+
+
  

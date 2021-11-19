@@ -33,16 +33,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     public function items() {
         return $this->hasMany(AuctionItem::class, 'owner');
+    }
+
+    public function is_admin() {
+        return $this->typ === 'admin';
+    }
+
+    public function is_auctioneer() {
+        return $this->typ === 'auctioneer';
     }
 }

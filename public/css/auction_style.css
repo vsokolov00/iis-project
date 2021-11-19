@@ -234,12 +234,20 @@ nav .container{
 .label-green{
   background: #42AA1F;
   color: #42AA1F;
+  cursor: pointer;
 }
 
 .label-yellow{
   background: #FFD700;
   color: #FFD700;
+  cursor: pointer;
 }
+
+.label-blue{
+    background: #e7b067;
+    color: #e7b067;
+    cursor: pointer;
+  }
 
 .auctionTypeLabel.label-green {
     background: transparent;
@@ -484,4 +492,8 @@ nav .container{
 a.lists-links{
     text-decoration: none;
     color: black;
+}
+
+.userTableHeader {
+    text-align: center;
 }

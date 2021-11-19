@@ -31,3 +31,5 @@ Route::post('/user/auctions', [App\Http\Controllers\UserAuctionsController::clas
 Route::get('auctions/selling', [App\Http\Controllers\AllAuctionsController::class, 'sellingAuctions'])->name('sellingAuctions');
 Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class, 'buyingAuctions'])->name('buyingAuctions');
 Route::get('auctions/closest', [App\Http\Controllers\AllAuctionsController::class, 'closestAuctions'])->name('closestAuctions');
+
+Route::get('userslist', [App\Http\Controllers\UserListController::class, 'index'])->name('userList');
