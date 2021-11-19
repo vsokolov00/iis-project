@@ -125,7 +125,6 @@ jQuery(function() {
     });
 
     $("#change-username").on("submit", function(action) {
-        console.log("here");
         if($("#change-username-submit").text() == "edit")
         {
             disableAllEditInputs();
@@ -140,7 +139,6 @@ jQuery(function() {
     });
 
     $("#change-email").on("submit", function(action) {
-        console.log("there");
         if($("#change-email-submit").text() == "edit")
         {
             disableAllEditInputs();
@@ -159,8 +157,9 @@ jQuery(function() {
     });
 });
 
-function openModal(img, name, description, sprice, minbid, maxbid, stime, etime, issell, isopen) {
-    $("#edit-previewImg").attr("src", img);
+function openModal(id, img, name, description, sprice, minbid, maxbid, stime, etime, issell, isopen) {
+    $("#id").val(id);
+    $("#previewImg").attr("src", img);
     $("#edit-name").val(name);
     $("#edit-description").val(description);
     $("#edit-startPrice").val(sprice);
