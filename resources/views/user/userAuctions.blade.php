@@ -17,7 +17,7 @@
 			<tbody>
                 <?php $imagePath = "storage/images/"; ?>
 				@foreach ($auctions as $auction)
-                        <tr onclick="openModal('{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', '{{ $auction->auctionItem->description }}',
+                        <tr onclick="openModal('{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                         '{{ $auction->starting_price }}', '-1', '-1', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                             <td>{{$auction->auctionItem->item_name}}</td>
                             <td>
@@ -57,9 +57,9 @@
 			<table class="table table-striped table-display-sm" >
 				<tbody>
 					@foreach ($auctions as $auction)
-                        <tr onclick="openModal('{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', '{{ $auction->auctionItem->description }}',
-                        '{{ $auction->starting_price }}', '-1', '-1', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
-                            <td>
+                        <tr>
+                            <td onclick="openModal('{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
+                                '{{ $auction->starting_price }}', '-1', '-1', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                                 <table class="table-plain">
                                     <tbody>
                                         <tr>

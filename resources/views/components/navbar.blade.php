@@ -53,7 +53,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         </div>
-        <div class="d-lg-none collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-lg-none collapse navbar-collapse pt-4" id="navbarSupportedContent">
         @guest
             <div class="list-group d-lg-none">
                 @if (Route::has('login'))
@@ -65,10 +65,10 @@
                 @endif
             </div>
         @else
-            <h4 class="d-lg-none" >{{ Auth::user()->name }}</h4>
+            <a href="{{ route('profile') }}" class="dropdown-item"><h4 class="d-lg-none" >{{ Auth::user()->name }}</h4></a>
 
             <div class="list-group d-lg-none">
-                <a href="#" class="list-group-item list-group-item-action">Moje nabídky</a>
+                <a href="{{ route('userAuctions') }}" class="list-group-item list-group-item-action">Moje nabídky</a>
                 <a href="#" class="list-group-item list-group-item-action">Registrované aukce</a>
                 <a href="#" class="list-group-item list-group-item-action">Nastavení</a>
                 <a class="list-group-item list-group-item-action" href="{{ route('logout') }}"
