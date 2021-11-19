@@ -1,34 +1,3 @@
-<!--
-    EDIT MODAL USAGE
-    <button type="button" id="buttton" class="btn btn-primary" data-toggle="modal" data-target="#editModal"
-    data-img="../../img/nothing.jpg"
-    data-name="Název aukce"
-    data-description="Popis aukce."
-    data-sprice="1000"
-    data-minbid="100"
-    data-maxbid="1000"
-    data-stime="2022-01-14T14:25"
-    data-etime="2022-01-14T14:25"
-    data-isopen="1"
-    data-issell="0">
-    Nic :-)
-</button>
-
-<button type="button" id="buttton" class="btn btn-primary" data-toggle="modal" data-target="#editModal"
-    data-img="../../img/empty.png"
-    data-name="Prázdno"
-    data-description="Popis aukce."
-    data-sprice="1000"
-    data-minbid="100"
-    data-maxbid="1000"
-    data-stime="2022-01-14T14:25"
-    data-etime="2022-01-14T14:25"
-    data-isopen="1"
-    data-issell="0">
-    Edituj aukci :-)
-</button>
--->
-
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog rounded" role="document">
         <div class="modal-content">

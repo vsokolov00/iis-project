@@ -157,30 +157,30 @@ jQuery(function() {
     $("#change-password-collapse").on("click", function() {
         disableAllEditInputs();
     });
-
-    $("#editModal").on("show.bs.modal", function(event) {
-        var source = $(event.relatedTarget);
-
-        $("#edit-previewImg").attr("src", source.data('img'));
-        $("#edit-name").val(source.data('name'));
-        $("#edit-description").val(source.data('description'));
-        $("#edit-startPrice").val(source.data('sprice'));
-        $("#edit-startRange").val(source.data('minbid'));
-        $("#edit-endRange").val(source.data('maxbid'));
-        $("#edit-auctionStart").val(source.data('stime'));
-        $("#edit-auctionEnd").val(source.data('etime'));
-
-        if(source.data('issell') == "1")
-            chooseFromClicked('#btnsell', '#btnbuy');
-        else
-            chooseFromClicked('#btnbuy', '#btnsell');
-
-        if(source.data('isopen') == "1")
-            chooseFromClicked('#btnopen', '#btnclosed');
-        else
-            chooseFromClicked('#btnclosed', '#btnopen');
-    });
 });
+
+function openModal(img, name, description, sprice, minbid, maxbid, stime, etime, issell, isopen) {
+    $("#edit-previewImg").attr("src", img);
+    $("#edit-name").val(name);
+    $("#edit-description").val(description);
+    $("#edit-startPrice").val(sprice);
+    $("#edit-startRange").val(minbid);
+    $("#edit-endRange").val(maxbid);
+    $("#edit-auctionStart").val((new Date(stime)).toISOString().slice(0, 16));
+    $("#edit-auctionEnd").val((new Date(etime)).toISOString().slice(0, 16));
+
+    if(issell == "1")
+        chooseFromClicked('#btnsell', '#btnbuy');
+    else
+        chooseFromClicked('#btnbuy', '#btnsell');
+
+    if(isopen == "1")
+        chooseFromClicked('#btnopen', '#btnclosed');
+    else
+        chooseFromClicked('#btnclosed', '#btnopen');
+
+    $("#editModal").modal('show');
+};
 
 function disableAllEditInputs()
 {
