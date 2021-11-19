@@ -26,3 +26,5 @@ Route::get('profile', [App\Http\Controllers\EditUserController::class, 'index'])
 Route::post('profile', [App\Http\Controllers\EditUserController::class, 'updateProfile'])->name('profile');
 
 Route::get('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'index'])->name('userAuctions');
+
+Route::get('allAuctions', [App\Http\Controllers\AllAuctionsController::class, 'index'])->name('allAuctions');
