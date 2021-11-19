@@ -27,3 +27,4 @@ Route::post('profile', [App\Http\Controllers\EditUserController::class, 'updateP
 
 Route::get('/auction/${id}', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctionDetail');
 Route::get('/auction/${id}/bid', [App\Http\Controllers\AuctionController::class, 'bid'])->name('makeBid');
+Route::get('/auction/time', [App\Http\Controllers\AuctionController::class, 'time'])->name('getTime');

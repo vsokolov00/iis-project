@@ -52,7 +52,7 @@
   
   }
   var updateTime = function(){
-    $.get("server-time.php", function(data, status){
+    $.get("/auction/time", function(data, status){
       var serverTime = new Date(data);
 
       if(auctionStartTime.getTime() > serverTime.getTime()){

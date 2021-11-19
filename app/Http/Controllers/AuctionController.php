@@ -14,12 +14,8 @@ class AuctionController extends Controller
     }
 
     function index($id) {
-        #fist() returns one item, otherwise the collection is returned, you must always iterate over the collection
         $auction = Auction::with('auctionItem')->where('id', '=', $id)->get()->first();
-        $participants = Auction::find($id)->participants;
-        $bid = $participants->sum('last_bid');
-
-        return view('auction/detailed-auction', ["auction" => $auction, "participants" => $participants, "bid" => $bid]);
+        return view('auction/detailed-auction', ["auction" => $auction, "bid" => "200"]);
     }
 
     function bid($id, Request $req) {
@@ -39,5 +35,9 @@ class AuctionController extends Controller
         }
 
         return $this->index($id);
+    }
+
+    function time(){
+        return date("c");
     }
 }
