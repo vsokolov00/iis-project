@@ -7,14 +7,15 @@
                 <span aria-hidden="true">&times;</span>
             </button>
 
-            <form action="#" method="POST" files="true" enctype="multipart/form-data">
+            <form method="POST" files="true" enctype="multipart/form-data">
+                <input type="text" name="id" id="id" class="d-none">
                 <div class="mt-4 mb-5">
                     <h5 class="modal-title" id="exampleModalLabel">Upravit</h5>
                         @csrf
                         <div class="d-md-flex align-items-center flex-lg-row my-1">
                             <div class="col">
                                 <div class="d-flex justify-content-center align-items-end p-2">
-                                    <img id="edit-previewImg" src="../../img/empty.png" class="previewImg img-fluid"/>
+                                    <img id="previewImg" src="../../img/empty.png" class="previewImg img-fluid"/>
                                     <label for="image" class="addImgBtn">
                                         <span class="material-icons-outlined md-36">add</span>
                                     </label>
@@ -31,7 +32,7 @@
                         <div class="d-md-flex  flex-lg-row mt-3">
                             <div class="col">
                                 <label for="startPrice">Počáteční cena</label>
-                                <input type="number" class="form-control" id="edit-startPrice" name="stratPrice" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
+                                <input type="number" class="form-control" id="edit-startPrice" name="startPrice" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
                             </div>
                             <div class="col">
                                 <label for="bidRange">Rozsah příhozů</label>
