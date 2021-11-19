@@ -24,7 +24,7 @@ class AllAuctionsController extends Controller
      */
     public function index()
     {
-        $data = Auction::with('auctionItem')->get();
+        $data = Auction::with('auctionItem')->orderBy('start_time')->get();
         
         App::setLocale('cs');
         return view('allAuctions', ["auctions" => $data]);

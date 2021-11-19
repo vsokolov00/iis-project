@@ -414,7 +414,13 @@ nav .container{
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
 
+#allAuctionsList{
+    overflow-x: visible;
+}
+.allAuctions-item:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 @media (max-width: 990px){

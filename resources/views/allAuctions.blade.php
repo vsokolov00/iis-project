@@ -4,7 +4,7 @@
     <div class="background-grey pt-5" style="margin-top:-30px;">
 			<div class="container">
 				<h1>Všechny aukce</h1>
-				<div class="d-flex flex-wrap align-items-stretch  mainPage-auction-list">
+				<div class="d-flex flex-wrap align-items-stretch  mainPage-auction-list" id="allAuctionsList">
 					@foreach($auctions as $auction) 
 						<div class="allAuctions-item">
 							<div class="img-container d-flex align-items-center justify-content-center">
