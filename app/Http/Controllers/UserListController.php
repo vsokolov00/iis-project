@@ -10,7 +10,7 @@ class UserListController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->is_admin()) {
+        if (Auth::check() && Auth::user()->is_admin()) {
             $users = User::all()->except(Auth::id());
             return view('user/userList', ["users" => $users]);
         } else {

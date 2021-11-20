@@ -72,36 +72,33 @@
                 <table class="table-plain">
                 <tbody>
                     <tr>
-                    <th scope="row">Jméno </th>
-                    <td>{{ $user->name }}</td>
+                      <th scope="row">Jméno </th>
+                      <td>{{ $user->name }}</td>
                     </tr>
-                    <tr>
-                      <th scope="row">Liciátor</th>
-                      <td>
-              
-                            <div class="material-switch pull-right">
+                      <tr>
+                        <th scope="row">Liciátor</th>
+                        <td>
+                            <div class="material-switch pull-right mrole">
                             @if($user->is_auctioneer())
-                              <input id="{{ $user->id }}rlic"  type="checkbox" name="roleLic" checked/>
+                              <input class="mrole" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic" checked/>
                             @else
-                              <input id="{{ $user->id }}rlic"  type="checkbox" name="roleLic"/>
+                              <input class="mrole" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic"/>
                             @endif  
                             <label for="{{ $user->id }}rlic" class="label-green"></label>
                             </div>
-                            
                         </td>
                       </tr>
                       <tr>
                         <th scope="row">Administrátor</th>
                         <td>
-                            <div class="material-switch pull-right">
-                            @if($user->is_admin())
-                              <input id="{{ $user->id }}radmin" type="checkbox" name="roleAdm" checked/>
-                            @else
-                              <input id="{{ $user->id }}radmin" type="checkbox" name="roleAdm"/>
-                            @endif
-                            <label for="{{ $user->id }}radmin" class="label-yellow"></label>
+                            <div class="material-switch pull-right mrole">
+                              @if($user->is_admin())
+                                <input class="mrole" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm" checked/>
+                              @else
+                                <input class="mrole" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm"/>
+                              @endif
+                              <label for="{{ $user->id }}radmin" class="label-yellow"></label>
                             </div>
-                           
                         </td>
                       </tr>
                       </tbody>

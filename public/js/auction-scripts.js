@@ -146,9 +146,13 @@
   }
 
 $("input:checkbox.role").click(function(){
-    var user_id = $(this).attr("id").match(/\d+/)[0];
-    console.log(user_id);
+    var isChecked = !$(this).is(':checked');
+    if(isChecked) {
+      $(this).prop('checked', false);
+      return;
+    }
     
+    var user_id = $(this).attr("id").match(/\d+/)[0];
     var group = "input[type=checkbox][id^='"+user_id+"r']";
     $(group).prop('checked', false);
     $(this).prop('checked', true);
