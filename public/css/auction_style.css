@@ -485,3 +485,11 @@ a.lists-links{
     text-decoration: none;
     color: black;
 }
+
+.no-hover-shadow:hover{
+    box-shadow: none !important;
+}
+
+td.table-item {
+    vertical-align: middle;
+}
