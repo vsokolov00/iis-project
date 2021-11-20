@@ -37,7 +37,7 @@
         </thead>
         <tbody>
           @foreach($users as $user)
-          <tr onclick="showDetail({{ $user->id }})">
+          <tr onclick="openUserModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}')">
             <td>{{ $user->name }}</td>
             <td>
               <div class="material-switch pull-right">
@@ -109,6 +109,8 @@
         </tbody>
       </table>
     </div>
+    @component('components/edit-user')
+    @endcomponent
     
 @endsection('content')
 

@@ -20,6 +20,17 @@ class EditUserController extends Controller
 
     public function updateProfile(Request $request)
     {
+        if (isset($request->byAdmin)) {
+            User::where('id', $request->id)->update(['name' => $request->username]);
+            User::where('id', $request->id)->update(['email' => $request->email]);
+            #ROLE
+            #User::where('id', $request->id)->update(['typ' => $request->type]);
+            if (isset($request->password)) {
+                User::where('id', $request->id)->update(['password' => Hash::make($request->password),]);
+            }
+            return redirect('userslist');
+        }
+
         if(isset($request->username))
             User::where('id', Auth::user()->id)->update(['name' => $request->username]);
         else if(isset($request->email))

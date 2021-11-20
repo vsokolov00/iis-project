@@ -181,6 +181,15 @@ function openModal(id, img, name, description, sprice, minbid, maxbid, stime, et
     $("#editModal").modal('show');
 };
 
+function openUserModal(id, name, email) {
+    $("#byAdmin").val(1);
+    $("#id").val(id);
+    $("#edit-name").val(name);
+    $("#edit-email").val(email);
+
+    $("#editUserModal").modal('show');
+};
+
 function disableAllEditInputs()
 {
     $("#change-email-submit").text("edit");

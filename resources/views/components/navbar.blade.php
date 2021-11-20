@@ -30,6 +30,10 @@
                 @endif
             @else
                 <a href="{{ route('profile') }}" class="dropdown-item"><h4>{{ Auth::user()->name }}</h4></a>
+                @if(Auth::user()->is_admin())
+                <a href="{{ route('userList') }}" class="dropdown-item"><b>Sprava uživatelů</b></a>
+                @endif
+
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
                 <a class="dropdown-item" href="#">Registrované aukce</a>
                 <a class="dropdown-item" href="#">Nastavení</a>
