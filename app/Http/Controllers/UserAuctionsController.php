@@ -18,7 +18,7 @@ class UserAuctionsController extends Controller
 
     public function updateAuction(Request $request)
     {
-        if(isset($request->name) && isset($request->description) &&
+        if(isset($request->name) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
            {

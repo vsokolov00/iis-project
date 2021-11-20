@@ -84,18 +84,7 @@
                                     </div>
                             </div>
                             <div class="d-flex mainPage-auction-list" id="favouriteAuctionList">
-                                    <?php for($i=0; $i < 6; $i++){
-                                            echo '
-
-                                                    <div class="mainPage-auction">
-                                                            <img class="img-fluid" src="./img/vaza.jpg" alt="Položka aukce"/>
-                                                            <h4>Malovaná váza</h4>
-                                                            <div class="mainPage-offer">Nabídka</div>
-                                                            <h3>5000Kč</h3>
-                                                            <span>Začátek: 10.11.2021 13:30</span>
-                                                    </div>
-                                            ';
-                                    }?>
+                                    
                             </div>
                             <div class = "d-flex align-items-center list-arrow-right hidesRight">
                                     <div class="list-arrow" id="newAuctionRight" onclick="rightScroll('#favouriteAuctionList')">
