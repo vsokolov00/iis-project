@@ -17,8 +17,8 @@ body{
 }
 
 .img-fluid {
-    max-height: 200px;
-    width: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .navbar .dropdown-menu-right { 
@@ -36,12 +36,28 @@ body{
     display: block;
     max-width: 400px;
     height: auto;
+    margin-bottom: 20px;
+    flex:1;
 } 
+
+.img-auction-detail img{
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    max-height: 300px;
+}
 
 @media (max-width: 768px){
     .img-auction-detail{
         max-width:100%;
     }
+}
+
+.auction-detail-panel{
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .two-columns{
@@ -283,6 +299,7 @@ nav .container{
 .mainPage-auction{
     flex: 1;
     min-width: 250px;
+    max-width: 300px;
     padding: 10px;
     border-radius: 10px;
     background-color: #FFFFFF;
@@ -292,7 +309,11 @@ nav .container{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     cursor: pointer;
 }
-
+.mainPage-auction .img-fluid{
+    max-height:200px;
+    width:auto;
+}
+ 
 .mainPage-auction:hover{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }

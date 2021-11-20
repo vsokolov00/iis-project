@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Auction;
 use App\Models\ParticipantsOf;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class AuctionController extends Controller
 {
@@ -15,7 +16,11 @@ class AuctionController extends Controller
 
     function index($id) {
         $auction = Auction::with('auctionItem')->where('id', '=', $id)->get()->first();
-        return view('auction/detailed-auction', ["auction" => $auction, "bid" => "200"]);
+        if(Auth::user() == null)
+            $registered = "";
+        else
+            $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
+        return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered]);
     }
 
     function bid($id, Request $req) {
@@ -39,5 +44,20 @@ class AuctionController extends Controller
 
     function time(){
         return date("c");
+    }
+
+    function price(){
+        return '<div class="yellow-text">100 Kč</div> 
+            <div class="green-text">(+5)</div>';
+    }
+
+    function register($id){
+        $participant = new ParticipantsOf();
+        $participant->participant = Auth::user()->id;
+        $participant->auction = $id;
+        $participant->is_approved = 0;
+        $participant->registered_at = date("c");
+        ParticipantsOf::create($participant->toArray());
+        return redirect("/auction/$$id");
     }
 }

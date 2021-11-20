@@ -14,14 +14,18 @@
     event.stopPropagation();
   });
 
-    var interval = 0;
-    var timer = 0;
+    var timeInterval = 0;
+    var syncTimeTimer = 0;
+    var priceInterval = 0;
+    var syncPriceTimer = 0;
     var auctionStartTime;
     var auctionEndTime; 
-  function startTimer(startTime, endTime){
+    var auctionId;
+  function startTimer(startTime, endTime, id){
     auctionStartTime = startTime;
     auctionEndTime = endTime;
-    timer = setTimeout(updateTime, interval);    
+    syncTimeTimer = setTimeout(updateTime, timeInterval);    
+    auctionId = id;
   }
 
   function timeCounter(startTime, endTime, start_end){
@@ -39,15 +43,15 @@
       if(Math.abs(endTime.getTime() - startTime.getTime()) < 60*1000){
         var secondsLeft = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime())/1000));
         $("#startTime").html(textToShow+" za: " + secondsLeft + "s"); //Zobrazí kolik zbývá sekund
-        interval = 300;
+        timeInterval = 300;
       }else{
         var minutesLeft = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime())/(60*1000)));
-        $("#startTime").html(textToShow+" za: " + minutesLeft + " min"); //Zobrazí kolik zbývá sekund
-        interval = 1000;
+        $("#startTime").html(textToShow+" za: " + minutesLeft + " min"); //Zobrazí kolik zbývá minut
+        timeInterval = 1000;
       }
     }else{
       $("#startTime").html(textToShow+": "+dateToShow);
-    interval = 60*1000;//1 minuta
+    timeInterval = 60*1000;//1 minuta
     }
   
   }
@@ -60,22 +64,35 @@
         $("#priceName").html("Počáteční cena:");
         $("#inputBid").prop("disabled", true);
         $("#btnBid").prop("disabled", true);
+        updatePrice();
+        priceInterval = 360000;
       }else{
         timeCounter(serverTime, auctionEndTime, "end");
         $("#priceName").html("Aktuální cena:"); 
         $("#inputBid").prop("disabled", false);
         $("#btnBid").prop("disabled", false);
+        priceInterval = 10000;
+        updatePrice();
         if(auctionEndTime.getTime() < serverTime.getTime()){
           $("#startTime").html("Aukce skončila.");
           $("#priceName").html("Konečná cena:");
           $("#inputBid").prop("disabled", true);
           $("#btnBid").prop("disabled", true);
-          clearTimeout(timer);
+          clearTimeout(syncTimeTimer);
+          clearTimeout(syncPriceTimer);
           return;
         }
       }
-      timer = setTimeout(updateTime, interval);
+      syncTimeTimer = setTimeout(updateTime, timeInterval);
     }); 
+  }
+
+  var updatePrice = function(){
+    $.get("/auction/price", function(data, status){
+      $('#detailPrice').html(data);
+      clearTimeout(syncPriceTimer);
+      syncPriceTimer = setTimeout(updatePrice, priceInterval);
+    });
   }
 
   function checkBidRange() {
