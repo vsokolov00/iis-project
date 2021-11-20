@@ -38,7 +38,8 @@
                             </div>
                             <div class="d-flex mainPage-auction-list align-items-stretch" id="newAuctionList">
                                 @foreach ($auctions as $auction)
-                                    <div class="mainPage-auction">
+                                    <?php $route = route("auctionDetail", ["id" => $auction->id]) ?>
+                                    <div class="mainPage-auction" onclick="window.location='{{$route}}'">
                                             <div class="img-container">
                                                 @if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
                                                     <img src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>

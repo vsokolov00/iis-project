@@ -23,23 +23,12 @@ class AuctionController extends Controller
         return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered]);
     }
 
-    function bid($id, Request $req) {
-        if (!Auction::find($id)->participants->where('participant', '=', Auth::user()->id)->isEmpty()) {
-            $last_bid = ParticipantsOf::where('participant', Auth::user()->id)->get('last_bid')->first()->last_bid;
-            $new_bid = $last_bid + $req->bid;
-            ParticipantsOf::where('participant', Auth::user()->id)->where('auction', $id)->update(['last_bid'=> $new_bid]);
-        } else {
-            $participant = new ParticipantsOf();
-            $participant->participant = Auth::user()->id;
-            $participant->auction = $id;
-            #TODO
-            $participant->is_approved = 1;
-            $participant->last_bid = $req->bid;
-
-            ParticipantsOf::create($participant->toArray());
-        }
-
-        return $this->index($id);
+    function bid(Request $req) {
+        $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->first();
+        if (!$participant == null) {
+            $last_bid = $participant->last_bid + $req->bid;
+            ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid, 'date_of_last_bid'=>date('Y-m-d H:i:s')]);
+       }
     }
 
     function time(){
@@ -57,6 +46,7 @@ class AuctionController extends Controller
         $participant->auction = $id;
         $participant->is_approved = 0;
         $participant->registered_at = date("c");
+        $participant->last_bid = 0;
         ParticipantsOf::create($participant->toArray());
         return redirect("/auction/$$id");
     }

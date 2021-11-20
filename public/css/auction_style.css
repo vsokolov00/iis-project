@@ -432,6 +432,16 @@ nav .container{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
+.mainPage-auction-list a, 
+.mainPage-auction-list a:hover, 
+.mainPage-auction-list a:focus,
+.mainPage-auction-list a:active{
+    text-decoration: inherit;
+    color: inherit;
+}
+.allAuctions-item img{
+    max-height: 150px;
+}
 .allAuctions-item-fill{
     flex: 1;
     min-width: 250px;

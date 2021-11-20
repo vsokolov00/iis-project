@@ -6,7 +6,8 @@
 				<h1>{{ $title }}</h1>
 				<div class="d-flex flex-wrap align-items-stretch  mainPage-auction-list" id="allAuctionsList">
 					@foreach($auctions as $auction)
-						<div class="allAuctions-item">
+						<?php $route = route("auctionDetail", ["id" => $auction->id]) ?>
+						<div class="allAuctions-item" onclick="window.location='{{$route}}'">
 							<div class="img-container d-flex align-items-center justify-content-center">
 								<div>
 									<img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>

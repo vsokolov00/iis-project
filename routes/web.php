@@ -26,7 +26,7 @@ Route::get('profile', [App\Http\Controllers\EditUserController::class, 'index'])
 Route::post('profile', [App\Http\Controllers\EditUserController::class, 'updateProfile'])->name('profile');
 
 Route::get('/auction/${id}', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctionDetail');
-Route::get('/auction/${id}/bid', [App\Http\Controllers\AuctionController::class, 'bid'])->name('makeBid');
+Route::post('/auction/bid', [App\Http\Controllers\AuctionController::class, 'bid'])->name('makeBid');
 Route::get('/auction/${id}/register', [App\Http\Controllers\AuctionController::class, 'register'])->name('registerToAuction');
 Route::get('/auction/time', [App\Http\Controllers\AuctionController::class, 'time'])->name('getTime');
 Route::get('/auction/price', [App\Http\Controllers\AuctionController::class, 'price'])->name('getPrice');

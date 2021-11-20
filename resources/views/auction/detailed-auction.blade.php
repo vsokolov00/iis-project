@@ -18,7 +18,7 @@
             @auth
               @if ($registered)
                 <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'" id="inputBid" oninput="checkBidRange()" disabled/>
-                <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="checkBidRange()" disabled>
+                <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid()" disabled>
                   <div class="d-flex align-items-center">
                     <span class="material-icons-outlined md-36">done</span>
                     Přihodit
@@ -42,6 +42,7 @@
       </div>
     </div>
     </div>
+    <div id="response"></div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type= "text/javascript">

@@ -21,11 +21,13 @@
     var auctionStartTime;
     var auctionEndTime; 
     var auctionId;
+    var serverTime;
   function startTimer(startTime, endTime, id){
     auctionStartTime = startTime;
     auctionEndTime = endTime;
-    syncTimeTimer = setTimeout(updateTime, timeInterval);    
+    syncTimeTimer = setTimeout(updateTime, timeInterval);  
     auctionId = id;
+    updatePrice();  
   }
 
   function timeCounter(startTime, endTime, start_end){
@@ -57,29 +59,27 @@
   }
   var updateTime = function(){
     $.get("/auction/time", function(data, status){
-      var serverTime = new Date(data);
+      serverTime = new Date(data);
 
       if(auctionStartTime.getTime() > serverTime.getTime()){
         timeCounter(auctionStartTime, serverTime, "start")
         $("#priceName").html("Počáteční cena:");
         $("#inputBid").prop("disabled", true);
         $("#btnBid").prop("disabled", true);
-        updatePrice();
         priceInterval = 360000;
       }else{
         timeCounter(serverTime, auctionEndTime, "end");
         $("#priceName").html("Aktuální cena:"); 
         $("#inputBid").prop("disabled", false);
         $("#btnBid").prop("disabled", false);
-        priceInterval = 10000;
-        updatePrice();
+        priceInterval = 5000;
+        updatePrice(); 
         if(auctionEndTime.getTime() < serverTime.getTime()){
           $("#startTime").html("Aukce skončila.");
           $("#priceName").html("Konečná cena:");
           $("#inputBid").prop("disabled", true);
           $("#btnBid").prop("disabled", true);
           clearTimeout(syncTimeTimer);
-          clearTimeout(syncPriceTimer);
           return;
         }
       }
@@ -88,14 +88,17 @@
   }
 
   var updatePrice = function(){
-    $.get("/auction/price", function(data, status){
+    $.get("/auction/"+auctionId+"/status/price", function(data, status){
       $('#detailPrice').html(data);
       clearTimeout(syncPriceTimer);
-      syncPriceTimer = setTimeout(updatePrice, priceInterval);
+      if(auctionEndTime.getTime() > serverTime.getTime()){
+        syncPriceTimer = setTimeout(updatePrice, priceInterval);
+      }
+        
     });
   }
 
-  function checkBidRange() {
+  function makeBid() {
     var max = document.getElementById("inputBid").max;
     var min = document.getElementById("inputBid").min;
     var value = document.getElementById("inputBid").value;
@@ -105,6 +108,15 @@
     }else{
       document.getElementById("wrongRangeSpan").innerHTML ="";
       document.getElementById("inputBid").classList.remove("is-invalid");
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.post("/auction/bid", {id: auctionId, bid: value}, function(data, status){
+        $("#response").html("jedu");
+      });
+      updatePrice();
     }
   }
 
