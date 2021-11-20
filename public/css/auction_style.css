@@ -12,6 +12,9 @@ body{
 .material-icons-outlined.md-36 { font-size: 36px; }
 .material-icons-outlined.md-48 { font-size: 48px; }
 
+h4{
+    overflow-wrap: break-word;
+}
 #account_circle {
     cursor: pointer;
 }
@@ -21,16 +24,16 @@ body{
     height: auto;
 }
 
-.navbar .dropdown-menu-right { 
-    right: 0; 
-    left: auto; 
+.navbar .dropdown-menu-right {
+    right: 0;
+    left: auto;
 }
 
 @media (min-width: 992px){
     .navbar-expand-lg .navbar-collapse{
         display: none !important;;
     }
-}  
+}
 
 .img-auction-detail{
     display: block;
@@ -81,8 +84,8 @@ h4{
     margin: 0;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button{  
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
     opacity: 1
 }
 
@@ -128,7 +131,7 @@ nav .container{
     }
 }
 
-.table-plain, .table-plain tr, .table-plain td, .table-plain th{ 
+.table-plain, .table-plain tr, .table-plain td, .table-plain th{
     border:none!important;
     background-color: transparent!important;
 }
@@ -183,14 +186,14 @@ nav .container{
 }
 
 .material-switch > input[type="checkbox"] {
-    display: none;   
+    display: none;
 }
 
 .material-switch > label {
     cursor: pointer;
     height: 0px;
-    position: relative; 
-    width: 40px;  
+    position: relative;
+    width: 40px;
 }
 
 .material-switch > label::before {
@@ -258,7 +261,7 @@ nav .container{
     background: transparent;
     color: #42AA1F;
   }
-  
+
 .auctionTypeLabel.label-yellow{
     background: transparent;
     color: #FFD700;
@@ -286,15 +289,16 @@ nav .container{
     position: relative;
     align-items: center;
     -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */   
+    scrollbar-width: none;  /* Firefox */
     cursor: pointer;
+    width: 100%;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .mainPage-auction-list::-webkit-scrollbar {
     display: none;
   }
-  
+
 
 .mainPage-auction{
     flex: 1;
@@ -309,17 +313,27 @@ nav .container{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     cursor: pointer;
 }
-.mainPage-auction .img-fluid{
-    max-height:200px;
-    width:auto;
+
+.mainPage-auction .img-container{
+    max-height: 150px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }
- 
+.mainPage-auction .img-container img{
+    object-fit: contain;
+    width:100%;
+}
 .mainPage-auction:hover{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .mainPage-offer{
     color: #42AA1F;
+}
+
+.mainPage-buy{
+    color: #FFD700;
 }
 
 .background-grey{
@@ -377,12 +391,12 @@ nav .container{
     from {
         margin-left: -48px;
         margin-right: 0;
-        
+
     }
     to {
         margin-left: 0;
         margin-right: -48px;
-       
+
     }
   }
 
@@ -390,12 +404,12 @@ nav .container{
     from {
         margin-left: 0px;
         margin-right: -48px;
-        
+
     }
     to {
         margin-left: -48px;
         margin-right: 0;
-        
+
     }
 }
 
@@ -416,16 +430,30 @@ nav .container{
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
 
+.allAuctions-item-fill{
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    flex-shrink: 1;
+    padding-left: 20px;
+}
+
+#allAuctionsList{
+    overflow-x: visible;
+}
+.allAuctions-item:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 @media (max-width: 990px){
-    .allAuctions-item{
+    .allAuctions-item, .allAuctions-item-fill{
         min-width: 200px;
     }
 }
 @media (max-width: 520px){
-    .allAuctions-item{
+    .allAuctions-item, .allAuctions-item-fill{
         min-width: 160px;
     }
 }
@@ -443,4 +471,33 @@ nav .container{
 }*/
 .material-icons{
     cursor: context-menu;
+}
+
+.previewImg{
+    max-height: 200px;
+}
+
+.addImgBtn{
+    margin-left: -60px;
+    background-color:#42AA1F;
+    padding: 7px;
+    padding-bottom: 0px;
+    border-radius: 60px;
+    color: #FFFFFF;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    cursor: pointer;
+}
+
+.addImgBtn:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.img-container{
+    flex:2;
+}
+
+a.lists-links{
+    text-decoration: none;
+    color: black;
 }

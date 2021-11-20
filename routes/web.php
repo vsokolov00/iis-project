@@ -30,3 +30,12 @@ Route::get('/auction/${id}/bid', [App\Http\Controllers\AuctionController::class,
 Route::get('/auction/${id}/register', [App\Http\Controllers\AuctionController::class, 'register'])->name('registerToAuction');
 Route::get('/auction/time', [App\Http\Controllers\AuctionController::class, 'time'])->name('getTime');
 Route::get('/auction/price', [App\Http\Controllers\AuctionController::class, 'price'])->name('getPrice');
+
+Route::get('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'index'])->name('userAuctions');
+Route::post('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'updateAuction'])->name('userAuctions');
+
+Route::get('auctions/selling', [App\Http\Controllers\AllAuctionsController::class, 'sellingAuctions'])->name('sellingAuctions');
+Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class, 'buyingAuctions'])->name('buyingAuctions');
+Route::get('auctions/closest', [App\Http\Controllers\AllAuctionsController::class, 'closestAuctions'])->name('closestAuctions');
+
+Route::get('auction/{id}/status/price', [App\Http\Controllers\PriceController::class, 'index'])->name('auctionPrice');

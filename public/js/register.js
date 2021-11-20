@@ -125,7 +125,6 @@ jQuery(function() {
     });
 
     $("#change-username").on("submit", function(action) {
-        console.log("here");
         if($("#change-username-submit").text() == "edit")
         {
             disableAllEditInputs();
@@ -140,7 +139,6 @@ jQuery(function() {
     });
 
     $("#change-email").on("submit", function(action) {
-        console.log("there");
         if($("#change-email-submit").text() == "edit")
         {
             disableAllEditInputs();
@@ -158,6 +156,30 @@ jQuery(function() {
         disableAllEditInputs();
     });
 });
+
+function openModal(id, img, name, description, sprice, minbid, maxbid, stime, etime, issell, isopen) {
+    $("#id").val(id);
+    $("#previewImg").attr("src", img);
+    $("#edit-name").val(name);
+    $("#edit-description").val(description);
+    $("#edit-startPrice").val(sprice);
+    $("#edit-startRange").val(minbid);
+    $("#edit-endRange").val(maxbid);
+    $("#edit-auctionStart").val((new Date(stime)).toISOString().slice(0, 16));
+    $("#edit-auctionEnd").val((new Date(etime)).toISOString().slice(0, 16));
+
+    if(issell == "1")
+        chooseFromClicked('#btnsell', '#btnbuy');
+    else
+        chooseFromClicked('#btnbuy', '#btnsell');
+
+    if(isopen == "1")
+        chooseFromClicked('#btnopen', '#btnclosed');
+    else
+        chooseFromClicked('#btnclosed', '#btnopen');
+
+    $("#editModal").modal('show');
+};
 
 function disableAllEditInputs()
 {

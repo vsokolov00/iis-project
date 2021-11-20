@@ -4,14 +4,14 @@
             <img src="{{ url('/') }}/assets/logo.png" width="75" style="margin: -10px 0px -10px 0px;"/>
         </a>
 
-        <a class="btn btn-success nav-link mx-1" href="#" role="button">
+        <a class="btn btn-success nav-link mx-1" href="{{ route('sellingAuctions') }}" role="button">
             <div class="d-flex align-items-center">
             <span class="material-icons-outlined">shopping_cart</span>
             <span class="d-none d-lg-block">Chci koupit</span>
             </div>
         </a>
 
-        <a class="btn btn-warning nav-link mx-1" href="#" role="button">
+        <a class="btn btn-warning nav-link mx-1" href="{{ route('buyingAuctions') }}" role="button">
         <div class="d-flex align-items-center">
             <span class="material-icons-outlined">sell</span>
             <span class="d-none d-lg-block">Chci prodat</span>
@@ -30,7 +30,7 @@
                 @endif
             @else
                 <a href="{{ route('profile') }}" class="dropdown-item"><h4>{{ Auth::user()->name }}</h4></a>
-                <a class="dropdown-item" href="#">Moje nabídky</a>
+                <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
                 <a class="dropdown-item" href="#">Registrované aukce</a>
                 <a class="dropdown-item" href="#">Nastavení</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -53,7 +53,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         </div>
-        <div class="d-lg-none collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-lg-none collapse navbar-collapse pt-4" id="navbarSupportedContent">
         @guest
             <div class="list-group d-lg-none">
                 @if (Route::has('login'))
@@ -65,10 +65,10 @@
                 @endif
             </div>
         @else
-            <h4 class="d-lg-none" >{{ Auth::user()->name }}</h4>
+            <a href="{{ route('profile') }}" class="dropdown-item"><h4 class="d-lg-none" >{{ Auth::user()->name }}</h4></a>
 
             <div class="list-group d-lg-none">
-                <a href="#" class="list-group-item list-group-item-action">Moje nabídky</a>
+                <a href="{{ route('userAuctions') }}" class="list-group-item list-group-item-action">Moje nabídky</a>
                 <a href="#" class="list-group-item list-group-item-action">Registrované aukce</a>
                 <a href="#" class="list-group-item list-group-item-action">Nastavení</a>
                 <a class="list-group-item list-group-item-action" href="{{ route('logout') }}"
