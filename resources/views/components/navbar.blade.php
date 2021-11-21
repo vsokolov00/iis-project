@@ -31,10 +31,15 @@
             @else
                 <a href="{{ route('profile') }}" class="dropdown-item"><h4>{{ Auth::user()->name }}</h4></a>
                 @if(Auth::user()->is_admin())
-                <a href="{{ route('userList') }}" class="dropdown-item"><b>Sprava uživatelů</b></a>
+                    <a href="{{ route('userList') }}" class="dropdown-item"><b>Sprava uživatelů</b></a>
                 @endif
 
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
+
+                @if(Auth::user()->is_auctioneer() || Auth::user()->is_admin())
+                    <a href="{{ route('auctionApproval') }}" class="dropdown-item"><b>Neschválené aukce</b></a>
+                @endif
+
                 <a class="dropdown-item" href="#">Registrované aukce</a>
                 <a class="dropdown-item" href="#">Nastavení</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -72,7 +77,16 @@
             <a href="{{ route('profile') }}" class="dropdown-item"><h4 class="d-lg-none" >{{ Auth::user()->name }}</h4></a>
 
             <div class="list-group d-lg-none">
+                @if(Auth::user()->is_admin())
+                    <a href="{{ route('userList') }}" class="list-group-item list-group-item-action"><b>Sprava uživatelů</b></a>
+                @endif
+
                 <a href="{{ route('userAuctions') }}" class="list-group-item list-group-item-action">Moje nabídky</a>
+
+                @if(Auth::user()->is_auctioneer() || Auth::user()->is_admin())
+                    <a href="{{ route('auctionApproval') }}" class="list-group-item list-group-item-action"><b>Neschválené aukce</b></a>
+                @endif
+
                 <a href="#" class="list-group-item list-group-item-action">Registrované aukce</a>
                 <a href="#" class="list-group-item list-group-item-action">Nastavení</a>
                 <a class="list-group-item list-group-item-action" href="{{ route('logout') }}"

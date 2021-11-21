@@ -1,5 +1,5 @@
 
-body{ 
+body{
     font-family: 'Roboto', sans-serif;
 }
 
@@ -41,7 +41,7 @@ h4{
     height: auto;
     margin-bottom: 20px;
     flex:1;
-} 
+}
 
 .img-auction-detail img{
     border-radius: 10px;
@@ -440,8 +440,8 @@ nav .container{
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-.mainPage-auction-list a, 
-.mainPage-auction-list a:hover, 
+.mainPage-auction-list a,
+.mainPage-auction-list a:hover,
 .mainPage-auction-list a:focus,
 .mainPage-auction-list a:active{
     text-decoration: inherit;
@@ -522,4 +522,11 @@ a.lists-links{
 
 .userTableHeader {
     text-align: center;
+}
+.no-hover-shadow:hover{
+    box-shadow: none !important;
+}
+
+td.table-item {
+    vertical-align: middle;
 }
