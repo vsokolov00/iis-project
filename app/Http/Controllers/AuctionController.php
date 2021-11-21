@@ -17,14 +17,15 @@ class AuctionController extends Controller
     function index($id) {
         $auction = Auction::with('auctionItem')->where('id', '=', $id)->get()->first();
         if(Auth::user() == null)
-            $registered = "";
+            $registered = 0;
         else
             $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
-            
+
         if($auction->auctionItem->owner == Auth::user()->id)
-            $registered = "2";       
+            $registered = 2;       
 
         return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered]);
+        //return $registered;
     }
 
     function bid(Request $req) {

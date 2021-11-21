@@ -113,9 +113,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      $.post("/auction/bid", {id: auctionId, bid: value}, function(data, status){
-        $("#response").html("jedu");
-      });
+      $.post("/auction/bid", {id: auctionId, bid: value});
       updatePrice();
     }
   }
