@@ -21,7 +21,7 @@
     var auctionStartTime;
     var auctionEndTime;
     var auctionId;
-    var serverTime;
+    var serverTime = new Date();
   function startTimer(startTime, endTime, id){
     auctionStartTime = startTime;
     auctionEndTime = endTime;
