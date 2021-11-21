@@ -26,7 +26,7 @@
                                 <label for="name">Název</label>
                                 <input type="text" class="form-control" id="edit-name" name="name" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
                                 <label for="name">Popis</label>
-                                <textarea class="form-control" id="edit-description" name="description" rows="3" required oninvalid="this.setCustomValidity('Vyplnite toto policko')"></textarea>
+                                <textarea class="form-control" id="edit-description" name="description" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="d-md-flex  flex-lg-row mt-3">

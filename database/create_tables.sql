@@ -1,12 +1,4 @@
--- DROP TABLE `auctioneer_of`;
--- DROP TABLE `participant_of`;
--- DROP TABLE `auction`;
--- DROP TABLE `auction_item`;
--- DROP TABLE `user`;
-
 SET NAMES utf8mb4;
-
--- USE `test`;
 
 CREATE TABLE `users` (
     `id`               int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -15,7 +7,7 @@ CREATE TABLE `users` (
     `email`            varchar(128) NOT NULL,
     `created_at`       datetime,
     `updated_at`       datetime,
-    `password`         varchar(255) DEFAULT NULL,
+    `password`         varchar(255) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -25,7 +17,7 @@ CREATE TABLE `auction_items` (
     `owner`         int(10) unsigned DEFAULT NULL,
     `item_name`     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
     `image`         varchar(256) DEFAULT NULL,
-    `description`   varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+    `description`   varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
     `created_at`      datetime,
     `updated_at`       datetime,
     PRIMARY KEY (`id`),
@@ -38,14 +30,16 @@ CREATE TABLE `auctions` (
     `item`              int(10) unsigned NOT NULL,
     `is_open`           tinyint(1) NOT NULL,
     `is_selling`        tinyint(1) NOT NULL,
-    `is_approved`       tinyint(1) NOT NULL DEFAULT 0,
+    `is_approved`       tinyint(1) DEFAULT NULL,
     `starting_price`    float NOT NULL,
-    `bid_constraint`    varchar(64) DEFAULT NULL,
+    `bid_min`           int(10) unsigned DEFAULT NULL,
+    `bid_max`           int(10) unsigned DEFAULT NULL,
     `start_time`        datetime DEFAULT NULL,
     `is_active`         tinyint(1) NOT NULL DEFAULT 0,
     `closing_price`     float DEFAULT NULL,
     `time_limit`        datetime DEFAULT NULL,
     `is_finished`       tinyint(1) DEFAULT 0,
+    `results_approved`  tinyint(1) NOT NULL DEFAULT 0,
     `winner`            int(10) unsigned DEFAULT NULL,
     `created_at`        datetime,
     `updated_at`        datetime,
@@ -60,7 +54,7 @@ CREATE TABLE `participants_of` (
     `participant`       int(10) unsigned NOT NULL,
     `auction`           int(10) unsigned NOT NULL,
     `registered_at`     datetime,
-    `is_approved`       tinyint(1) DEFAULT NULL,
+    `is_approved`       tinyint(1) DEFAULT 0,
     `last_bid`          decimal(10,0) DEFAULT NULL,
     `date_of_last_bid`  datetime DEFAULT NULL,
     PRIMARY KEY (`participant`,`auction`),

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuctionItemsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAuctionItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('auction_items', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('owner')->nullable()->index('owner_of_item_fk');
-            $table->string('item_name', 256);
-            $table->string('image', 256)->nullable();
-            $table->string('description', 1024);
+            $table->enum('typ', ['admin', 'user', 'auctioneer'])->default('user');
+            $table->string('name');
+            $table->string('email', 128)->unique('email');
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
+            $table->string('password');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateAuctionItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auction_items');
+        Schema::dropIfExists('users');
     }
 }

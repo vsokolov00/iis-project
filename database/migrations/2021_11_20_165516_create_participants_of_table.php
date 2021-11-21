@@ -17,7 +17,7 @@ class CreateParticipantsOfTable extends Migration
             $table->unsignedInteger('participant');
             $table->unsignedInteger('auction')->index('part_of_fk');
             $table->dateTime('registered_at')->nullable();
-            $table->tinyInteger('is_approved')->nullable();
+            $table->tinyInteger('is_approved')->nullable()->default(0);
             $table->decimal('last_bid', 10, 0)->nullable();
             $table->dateTime('date_of_last_bid')->nullable();
 

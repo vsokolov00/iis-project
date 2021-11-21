@@ -18,14 +18,16 @@ class CreateAuctionsTable extends Migration
             $table->unsignedInteger('item')->index('item_fk');
             $table->tinyInteger('is_open');
             $table->tinyInteger('is_selling');
-            $table->tinyInteger('is_approved')->default(0);
+            $table->tinyInteger('is_approved')->nullable();
             $table->float('starting_price', 10, 0);
-            $table->string('bid_constraint', 64)->nullable();
+            $table->unsignedInteger('bid_min')->nullable();
+            $table->unsignedInteger('bid_max')->nullable();
             $table->dateTime('start_time')->nullable();
             $table->tinyInteger('is_active')->default(0);
             $table->float('closing_price', 10, 0)->nullable();
             $table->dateTime('time_limit')->nullable();
             $table->tinyInteger('is_finished')->nullable()->default(0);
+            $table->tinyInteger('results_approved')->default(0);
             $table->unsignedInteger('winner')->nullable()->index('winner_fk');
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();

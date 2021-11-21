@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
 {
-    protected $fillable = ['item', 'is_open', 'is_selling', 'is_approved', 'starting_price', 'bid_constraint', 'start_time', 'is_active', 'closing_price', 'time_limit'];
+    protected $fillable = ['item', 'is_open', 'is_selling', 'is_approved', 'starting_price', 'start_time', 'is_active', 'closing_price', 'time_limit'];
 
     public function winner() {
         return $this->belongsTo(User::class, 'winner');
