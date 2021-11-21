@@ -32,4 +32,5 @@ Route::get('auctions/selling', [App\Http\Controllers\AllAuctionsController::clas
 Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class, 'buyingAuctions'])->name('buyingAuctions');
 Route::get('auctions/closest', [App\Http\Controllers\AllAuctionsController::class, 'closestAuctions'])->name('closestAuctions');
 
-Route::get('userslist', [App\Http\Controllers\UserListController::class, 'index'])->name('userList');
+Route::get('users', [App\Http\Controllers\UserListController::class, 'index'])->name('userList');
+Route::post('users', [App\Http\Controllers\UserListController::class, 'triggerToggle'])->name('userList');

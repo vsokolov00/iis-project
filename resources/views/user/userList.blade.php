@@ -10,7 +10,7 @@
         <a class="ml-auto" onclick="hideDetail()">
           <span class="material-icons-outlined">close</span>
         </a>
-      
+
         <table class="table-plain">
           <tr>
             <th scope="row">Jméno</th>
@@ -23,9 +23,9 @@
         </table>
         <div id="userAuctions" class="detail-list-view"></div>
       </div>
-      
+
     </div>
-    <div class="container">  
+    <div class="container">
       <h1>Seznam uživatelů</h1>
       <table class="table table-striped table-display-lg ">
         <thead>
@@ -41,21 +41,15 @@
             <td>{{ $user->name }}</td>
             <td>
               <div class="material-switch pull-right">
-              @if($user->is_auctioneer())
-                <input class="role" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic" checked/>
-              @else
-                <input class="role" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic"/>
-              @endif  
+                <input class="role type-toggle" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic" data-userid="{{ $user->id }}" data-role="auctioneer"
+                @if($user->is_auctioneer()) checked @endif />
               <label for="{{ $user->id }}rlic" class="label-green"></label>
               </div>
             </td>
             <td>
               <div class="material-switch pull-right">
-              @if($user->is_admin())
-                <input class="role" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm" checked/>
-              @else
-                <input class="role" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm"/>
-              @endif
+                <input class="role type-toggle" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm" data-userid="{{ $user->id }}" data-role="admin"
+                @if($user->is_admin()) checked @endif />
               <label for="{{ $user->id }}radmin" class="label-yellow"></label>
               </div>
             </td>
@@ -65,7 +59,7 @@
       </table>
 
       <table class="table table-striped table-display-sm" >
-      <tbody> 
+      <tbody>
             @foreach($users as $user)
              <tr onclick="showDetail({{ $user->id }})">
                 <td>
@@ -79,12 +73,9 @@
                         <th scope="row">Liciátor</th>
                         <td>
                             <div class="material-switch pull-right mrole">
-                            @if($user->is_auctioneer())
-                              <input class="mrole" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic" checked/>
-                            @else
-                              <input class="mrole" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic"/>
-                            @endif  
-                            <label for="{{ $user->id }}rlic" class="label-green"></label>
+                              <input class="mrole type-toggle" id="{{ $user->id }}rlic-m" type="checkbox" name="roleLic" data-userid="{{ $user->id }}" data-role="auctioneer"
+                              @if($user->is_auctioneer()) checked @endif />
+                            <label for="{{ $user->id }}rlic-m" class="label-green"></label>
                             </div>
                         </td>
                       </tr>
@@ -92,12 +83,9 @@
                         <th scope="row">Administrátor</th>
                         <td>
                             <div class="material-switch pull-right mrole">
-                              @if($user->is_admin())
-                                <input class="mrole" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm" checked/>
-                              @else
-                                <input class="mrole" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm"/>
-                              @endif
-                              <label for="{{ $user->id }}radmin" class="label-yellow"></label>
+                                <input class="mrole type-toggle" id="{{ $user->id }}radmin-m" type="checkbox" name="roleAdm" data-userid="{{ $user->id }}" data-role="admin"
+                                @if($user->is_admin()) checked @endif />
+                              <label for="{{ $user->id }}radmin-m" class="label-yellow"></label>
                             </div>
                         </td>
                       </tr>
@@ -111,6 +99,6 @@
     </div>
     @component('components/edit-user')
     @endcomponent
-    
+
 @endsection('content')
 
