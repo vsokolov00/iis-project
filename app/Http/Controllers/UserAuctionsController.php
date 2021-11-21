@@ -18,7 +18,7 @@ class UserAuctionsController extends Controller
 
     public function updateAuction(Request $request)
     {
-        if(isset($request->name) &&
+        if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
            {
@@ -33,6 +33,8 @@ class UserAuctionsController extends Controller
                         $auction->auctionItem->image = basename($request->image->store('public/images'));
                     }
 
+                    $auction->bid_min = $request->min_bid;
+                    $auction->bid_max = $request->max_bid;
                     $auction->is_open = $request->is_open;
                     $auction->is_selling = $request->is_selling;
                     $auction->starting_price = $request->startPrice;
@@ -56,7 +58,7 @@ class UserAuctionsController extends Controller
     {
         $items = AuctionItem::select('id')->where('owner','=',Auth::user()->id)->get();
         $auctions = Auction::with('auctionItem')->whereIn('item', $items)->get();
-        
+
         App::setLocale('cs');
         return view('user/userAuctions', ["auctions" => $auctions]);
     }

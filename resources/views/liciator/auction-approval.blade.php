@@ -54,7 +54,7 @@
                         <td style="padding-right: 0; text-align: right;" class="table-item">
                             <span class="material-icons-outlined green-text md-24 pl-4 pr-3 text-right" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
                             '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
-                            '{{ $auction->starting_price }}', '-1', '-1', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
+                            '{{ $auction->starting_price }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
                         </td>
                     </tr>
 
@@ -83,7 +83,7 @@
                                             <div class="col">
                                                 <h5>Rozsah příhozů</h5>
                                                 <b class="d-flex ml-2">
-                                                    10 Kč - 12 Kč
+                                                    <?= $auction->bid_min ?> Kč - <?= $auction->bid_max ?> Kč
                                                 </b>
                                             </div>
                                         </div>
@@ -219,7 +219,7 @@
                                 <div class="d-flex justify-content-center mt-3 mb-3">
                                     <button type="button" class="btn btn-success" onclick="openModal('{{ $auction->id }}',
                             '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
-                            '{{ $auction->starting_price }}', '-1', '-1', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
+                            '{{ $auction->starting_price }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                                         <div class="d-flex align-content-center">
                                             <span class="material-icons-outlined md-24 mr-3 text-right" style="height: 24px; width: 24px; margin-left: -5px;">edit</span>
                                             Editovat

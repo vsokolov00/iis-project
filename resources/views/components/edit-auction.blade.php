@@ -37,8 +37,8 @@
                             <div class="col">
                                 <label for="bidRange">Rozsah příhozů</label>
                                 <div class="d-flex" id="bidRange">
-                                    <input type="number" class="form-control mr-1" id="edit-startRange">
-                                    <input type="number" class="form-control ml-1" id="edit-endRange">
+                                    <input type="number" class="form-control mr-1" id="edit-startRange" name="min_bid">
+                                    <input type="number" class="form-control ml-1" id="edit-endRange" name="max_bid">
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col chooseBtn label-yellow text-center" id="btnsell" onclick="chooseFromClicked('#btnsell', '#btnbuy')">
                                         Prodej
-                                        <input type="radio" checked="checked" name="is_selling" id="sell" class="d-none" value="1" />
+                                        <input type="radio" checked="checked" name="is_selling" id="sell" class="d-none" value="1"/>
                                     </div>
                                 </div>
                             </div>
