@@ -66,11 +66,11 @@
         @guest
             <div class="list-group d-lg-none">
                 @if (Route::has('login'))
-                    <a class="list-group-item list-group-item-action" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="list-group-item list-group-item-action" href="{{ route('login') }}">Přihlásit</a>
                 @endif
 
                 @if (Route::has('register'))
-                    <a class="list-group-item list-group-item-action" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="list-group-item list-group-item-action" href="{{ route('register') }}">Registrovat</a>
                 @endif
             </div>
         @else
