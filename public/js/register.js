@@ -201,7 +201,7 @@ jQuery(function() {
     });
 });
 
-function openModal(id, img, name, description, sprice, minbid, maxbid, stime, etime, issell, isopen) {
+function openModal(id, img, name, description, sprice, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
     $("#previewImg").attr("src", img);
     $("#edit-name").val(name);
