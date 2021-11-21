@@ -16,16 +16,18 @@
           </div>
           <div class="d-flex">
             @auth
-              @if ($registered)
-                <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'" id="inputBid" oninput="checkBidRange()" disabled/>
-                <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid()" disabled>
-                  <div class="d-flex align-items-center">
-                    <span class="material-icons-outlined md-36">done</span>
-                    Přihodit
-                  </div>  
-                </button>
-              @else
-                <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button">Registrovat</a> 
+              @if ($registered != "2")
+                @if ($registered)
+                  <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'" id="inputBid" oninput="checkBidRange()" disabled/>
+                  <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid()" disabled>
+                    <div class="d-flex align-items-center">
+                      <span class="material-icons-outlined md-36">done</span>
+                      Přihodit
+                    </div>  
+                  </button>
+                @else
+                  <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button">Registrovat</a> 
+                @endif
               @endif
             @else
               <a class="btn btn-success btn-block btn-lg" href="{{ route('login') }}" id="btnRegister" role="button">Registrovat</a> 
