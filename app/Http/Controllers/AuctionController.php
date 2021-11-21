@@ -22,21 +22,34 @@ class AuctionController extends Controller
             $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
             if($auction->auctionItem->owner == Auth::user()->id)
                 $registered = 2;  
-        }
             
-
-             
-
+            if(!$auction->is_open){
+                $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->first();
+                if($participant != null){
+                    if($participant->last_bid != 0)
+                    $registered = 3;
+                }
+                
+            }
+        }
+       
         return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered]);
-        //return $registered;
+ 
     }
 
     function bid(Request $req) {
-        $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->first();
-        if (!$participant == null) {
-            $last_bid = $participant->last_bid + $req->bid;
-            ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid, 'date_of_last_bid'=>date('Y-m-d H:i:s')]);
-       }
+        $auction = Auction::where("id", $req->id)->first();
+        if($auction == null)
+            return;
+
+        if($auction->start_time < now() && $auction->time_limit > now()){
+            $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->first();
+            if (!$participant == null) {
+                $last_bid = $participant->last_bid + $req->bid;
+                ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid, 'date_of_last_bid'=>date('Y-m-d H:i:s')]);
+            }
+        }
+        
     }
 
     function time(){

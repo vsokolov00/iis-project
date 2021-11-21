@@ -105,6 +105,7 @@ nav .container{
 .auction-description{
     background-color: #EEEEEE;
     padding: 1px 0 1px 0;
+    white-space: pre-line;
 }
 
 .font-size-25 {

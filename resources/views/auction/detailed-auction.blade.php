@@ -10,8 +10,15 @@
           <img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce">
         </div>
         <div class="auction-detail-panel">
-          <h4 id="startTime"></h4>
-          <h5 id="priceName"></h5>
+          @if ($auction->is_open)
+            <h5>Otevřená aukce</h5>
+            <h4 id="startTime"></h4>
+            <h5 id="priceName"></h5>
+          @else
+            <h5>Uzavřená aukce</h5>
+            <h4 id="startTime"></h4>
+            <h5>Počáteční cena:</h5>
+          @endif  
           <div class="d-flex align-items-top flex-wrap" id="detailPrice">
           </div>
           <div class="d-flex">
@@ -19,18 +26,26 @@
               @if ($registered !== 2)
                 @if ($registered == 1)
                   <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'" id="inputBid" oninput="checkBidRange()" disabled/>
-                  <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid()" disabled>
+                  <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
+                    <div class="d-flex align-items-center">
+                      <span class="material-icons-outlined md-36">done</span>
+                      Přihodit
+                    </div>  
+                  </button>
+                @elseif ($registered == 3)
+                  <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'"  disabled/>
+                  <button class="btn btn-success ml-3" href="#"  role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
                       Přihodit
                     </div>  
                   </button>
                 @else
-                  <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button">Registrovat</a> 
+                  <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button" style="display: none;">Registrovat</a> 
                 @endif
               @endif
             @else
-              <a class="btn btn-success btn-block btn-lg" href="{{ route('login') }}" id="btnRegister" role="button">Registrovat</a> 
+              <a class="btn btn-success btn-block btn-lg" href="{{ route('login') }}" id="btnRegister" role="button" style="display: none;">Registrovat</a> 
             @endauth         
           </div>
           <span id="wrongRangeSpan" ></span>

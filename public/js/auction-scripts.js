@@ -66,6 +66,7 @@
         $("#priceName").html("Počáteční cena:");
         $("#inputBid").prop("disabled", true);
         $("#btnBid").prop("disabled", true);
+        $("#btnRegister").css("display", "block");
         priceInterval = 360000;
       }else{
         timeCounter(serverTime, auctionEndTime, "end");
@@ -82,6 +83,7 @@
           clearTimeout(syncTimeTimer);
           return;
         }
+         $("#btnRegister").css("display", "block");
       }
       syncTimeTimer = setTimeout(updateTime, timeInterval);
     });
@@ -98,7 +100,7 @@
     });
   }
 
-  function makeBid() {
+  function makeBid(is_open) {
     var max = document.getElementById("inputBid").max;
     var min = document.getElementById("inputBid").min;
     var value = document.getElementById("inputBid").value;
@@ -113,7 +115,12 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      $.post("/auction/bid", {id: auctionId, bid: value});
+      $.post("/auction/bid", {id: auctionId, bid: value}, function(data, status){
+        if (status == "success" && is_open == 0){
+          $("#inputBid").prop("disabled", true);
+          $("#btnBid").prop("disabled", true);
+        }
+      });
       updatePrice();
     }
   }
