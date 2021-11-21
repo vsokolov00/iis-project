@@ -17,11 +17,11 @@
     var interval = 0;
     var timer = 0;
     var auctionStartTime;
-    var auctionEndTime; 
+    var auctionEndTime;
   function startTimer(startTime, endTime){
     auctionStartTime = startTime;
     auctionEndTime = endTime;
-    timer = setTimeout(updateTime, interval);    
+    timer = setTimeout(updateTime, interval);
   }
 
   function timeCounter(startTime, endTime, start_end){
@@ -49,7 +49,7 @@
       $("#startTime").html(textToShow+": "+dateToShow);
     interval = 60*1000;//1 minuta
     }
-  
+
   }
   var updateTime = function(){
     $.get("server-time.php", function(data, status){
@@ -62,7 +62,7 @@
         $("#btnBid").prop("disabled", true);
       }else{
         timeCounter(serverTime, auctionEndTime, "end");
-        $("#priceName").html("Aktuální cena:"); 
+        $("#priceName").html("Aktuální cena:");
         $("#inputBid").prop("disabled", false);
         $("#btnBid").prop("disabled", false);
         if(auctionEndTime.getTime() < serverTime.getTime()){
@@ -75,7 +75,7 @@
         }
       }
       timer = setTimeout(updateTime, interval);
-    }); 
+    });
   }
 
   function checkBidRange() {
@@ -100,7 +100,7 @@
       $(auctionTypeLabelId).html("Nákup");
       $(auctionTypeLabelId).addClass("label-green");
       $(auctionTypeLabelId).removeClass("label-yellow");
-    } 
+    }
   }
 
   function chooseFromClicked(activeId, inactiveId){
@@ -133,30 +133,14 @@
 
   function showPreview(input){
     var file = $("input[type=file]").get(0).files[0];
- 
+
         if(file){
             var reader = new FileReader();
- 
+
             reader.onload = function(){
                 $("#previewImg").attr("src", reader.result);
             }
- 
+
             reader.readAsDataURL(file);
         }
   }
-
-$("input:checkbox.role").click(function(){
-    var isChecked = !$(this).is(':checked');
-    if(isChecked) {
-      $(this).prop('checked', false);
-      return;
-    }
-    
-    var user_id = $(this).attr("id").match(/\d+/)[0];
-    var group = "input[type=checkbox][id^='"+user_id+"r']";
-    $(group).prop('checked', false);
-    $(this).prop('checked', true);
-});
-
-
- 
