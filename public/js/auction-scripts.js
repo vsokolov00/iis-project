@@ -19,15 +19,15 @@
     var priceInterval = 0;
     var syncPriceTimer = 0;
     var auctionStartTime;
-    var auctionEndTime; 
+    var auctionEndTime;
     var auctionId;
     var serverTime;
   function startTimer(startTime, endTime, id){
     auctionStartTime = startTime;
     auctionEndTime = endTime;
-    syncTimeTimer = setTimeout(updateTime, timeInterval);  
+    syncTimeTimer = setTimeout(updateTime, timeInterval);
     auctionId = id;
-    updatePrice();  
+    updatePrice();
   }
 
   function timeCounter(startTime, endTime, start_end){
@@ -55,7 +55,7 @@
       $("#startTime").html(textToShow+": "+dateToShow);
     timeInterval = 60*1000;//1 minuta
     }
-  
+
   }
   var updateTime = function(){
     $.get("/auction/time", function(data, status){
@@ -69,11 +69,11 @@
         priceInterval = 360000;
       }else{
         timeCounter(serverTime, auctionEndTime, "end");
-        $("#priceName").html("Aktuální cena:"); 
+        $("#priceName").html("Aktuální cena:");
         $("#inputBid").prop("disabled", false);
         $("#btnBid").prop("disabled", false);
         priceInterval = 5000;
-        updatePrice(); 
+        updatePrice();
         if(auctionEndTime.getTime() < serverTime.getTime()){
           $("#startTime").html("Aukce skončila.");
           $("#priceName").html("Konečná cena:");
@@ -84,7 +84,7 @@
         }
       }
       syncTimeTimer = setTimeout(updateTime, timeInterval);
-    }); 
+    });
   }
 
   var updatePrice = function(){
@@ -94,7 +94,7 @@
       if(auctionEndTime.getTime() > serverTime.getTime()){
         syncPriceTimer = setTimeout(updatePrice, priceInterval);
       }
-        
+
     });
   }
 
@@ -127,7 +127,7 @@
       $(auctionTypeLabelId).html("Nákup");
       $(auctionTypeLabelId).addClass("label-green");
       $(auctionTypeLabelId).removeClass("label-yellow");
-    } 
+    }
   }
 
   function chooseFromClicked(activeId, inactiveId){
@@ -135,6 +135,15 @@
     $(activeId).removeClass("chooseBtn-not-checked");
     $('#'+inactiveId.slice(4)).prop("checked", false);
     $('#'+activeId.slice(4)).prop("checked", true);
+  }
+
+  function chooseFromClickedRoles(activeRole, inactiveRole1, inactiveRole2){
+    $(inactiveRole1).addClass("chooseBtn-not-checked");
+    $(inactiveRole2).addClass("chooseBtn-not-checked");
+    $(activeRole).removeClass("chooseBtn-not-checked");
+    $('#'+inactiveRole1.slice(4)).prop("checked", false);
+    $('#'+inactiveRole2.slice(4)).prop("checked", false);
+    $('#'+activeRole.slice(4)).prop("checked", true);
   }
 
   function leftScroll(listId){
@@ -151,15 +160,14 @@
 
   function showPreview(input){
     var file = $("input[type=file]").get(0).files[0];
- 
+
         if(file){
             var reader = new FileReader();
- 
+
             reader.onload = function(){
                 $("#previewImg").attr("src", reader.result);
             }
- 
+
             reader.readAsDataURL(file);
         }
   }
- 

@@ -155,6 +155,50 @@ jQuery(function() {
     $("#change-password-collapse").on("click", function() {
         disableAllEditInputs();
     });
+
+    $('.type-toggle').on('click', function(event) {
+        event.preventDefault();
+
+        var caller = $(event.target);
+        var id = caller.data('userid');
+        var role = caller.data('role');
+
+        var formattedData = role == "auctioneer" ? { userId: id, isAuctioneer: 1 } : { userId: id, isAdmin: 1 }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            data: formattedData,
+            success: function (_, _, xhr) {
+                if(xhr.status == 200)
+                {
+                    var targetId = event.target.id;
+
+                    $("#" + targetId).prop('checked', !$("#" + targetId).is(':checked'));
+                    var isChecked = !$("#" + targetId).is(':checked');
+                    if(isChecked) {
+                      $("#" + targetId).prop('checked', false);
+                      return;
+                    }
+
+                    var user_id = $("#" + targetId).attr("id").match(/\d+/)[0];
+                    var group = "input[type=checkbox][id^='"+user_id+"r']";
+                    $(group).prop('checked', false);
+                    $("#" + targetId).prop('checked', true);
+
+                    if(targetId.slice(-1) == 'm')
+                        $("#" + targetId.slice(0, targetId.length - 2)).prop('checked', true);
+                    else
+                        $("#" + targetId + "-m").prop('checked', true);
+                }
+            }
+        });
+    });
 });
 
 function openModal(id, img, name, description, sprice, minbid, maxbid, stime, etime, issell, isopen) {
@@ -179,6 +223,15 @@ function openModal(id, img, name, description, sprice, minbid, maxbid, stime, et
         chooseFromClicked('#btnclosed', '#btnopen');
 
     $("#editModal").modal('show');
+};
+
+function openUserModal(id, name, email) {
+    $("#byAdmin").val(1);
+    $("#id").val(id);
+    $("#edit-name").val(name);
+    $("#edit-email").val(email);
+
+    $("#editUserModal").modal('show');
 };
 
 function disableAllEditInputs()

@@ -39,3 +39,6 @@ Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class
 Route::get('auctions/closest', [App\Http\Controllers\AllAuctionsController::class, 'closestAuctions'])->name('closestAuctions');
 
 Route::get('auction/{id}/status/price', [App\Http\Controllers\PriceController::class, 'index'])->name('auctionPrice');
+
+Route::get('users', [App\Http\Controllers\UserListController::class, 'index'])->name('userList');
+Route::post('users', [App\Http\Controllers\UserListController::class, 'triggerToggle'])->name('userList');
