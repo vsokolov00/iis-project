@@ -25,12 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Auction::with('auctionItem')->where('start_time', '>', date('Y-m-d H:i:s'))->orderBy('start_time')->take(7)->get();
+        $data = Auction::with('auctionItem')->where('start_time', '>', date('Y-m-d H:i:s'))->
+            where('is_approved', 1)->orderBy('start_time')->take(7)->get();
         $bids = [];
         foreach ($data as $auction) {
             $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
         }
-        
+
         return view('home', ["auctions" => $data], ["bids" => $bids]);
     }
 }
