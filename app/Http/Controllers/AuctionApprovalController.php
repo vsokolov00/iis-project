@@ -19,12 +19,14 @@ class AuctionApprovalController extends Controller
 
     public function updateAuction(Request $request)
     {
+        if(!Auth::user()->is_auctioneer() && !Auth::user()->is_admin())
+            return redirect('/');
+
         if(isset($request->name) && isset($request->description) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
            {
                 $auction = Auction::with('auctionItem')->where('id', '=', $request->id)->first();
-
                 if($auction->auctionItem->owner == Auth::user()->id)
                 {
                     $auction->auctionItem->item_name = $request->name;
@@ -73,10 +75,11 @@ class AuctionApprovalController extends Controller
      */
     public function index()
     {
-        $items = AuctionItem::select('id')->where('owner','=',Auth::user()->id)->get();
-        $auctions = Auction::with('auctionItem')->where('is_approved', '=', NULL)->whereIn('item', $items)->get();
+        if(!Auth::user()->is_auctioneer() && !Auth::user()->is_admin())
+            return redirect('/');
 
-        App::setLocale('cs');
+        $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->where('is_approved', '=', NULL)->get();
+
         return view('liciator/auction-approval', ["auctions" => $auctions]);
     }
 }

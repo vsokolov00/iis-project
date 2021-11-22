@@ -9,7 +9,7 @@ class AuctionItem extends Model
 {
     protected $fillable = ['item_name', 'owner', 'description', 'image'];
 
-    public function owner() {
+    public function auctionOwner() {
         return $this->belongsTo(User::class, 'owner', 'id');
     }
 

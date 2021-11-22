@@ -72,6 +72,8 @@
                                             <div class="col">
                                                 <h3><?= $auction->auctionItem->item_name ?></h3>
                                                 <br>
+                                                <h5><?= $auction->auctionItem->auctionOwner->name ?></h5>
+                                                <br>
                                                 <?= $auction->auctionItem->description ?>
                                             </div>
                                         </div>
@@ -238,6 +240,8 @@
                                                 <img id="detail-previewImg" src="{{ asset($imagePath . $auction->auctionItem->image); }}" class="previewImg img-fluid"/>
                                             </div>
                                             <h3><?= $auction->auctionItem->item_name ?></h3>
+                                            <br>
+                                            <h5><?= $auction->auctionItem->auctionOwner->name ?></h5>
                                             <br>
                                             <?= $auction->auctionItem->description ?>
 
