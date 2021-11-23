@@ -43,8 +43,7 @@
                 @endif
 
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
-                <a class="dropdown-item" href="#">Registrované aukce</a>
-                <a class="dropdown-item" href="#">Nastavení</a>
+                <a class="dropdown-item" href=" {{ route('userTakesPartIn') }} ">Registrované aukce</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit()">

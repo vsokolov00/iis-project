@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Auction;
+use App\Models\ParticipantsOf;
 use App;
+use Auth;
 
 class AllAuctionsController extends Controller
 {
@@ -39,5 +41,18 @@ class AllAuctionsController extends Controller
 
         App::setLocale('cs');
         return view('allAuctions', ["auctions" => $data, "title" => "Nejbližší aukce"]);
+    }
+
+    public function userTakesPartIn() {
+        $auctionIDsITakePartIt = Auth::user()->participatesIn->pluck('auction');
+
+        $auctionsITakePartIn = Auction::with('auctionItem')->whereIn('id', $auctionIDsITakePartIt)->get();
+
+        $bids = [];
+        foreach ($auctionsITakePartIn as $auction) {
+            $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
+        }
+        
+        return view('user/registeredAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $bids]);
     }
 }

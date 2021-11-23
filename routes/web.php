@@ -40,6 +40,7 @@ Route::post('/auctions/approval', [App\Http\Controllers\AuctionApprovalControlle
 Route::get('auctions/selling', [App\Http\Controllers\AllAuctionsController::class, 'sellingAuctions'])->name('sellingAuctions');
 Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class, 'buyingAuctions'])->name('buyingAuctions');
 Route::get('auctions/closest', [App\Http\Controllers\AllAuctionsController::class, 'closestAuctions'])->name('closestAuctions');
+Route::get('auctions/i-bid-on', [App\Http\Controllers\AllAuctionsController::class, 'userTakesPartIn'])->name('userTakesPartIn');
 
 Route::get('auction/{id}/status/price', [App\Http\Controllers\PriceController::class, 'index'])->name('auctionPrice');
 
