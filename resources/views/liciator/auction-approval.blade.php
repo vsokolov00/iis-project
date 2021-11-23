@@ -139,7 +139,7 @@
                                                 @endif
                                             </div>
                                         </div>
-
+                                        @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
                                         <div class="m-3 mt-5 d-flex">
                                             <form method="POST">
                                                 @csrf
@@ -154,6 +154,9 @@
                                                 <button type="submit" class="btn btn-success m-2">Potvrdit</button>
                                             </form>
                                         </div>
+                                        @else
+                                            <b> Nemůžete schválit svoji aukci</b>
+                                        @endif
                                 </div>
                             </div>
                         </td>
@@ -321,7 +324,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-
+                                            @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
                                             <div class="m-3 mt-5 d-flex justify-content-center">
                                                 <form method="POST">
                                                     @csrf
@@ -336,6 +339,9 @@
                                                     <button type="submit" class="btn btn-success m-2">Potvrdit</button>
                                                 </form>
                                             </div>
+                                            @else
+                                                <b> Nemůžete schválit svoji aukci</b>
+                                            @endif
                                     </div>
                                 </div>
                             </td>
