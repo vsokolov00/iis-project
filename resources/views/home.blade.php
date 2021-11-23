@@ -59,7 +59,7 @@
                                                 </div>
                                             @endif
 
-                                            <h3>{{ $auction->starting_price }} Kč</h3>
+                                            <h3>{{ $auction->starting_price + $bids[$auction->id]}} Kč</h3>
                                             <span>Začátek: {{ $auction->start_time }}</span>
                                     </div>
                                 @endforeach
@@ -74,7 +74,7 @@
             <div class="mt-5">
                     <a href="#" class="lists-links">
                         <div class="d-flex">
-                            <h2 class="mr-1">Oblíbené aukce</h2>
+                            <h2 class="mr-1">Stihni přihodit</h2>
                             <span class="material-icons md-36">navigate_next</span>
                         </div>
                     </a>
@@ -85,7 +85,32 @@
                                     </div>
                             </div>
                             <div class="d-flex mainPage-auction-list" id="favouriteAuctionList">
-                                    
+                            @foreach ($endSoon as $auction)
+                                <?php $route = route("auctionDetail", ["id" => $auction->id]) ?>
+                                <div class="mainPage-auction" onclick="window.location='{{$route}}'">
+                                        <div class="img-container">
+                                            @if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
+                                                <img src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
+                                            @else
+                                                <img src="{{ url('/') }}/assets/empty.png" alt="Položka aukce"/>
+                                            @endif
+                                        </div>
+                                        <h4>{{ $auction->auctionItem->item_name }}</h4>
+
+                                        @if ($auction->is_selling)
+                                            <div class="mainPage-offer">
+                                                Nabídka
+                                            </div>
+                                        @else
+                                            <div class="mainPage-buy">
+                                                Poptávka
+                                            </div>
+                                        @endif
+
+                                        <h3>{{ $auction->starting_price + $bids[$auction->id]}} Kč</h3>
+                                        <span>Začátek: {{ $auction->start_time }}</span>
+                                </div>
+                            @endforeach
                             </div>
                             <div class = "d-flex align-items-center list-arrow-right hidesRight">
                                     <div class="list-arrow" id="newAuctionRight" onclick="rightScroll('#favouriteAuctionList')">
