@@ -24,8 +24,10 @@
                                 <div class="d-flex justify-content-center">
                                     @if($auction->is_approved)
                                         <span class="material-icons-outlined green-text md-36">check</span>
-                                    @else
+                                    @elseif(is_null($auction->is_approved))
                                         <span class="material-icons-outlined yellow-text md-36">watch_later</span>
+                                    @else
+                                        <span class="material-icons-outlined red-text md-36">clear</span>
                                     @endif
                                 </div>
                             </td>
@@ -69,11 +71,13 @@
                                         <tr>
                                             <th scope="row">Schválená</th>
                                             <td>
-                                                    @if($auction->is_approved)
-                                                        <span class="material-icons-outlined green-text md-36">check</span>
-                                                    @else
-                                                        <span class="material-icons-outlined yellow-text md-36">watch_later</span>
-                                                    @endif
+                                            @if($auction->is_approved)
+                                                <span class="material-icons-outlined green-text md-36">check</span>
+                                            @elseif(is_null($auction->is_approved))
+                                                <span class="material-icons-outlined yellow-text md-36">watch_later</span>
+                                            @else
+                                                <span class="material-icons-outlined red-text md-36">clear</span>
+                                            @endif
                                             </td>
                                         </tr>
                                         <tr>
