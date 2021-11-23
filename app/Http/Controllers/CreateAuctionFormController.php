@@ -50,7 +50,7 @@ class CreateAuctionFormController extends Controller
         $auction->is_open = $req->is_open;
         $auction->is_selling = $req->is_selling;
         #TODO approved
-        $auction->is_approved = "1";
+        $auction->is_approved = "0";
         $auction->starting_price = $req->stratPrice;
         $auction->start_time = $req->auctionStart;
         $auction->time_limit = $req->auctionEnd;
