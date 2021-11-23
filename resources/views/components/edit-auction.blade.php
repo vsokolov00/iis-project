@@ -100,9 +100,8 @@
                             </div>
                         </div>
                 </div>
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zrušit</button>
-                <button type="submit" class="btn btn-success">Uložit změny</button>
+                <button type="button" class="btn btn-secondary inv_after_approved" data-dismiss="modal">Zrušit</button>
+                <button type="submit" class="btn btn-success inv_after_approved">Uložit změny</button>
             </form>
         </div>
         </div>

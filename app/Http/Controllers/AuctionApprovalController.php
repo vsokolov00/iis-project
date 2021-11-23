@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Auction;
 use App\Models\AuctionItem;
+use App\Models\AuctioneerOf;
 use Auth;
 use App;
 
@@ -54,6 +55,14 @@ class AuctionApprovalController extends Controller
                 if($auction != NULL)
                 {
                     $auction->is_approved = $request->approved;
+
+                    //save only the information about the approved auctions
+                    if ($auction->is_approved) {
+                        $auctioneerOf = new AuctioneerOf();
+                        $auctioneerOf->user = Auth::user()->id;
+                        $auctioneerOf->auction = $request->auctionId;
+                        AuctioneerOf::create($auctioneerOf->toArray());
+                    }
 
                     if($auction->start_time < now())
                     {

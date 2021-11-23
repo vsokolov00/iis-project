@@ -44,7 +44,7 @@
                                                 @if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
                                                     <img src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
                                                 @else
-                                                    <img src="{{ url('/') }}/assets/default_image.png" alt="Položka aukce"/>
+                                                    <img src="{{ url('/') }}/assets/empty.png" alt="Položka aukce"/>
                                                 @endif
                                             </div>
                                             <h4>{{ $auction->auctionItem->item_name }}</h4>

@@ -201,7 +201,7 @@ jQuery(function() {
     });
 });
 
-function openModal(id, img, name, description, sprice, minbid, maxbid, stime, etime, isopen, issell) {
+function openModal(id, img, name, description, sprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
     $("#previewImg").attr("src", img);
     $("#edit-name").val(name);
@@ -221,6 +221,18 @@ function openModal(id, img, name, description, sprice, minbid, maxbid, stime, et
         chooseFromClicked('#btnopen', '#btnclosed');
     else
         chooseFromClicked('#btnclosed', '#btnopen');
+        
+    if (isapproved != null && isapproved == 1) {
+        var editButtons = document.getElementsByClassName('inv_after_approved');
+        for (var i = 0; i < editButtons.length; i ++) {
+            editButtons[i].style.display = 'none';
+        }
+    } else {
+        var editButtons = document.getElementsByClassName('inv_after_approved');
+        for (var i = 0; i < editButtons.length; i ++) {
+            editButtons[i].style.display = 'inline';
+        }
+    }
 
     $("#editModal").modal('show');
 };

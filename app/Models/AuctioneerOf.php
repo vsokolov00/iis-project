@@ -9,6 +9,7 @@ class AuctioneerOf extends Model
 {
     public $timestamps = false;
     protected $fillable = ['user', 'auction'];
+    protected $table = 'auctioneers_of';
 
     public function auctioneer() {
         return $this->belongsTo(User::class, 'user', 'id');
