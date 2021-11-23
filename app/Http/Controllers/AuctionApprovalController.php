@@ -89,6 +89,14 @@ class AuctionApprovalController extends Controller
 
         $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->where('is_approved', '=', NULL)->get();
 
-        return view('liciator/auction-approval', ["auctions" => $auctions]);
+        return view('liciator/auction-approval', ["auctions" => $auctions, "title" => "Neschválené aukce"]);
+    }
+
+    public function approvedByYou() {
+        $auctionsIapproved = AuctioneerOf::where('user', Auth::user()->id)->pluck('auction');
+
+        $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->whereIn('id', $auctionsIapproved)->where('is_approved', '=', '1')->get();
+
+        return view('liciator/auction-approval', ["auctions" => $auctions, "title" => "Aukce schvalené mnou"]);
     }
 }

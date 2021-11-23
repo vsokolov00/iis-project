@@ -52,7 +52,7 @@ class AllAuctionsController extends Controller
         foreach ($auctionsITakePartIn as $auction) {
             $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
         }
-        
+        return view('allAuctions', ["auctions" => $auctionsITakePartIn, "title" => "Aukce, kterych jste se zůčastnil"]);
         return view('user/registeredAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $bids]);
     }
 }

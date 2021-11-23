@@ -39,7 +39,7 @@
                 @endif
 
                 @if(Auth::user()->is_admin() || Auth::user()->is_auctioneer())
-                    <a href="#" class="dropdown-item">Aukce schvalené mnou</a>
+                    <a href="{{ route('approvedByYou') }}" class="dropdown-item">Aukce schvalené mnou</a>
                 @endif
 
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>

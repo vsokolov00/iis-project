@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container">
-		<h1>Neschválené aukce</h1>
+		<h1>{{ $title }}</h1>
 		<table class="table table-striped table-display-lg ">
 			<thead>
 				<tr>
@@ -139,23 +139,27 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
-                                        <div class="m-3 mt-5 d-flex">
-                                            <form method="POST">
-                                                @csrf
-                                                <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
-                                                <input type="number" name="approved" value="0" hidden>
-                                                <button type="submit" class="btn btn-danger m-2" data-dismiss="modal">Zamítnout</button>
-                                            </form>
-                                            <form method="POST">
-                                                @csrf
-                                                <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
-                                                <input type="number" name="approved" value="1" hidden>
-                                                <button type="submit" class="btn btn-success m-2">Potvrdit</button>
-                                            </form>
-                                        </div>
-                                        @else
-                                            <b> Nemůžete schválit svoji aukci</b>
+                                        @if(!$auction->is_approved)
+                                            @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
+                                            <div class="m-3 mt-5 d-flex">
+                                                <form method="POST">
+                                                    @csrf
+                                                    <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
+                                                    <input type="number" name="approved" value="0" hidden>
+                                                    <button type="submit" class="btn btn-danger m-2" data-dismiss="modal">Zamítnout</button>
+                                                </form>
+                                                <form method="POST">
+                                                    @csrf
+                                                    <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
+                                                    <input type="number" name="approved" value="1" hidden>
+                                                    <button type="submit" class="btn btn-success m-2">Potvrdit</button>
+                                                </form>
+                                            </div>
+                                            @else
+                                                <b> Nemůžete schválit svoji aukci</b>
+                                            @endif
+                                        @elseif(!$auction->results_approved)
+                                            <button>Schvalit vysledek</button>    
                                         @endif
                                 </div>
                             </div>
@@ -324,23 +328,27 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
-                                            <div class="m-3 mt-5 d-flex justify-content-center">
-                                                <form method="POST">
-                                                    @csrf
-                                                    <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
-                                                    <input type="number" name="approved" value="0" hidden>
-                                                    <button type="submit" class="btn btn-danger m-2" data-dismiss="modal">Zamítnout</button>
-                                                </form>
-                                                <form method="POST">
-                                                    @csrf
-                                                    <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
-                                                    <input type="number" name="approved" value="1" hidden>
-                                                    <button type="submit" class="btn btn-success m-2">Potvrdit</button>
-                                                </form>
-                                            </div>
-                                            @else
-                                                <b> Nemůžete schválit svoji aukci</b>
+                                            @if(!$auction->is_approved)
+                                                @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
+                                                <div class="m-3 mt-5 d-flex justify-content-center">
+                                                    <form method="POST">
+                                                        @csrf
+                                                        <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
+                                                        <input type="number" name="approved" value="0" hidden>
+                                                        <button type="submit" class="btn btn-danger m-2" data-dismiss="modal">Zamítnout</button>
+                                                    </form>
+                                                    <form method="POST">
+                                                        @csrf
+                                                        <input type="number" name="auctionId" value="{{ $auction->id }}" hidden>
+                                                        <input type="number" name="approved" value="1" hidden>
+                                                        <button type="submit" class="btn btn-success m-2">Potvrdit</button>
+                                                    </form>
+                                                </div>
+                                                @else
+                                                    <b> Nemůžete schválit svoji aukci</b>
+                                                @endif
+                                            @elseif(!$auction->results_approved)
+                                                <button>Schvalit vysledek</button>
                                             @endif
                                     </div>
                                 </div>
