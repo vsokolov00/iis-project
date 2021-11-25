@@ -26,7 +26,9 @@ class UserListController extends Controller
                 $user->save();
                 return response('OK', 200);
             }
-            else abort(400);
+            else{ 
+                return abort(400);
+            }
 
         return abort(403);
     }

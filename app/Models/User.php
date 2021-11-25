@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function is_auctioneer() {
         return $this->typ === 'auctioneer';
     }
+
+    public function auctioneer_auctions() {
+        return $this->hasMany(AuctioneerOf::class, 'user');
+    }
 }

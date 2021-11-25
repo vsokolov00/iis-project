@@ -18,14 +18,16 @@
                 <?php $imagePath = "storage/images/"; ?>
 				@foreach ($auctions as $auction)
                         <tr onclick="openModal('{{ $auction->id }}', '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
-                        '{{ $auction->starting_price }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
+                        '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                             <td>{{$auction->auctionItem->item_name}}</td>
                             <td>
                                 <div class="d-flex justify-content-center">
                                     @if($auction->is_approved)
                                         <span class="material-icons-outlined green-text md-36">check</span>
-                                    @else
+                                    @elseif(is_null($auction->is_approved))
                                         <span class="material-icons-outlined yellow-text md-36">watch_later</span>
+                                    @else
+                                        <span class="material-icons-outlined red-text md-36">clear</span>
                                     @endif
                                 </div>
                             </td>
@@ -59,7 +61,7 @@
 					@foreach ($auctions as $auction)
                         <tr>
                             <td onclick="openModal('{{ $auction->id }}', '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
-                                '{{ $auction->starting_price }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
+                                '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                                 <table class="table-plain">
                                     <tbody>
                                         <tr>
@@ -69,11 +71,13 @@
                                         <tr>
                                             <th scope="row">Schválená</th>
                                             <td>
-                                                    @if($auction->is_approved)
-                                                        <span class="material-icons-outlined green-text md-36">check</span>
-                                                    @else
-                                                        <span class="material-icons-outlined yellow-text md-36">watch_later</span>
-                                                    @endif
+                                            @if($auction->is_approved)
+                                                <span class="material-icons-outlined green-text md-36">check</span>
+                                            @elseif(is_null($auction->is_approved))
+                                                <span class="material-icons-outlined yellow-text md-36">watch_later</span>
+                                            @else
+                                                <span class="material-icons-outlined red-text md-36">clear</span>
+                                            @endif
                                             </td>
                                         </tr>
                                         <tr>

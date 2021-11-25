@@ -51,12 +51,18 @@
             function getToday(){
               var date = new Date();
               var dateTime = date.toISOString().slice(0, 16);
-            return dateTime;
+              return dateTime;
+            }
+            function get7daysAfterToday(){
+              var date = new Date();
+              date.setDate(date.getDate() + 7);
+              var dateTime = date.toISOString().slice(0, 16);
+              return dateTime;
             }
             $(document).ready(function (){
               $("#auctionStart").val(getToday());
               $("#auctionStart").attr("min", getToday());
-              $("#auctionEnd").val(getToday());
+              $("#auctionEnd").val(get7daysAfterToday());
               $("#auctionEnd").attr("min", getToday());
             })
           </script>

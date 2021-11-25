@@ -20,4 +20,8 @@ class Auction extends Model
     public function participants() {
         return $this->hasMany(ParticipantsOf::class, 'auction');
     }
+
+    public function myAuctioneer() {
+        return $this->morphTo();
+    }
 }

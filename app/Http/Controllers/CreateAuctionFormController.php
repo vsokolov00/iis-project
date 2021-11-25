@@ -41,6 +41,8 @@ class CreateAuctionFormController extends Controller
 
         if ($req->hasFile('image')) {
             $auction_item->image = basename($req->image->store('public/images'));
+        } else {
+            $auction_item->image = "empty.png";
         }
         $auction_item->description = $req->description;
         $auction_item->owner = Auth::user()->id;
@@ -50,7 +52,7 @@ class CreateAuctionFormController extends Controller
         $auction->is_open = $req->is_open;
         $auction->is_selling = $req->is_selling;
         #TODO approved
-        $auction->is_approved = "1";
+        // $auction->is_approved = 0;
         $auction->starting_price = $req->stratPrice;
         $auction->start_time = $req->auctionStart;
         $auction->time_limit = $req->auctionEnd;
