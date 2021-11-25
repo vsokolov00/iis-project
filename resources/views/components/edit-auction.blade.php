@@ -59,6 +59,7 @@
                         <script>
                             function getToday(){
                                 var date = new Date();
+                                date.setHours( date.getHours() + 1 );
                                 var dateTime = date.toISOString().slice(0, 16);
                                 return dateTime;
                             }
