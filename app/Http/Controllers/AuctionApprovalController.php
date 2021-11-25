@@ -96,13 +96,25 @@ class AuctionApprovalController extends Controller
 
         $newRegisteredUsers = ParticipantsOf::with('user')->whereIn('auction', $auctionsIapproved)->where('is_approved', 1)->get();
 
-        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "title" => "Aukce schvalené mnou"]);
+        $auction_winners = [];
+        
+        foreach ($auctions as $auction) {
+            if($auction->is_open) {
+                $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('date_of_last_bid', 'desc')->first();
+                $auction_winners[$auction->id] = $current_winner;
+            } else {
+                $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
+                $auction_winners[$auction->id] = $current_winner;
+            }
+        }
+
+        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Aukce schvalené mnou"]);
     }
 
     public function handleNewRegisteredUser(Request $request) {
         if(Auth::check() && (Auth::user()->is_admin() || Auth::user()->is_auctioneer())) {
             if(isset($request->userId) && (isset($request->auctionId))) {
-                $participation = ParticipantsOf::where('auction', $request->auctionId)->where('participant', $request->userId)->update(['is_approved'=>False]);;
+                ParticipantsOf::where('auction', $request->auctionId)->where('participant', $request->userId)->update(['is_approved'=>False]);;
                 return response('OK', 200);
             }
             else {
@@ -110,6 +122,19 @@ class AuctionApprovalController extends Controller
             }
         }
 
+        return abort(403);
+    }
+
+    public function approveAuction(Request $request) {
+        if(Auth::check() && (Auth::user()->is_admin() || Auth::user()->is_auctioneer())) {
+            if(isset($request->response) && (isset($request->auctionId))) {
+                Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response]);;
+                return response('OK', 200);
+            }
+            else {
+                return abort(400);
+            }
+        }
         return abort(403);
     }
 }

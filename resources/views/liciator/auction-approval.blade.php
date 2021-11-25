@@ -140,6 +140,7 @@
                                             </div>
                                         </div>
                                         @isset($newParticipants)
+                                        @if(!$auction->results_approved)
                                         <div class="d-md-flex flex-lg-row mt-4 mb-5">
                                         <div class="col">     
                                                 <table>
@@ -148,17 +149,20 @@
                                                     <th>Datum přihlášení</th>
                                                     <th>Příhoz</th>
                                                 </tr>
-                                                @foreach($newParticipants as $participant)  
-                                                <tr>
-                                                    <td>{{ $participant->user->name }}</td>
-                                                    <td>{{ $participant->registered_at }}</td>
-                                                    <td>{{ $participant->last_bid }} Kč</td>
-                                                    <td><input class="approve-decline-user" data-username="{{ $participant->user->name }}" data-userid="{{ $participant->user->id }}" data-auctionid = "{{ $auction->id }}" type="submit" value="Vyhodit"></td>
-                                                </tr>
+                                                @foreach($newParticipants as $participant)
+                                                @if($auction->id == $participant->auction)  
+                                                    <tr>
+                                                        <td>{{ $participant->user->name }}</td>
+                                                        <td>{{ $participant->registered_at }}</td>
+                                                        <td>{{ $participant->last_bid }} Kč</td>
+                                                        <td><input class="approve-decline-user" data-username="{{ $participant->user->name }}" data-userid="{{ $participant->user->id }}" data-auctionid = "{{ $auction->id }}" type="submit" value="Vyhodit"></td>
+                                                    </tr>
+                                                @endif
                                                 @endforeach
                                                 </table>
                                             </div>
                                         </div>
+                                        @endif
                                         @endisset($newParticipants)
                                         @if(!$auction->is_approved)
                                             @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
@@ -179,12 +183,17 @@
                                             @else
                                                 <b> Nemůžete schválit svoji aukci</b>
                                             @endif
-                                        @elseif(!$auction->results_approved)
-                                        @php
-                                            if(date("Y-m-d h:i:s") > $auction->time_limit) {
-                                                echo "<button>Schvalit vysledek</button>";
-                                            }
-                                        @endphp    
+                                        @elseif(!$auction->results_approved && now() > $auction->time_limit)
+                                       <div>
+                                            <input class="auction-result-submit" type="submit" value="Schvalit výsledek" data-auctionid="{{ $auction->id }}" data-response="1" data-target="{{ route('approveAuction') }}">
+                                            <input class="auction-result-submit" type="submit" value="Zamitnout výsledek" data-auctionid="{{ $auction->id }}" data-response="0" data-target="{{ route('approveAuction') }}">
+                                        </div>
+                                        @endif
+                                        @if($auction->results_approved)
+                                        <div id="auction-result">
+                                            <p style="color: green">Winner je {{ $winners[$auction->id]->user->name }} </p>
+                                            <p style="color: green">Výsledky aukce jsou schvalené!</p>
+                                        </div>
                                         @endif
                                 </div>
                             </div>

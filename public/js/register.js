@@ -238,6 +238,43 @@ $('.approve-decline-user').on('click', function(event) {
     }
 });
 
+$('.auction-result-submit').on('click', function(event) {
+    event.preventDefault();
+    var caller = $(event.target);
+    var id = caller.data('auctionid');
+    var response = caller.data('response');
+    var route = caller.data('target');
+
+    result = confirm("Chcete schvalit výsledky této aukcí? ");
+    
+    if (result) {
+        var formattedData = { auctionId: id, response: response }
+        console.log(formattedData);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax( route, {
+            type: "POST",
+            data: formattedData,
+            success: function (_, _, xhr) {
+                var parent = caller.parent();
+                parent.css("display", "none");
+                // var results = document.getElementById('auction-result');
+                // results.style.visibility = 'visible';
+
+            }, 
+            error: function() {
+                alert('Není možné provest tuto akci.')
+            }
+        });
+    }
+});
+
+
+
 function openModal(id, img, name, description, sprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
     $("#previewImg").attr("src", img);
