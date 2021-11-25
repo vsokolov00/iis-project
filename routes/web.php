@@ -37,6 +37,7 @@ Route::post('/user/auctions', [App\Http\Controllers\UserAuctionsController::clas
 Route::get('/auctions/approval', [App\Http\Controllers\AuctionApprovalController::class, 'index'])->name('auctionApproval');
 Route::post('/auctions/approval', [App\Http\Controllers\AuctionApprovalController::class, 'updateAuction'])->name('auctionApproval');
 Route::get('/auctions/approved-by-you', [App\Http\Controllers\AuctionApprovalController::class, 'approvedByYou'])->name('approvedByYou');
+Route::post('/auctions/approved-by-you', [App\Http\Controllers\AuctionApprovalController::class, 'handleNewRegisteredUser'])->name('approvedByYou');
 
 Route::get('auctions/selling', [App\Http\Controllers\AllAuctionsController::class, 'sellingAuctions'])->name('sellingAuctions');
 Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class, 'buyingAuctions'])->name('buyingAuctions');

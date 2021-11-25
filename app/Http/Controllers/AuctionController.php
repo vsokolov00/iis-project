@@ -65,8 +65,7 @@ class AuctionController extends Controller
         $participant = new ParticipantsOf();
         $participant->participant = Auth::user()->id;
         $participant->auction = $id;
-        $participant->is_approved = 0;
-        $participant->registered_at = date("c");
+        $participant->is_approved = 1;
         $participant->last_bid = 0;
         ParticipantsOf::create($participant->toArray());
         return redirect("/auction/$$id");

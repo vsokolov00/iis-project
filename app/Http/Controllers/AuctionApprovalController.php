@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Auction;
 use App\Models\AuctionItem;
 use App\Models\AuctioneerOf;
+use App\Models\ParticipantsOf;
 use Auth;
 use App;
 
@@ -94,9 +95,24 @@ class AuctionApprovalController extends Controller
 
     public function approvedByYou() {
         $auctionsIapproved = AuctioneerOf::where('user', Auth::user()->id)->pluck('auction');
-
         $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->whereIn('id', $auctionsIapproved)->where('is_approved', '=', '1')->get();
 
-        return view('liciator/auction-approval', ["auctions" => $auctions, "title" => "Aukce schvalené mnou"]);
+        $newRegisteredUsers = ParticipantsOf::with('user')->whereIn('auction', $auctionsIapproved)->where('is_approved', 1)->get();
+
+        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "title" => "Aukce schvalené mnou"]);
+    }
+
+    public function handleNewRegisteredUser(Request $request) {
+        if(Auth::check() && (Auth::user()->is_admin() || Auth::user()->is_auctioneer())) {
+            if(isset($request->userId) && (isset($request->auctionId))) {
+                $participation = ParticipantsOf::where('auction', $request->auctionId)->where('participant', $request->userId)->update(['is_approved'=>False]);;
+                return response('OK', 200);
+            }
+            else {
+                return abort(400);
+            }
+        }
+
+        return abort(403);
     }
 }

@@ -63,7 +63,7 @@
               $("#auctionStart").val(getToday());
               $("#auctionStart").attr("min", getToday());
               $("#auctionEnd").val(get7daysAfterToday());
-              $("#auctionEnd").attr("min", get7daysAfterToday());
+              $("#auctionEnd").attr("min", getToday());
             })
           </script>
       </div>

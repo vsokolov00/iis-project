@@ -201,6 +201,43 @@ jQuery(function() {
     });
 });
 
+
+$('.approve-decline-user').on('click', function(event) {
+    event.preventDefault();
+    var caller = $(event.target);
+    var id = caller.data('userid');
+    var username = caller.data('username');
+    var auction = caller.data('auctionid');
+
+    result = confirm("Chcete trvale odebrat uživatele " + username + " z účasti v aukci?");
+    
+    if (result) {
+        var formattedData = { userId: id, auctionId: auction, response: 0 }
+        console.log(formattedData);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            data: formattedData,
+            success: function (_, _, xhr) {
+                if(xhr.status == 200)
+                {
+                    
+                }
+                var parent = caller.parent().parent();
+                parent.css("display", "none");
+            }, 
+            error: function() {
+                alert('Není možné provest tuto akci.')
+            }
+        });
+    }
+});
+
 function openModal(id, img, name, description, sprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
     $("#previewImg").attr("src", img);

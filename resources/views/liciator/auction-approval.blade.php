@@ -139,6 +139,27 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        @isset($newParticipants)
+                                        <div class="d-md-flex flex-lg-row mt-4 mb-5">
+                                        <div class="col">     
+                                                <table>
+                                                <tr>
+                                                    <th>Uživatel</th>
+                                                    <th>Datum přihlášení</th>
+                                                    <th>Příhoz</th>
+                                                </tr>
+                                                @foreach($newParticipants as $participant)  
+                                                <tr>
+                                                    <td>{{ $participant->user->name }}</td>
+                                                    <td>{{ $participant->registered_at }}</td>
+                                                    <td>{{ $participant->last_bid }} Kč</td>
+                                                    <td><input class="approve-decline-user" data-username="{{ $participant->user->name }}" data-userid="{{ $participant->user->id }}" data-auctionid = "{{ $auction->id }}" type="submit" value="Vyhodit"></td>
+                                                </tr>
+                                                @endforeach
+                                                </table>
+                                            </div>
+                                        </div>
+                                        @endisset($newParticipants)
                                         @if(!$auction->is_approved)
                                             @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
                                             <div class="m-3 mt-5 d-flex">
@@ -159,7 +180,11 @@
                                                 <b> Nemůžete schválit svoji aukci</b>
                                             @endif
                                         @elseif(!$auction->results_approved)
-                                            <button>Schvalit vysledek</button>    
+                                        @php
+                                            if(date("Y-m-d h:i:s") > $auction->time_limit) {
+                                                echo "<button>Schvalit vysledek</button>";
+                                            }
+                                        @endphp    
                                         @endif
                                 </div>
                             </div>
