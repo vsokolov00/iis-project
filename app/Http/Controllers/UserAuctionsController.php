@@ -38,6 +38,7 @@ class UserAuctionsController extends Controller
                     $auction->is_open = $request->is_open;
                     $auction->is_selling = $request->is_selling;
                     $auction->starting_price = $request->startPrice;
+                    $auction->is_approved = null;
                     $auction->start_time = $request->auctionStart;
                     $auction->time_limit = $request->auctionEnd;
 

@@ -105,10 +105,11 @@
     var min = document.getElementById("inputBid").min;
     var value = document.getElementById("inputBid").value;
     if(Number(min)>Number(value)||Number(value)>Number(max)){
-      document.getElementById("wrongRangeSpan").innerHTML = "Výše příhozu musí být v rozsahu "+min+"-"+max;
+      document.getElementById("wrongRangeError").innerHTML = "Výše příhozu musí být v rozsahu "+min+"-"+max;
       document.getElementById("inputBid").classList.add("is-invalid");
+      $("#wrongRangeError").css("display", "block");
     }else{
-      document.getElementById("wrongRangeSpan").innerHTML ="";
+      document.getElementById("wrongRangeError").innerHTML ="";
       document.getElementById("inputBid").classList.remove("is-invalid");
       $.ajaxSetup({
         headers: {
@@ -178,3 +179,76 @@
             reader.readAsDataURL(file);
         }
   }
+  
+  $("#submitAuction").click(function(event){
+    $("#stratPrice").removeClass("is-invalid");
+    $("#startPriceError").empty();
+    $("#closingPrice").removeClass("is-invalid");
+    $("#closingPriceError").empty();
+    $("#bid_min").removeClass("is-invalid");
+    $("#bid_max").removeClass("is-invalid");
+    $("#bidError").empty();
+    $("#auctionStart").removeClass("is-invalid");
+    $("#auctionStartError").empty();
+    $("#auctionEnd").removeClass("is-invalid");
+    $("#auctionEndError").empty();
+
+    if(parseInt($("#stratPrice").val()) > parseInt($("#closingPrice").val())){
+      $("#startPriceError").html("Konečná cena musí být vyšší, než počáteční.");
+      $("#stratPrice").addClass("is-invalid");
+      $("#closingPrice").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(parseInt($("#stratPrice").val()) < 1){
+      $("#startPriceError").html("Počáteční cena musí být alespoň 1.");
+      $("#stratPrice").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(parseInt($("#closingPrice").val()) < 1){
+      $("#closingPriceError").html("Konečná cena musí být alespoň 1.");
+      $("#closingPrice").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(parseInt($("#bid_min").val()) > parseInt($("#bid_max").val())){
+      $("#bidError").html("Maximální výše příhozu musí být vyšší než minimální.");
+      $("#bidError").css("display", "block");
+      $("#bid_min").addClass("is-invalid");
+      $("#bid_max").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(parseInt($("#bid_min").val()) < 1){
+      $("#bidError").html("Výše příhozu musí být vyšší než 0.");
+      $("#bid_min").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(parseInt($("#bid_max").val()) < 1){
+      $("#bidError").html("Výše příhozu musí být vyšší než 0.");
+      $("#bid_max").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(Date.parse($("#auctionStart").val()) > Date.parse($("#auctionEnd").val())){
+      $("#auctionStartError").html("Aukce nesmí skončit dříve, než začne.");
+      $("#auctionStart").addClass("is-invalid");
+      $("#auctionEnd").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(Date.parse($("#auctionStart").val()) < new Date()){
+      $("#auctionStartError").html("Aukce nemůže začít v minulosti.");
+      $("#auctionStart").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+    if(Date.parse($("#auctionEnd").val()) < new Date()){
+      $("#auctionEndError").html("Aukce nemůže začít v minulosti.");
+      $("#auctionEnd").addClass("is-invalid");
+      event.preventDefault();
+    }
+
+  });
