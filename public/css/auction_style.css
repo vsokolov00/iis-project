@@ -537,3 +537,8 @@ a.lists-links{
 td.table-item {
     vertical-align: middle;
 }
+
+.bid-range{
+    gap: 10px;
+}
+

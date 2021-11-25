@@ -29,7 +29,6 @@ class AuctionController extends Controller
                     if($participant->last_bid != 0)
                     $registered = 3;
                 }
-                
             }
         }
        
