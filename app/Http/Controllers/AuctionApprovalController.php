@@ -59,10 +59,7 @@ class AuctionApprovalController extends Controller
 
                     //save only the information about the approved auctions
                     if ($auction->is_approved) {
-                        $auctioneerOf = new AuctioneerOf();
-                        $auctioneerOf->user = Auth::user()->id;
-                        $auctioneerOf->auction = $request->auctionId;
-                        AuctioneerOf::create($auctioneerOf->toArray());
+                        AuctioneerOf::create(['user'=>Auth::user()->id, 'auction'=>$request->auctionId]);
                     }
 
                     if($auction->start_time < now())
