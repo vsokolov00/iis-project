@@ -311,6 +311,26 @@ function openModal(id, img, name, description, sprice, isapproved, minbid, maxbi
     $("#editModal").modal('show');
 };
 
+function invalidateAuction(target, id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax(target, {
+        type: "POST",
+        data: { "id" : id },
+        success: function (_, _, xhr) {
+            if(xhr.status == 200)
+            {
+                $("#detail-" + id).hide();
+                $("#header-" + id).hide();
+            }
+        }
+    });
+}
+
 function openUserModal(id, name, email) {
     $("#byAdmin").val(1);
     $("#id").val(id);

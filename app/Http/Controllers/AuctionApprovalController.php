@@ -10,6 +10,10 @@ use App\Models\AuctioneerOf;
 use App\Models\ParticipantsOf;
 use Auth;
 use App;
+use Doctrine\DBAL\Driver\IBMDB2\Result;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+
+use function PHPUnit\Framework\isEmpty;
 
 class AuctionApprovalController extends Controller
 {
@@ -73,6 +77,24 @@ class AuctionApprovalController extends Controller
             }
 
         return $this->index();
+    }
+
+    public function invalidateAuction(Request $request)
+    {
+        if(isset($request->id))
+        {
+            if(!empty(AuctioneerOf::where('user', Auth::user()->id)
+                ->where('auction', $request->id)->pluck('auction')))
+            {
+                Auction::where('id', $request->id)->update(['is_approved' => null]);
+                AuctioneerOf::where('auction', $request->id)->where('user', Auth::user()->id)->delete();
+                return response('OK', 200);
+            }
+
+            return abort(403);
+        }
+
+        return abort(404);
     }
 
     /**

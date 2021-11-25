@@ -45,3 +45,5 @@ a.form-icon { margin-top: 5px; color: black; }
 .warn-label { color: orange; font-size: smaller; }
 .color-success { color: rgba(40, 167, 69, 1);}
 .color-warning { color: rgba(255, 193, 7, 1); }
+
+.invalidate { color: red; margin-left: -5px; }

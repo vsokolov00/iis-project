@@ -17,7 +17,7 @@
 			<tbody>
                 <?php $imagePath = "storage/images/"; ?>
 				@foreach ($auctions as $auction)
-                    <tr data-toggle="collapse" data-target="#detail-{{ $auction->id }}">
+                    <tr data-toggle="collapse" data-target="#detail-{{ $auction->id }}" id="header-{{$auction->id}}">
                         <td class="table-item">{{$auction->auctionItem->item_name}}</td>
                         <td class="table-item">
                             @if($auction->is_selling)
@@ -51,10 +51,14 @@
                         <td class="text-right table-item">
                             {{number_format($auction->starting_price,0,"", " ")}} Kč
                         </td>
-                        <td style="padding-right: 0; text-align: right;" class="table-item">
-                            <span class="material-icons-outlined green-text md-24 pl-4 pr-3 text-right" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
-                            '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
-                            '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
+                        <td style="padding-right: 0; text-align: right;" class="table-item d-flex justify-content-end">
+                            @if($auction->is_approved)
+                                <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
+                            @else
+                                <span class="material-icons-outlined green-text md-24 pl-4 pr-3 text-right" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
+                                    '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
+                                    '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
+                            @endif
                         </td>
                     </tr>
 
@@ -142,7 +146,7 @@
                                         @isset($newParticipants)
                                         @if(!$auction->results_approved)
                                         <div class="d-md-flex flex-lg-row mt-4 mb-5">
-                                        <div class="col">     
+                                        <div class="col">
                                                 <table>
                                                 <tr>
                                                     <th>Uživatel</th>
@@ -150,7 +154,7 @@
                                                     <th>Příhoz</th>
                                                 </tr>
                                                 @foreach($newParticipants as $participant)
-                                                @if($auction->id == $participant->auction)  
+                                                @if($auction->id == $participant->auction)
                                                     <tr>
                                                         <td>{{ $participant->user->name }}</td>
                                                         <td>{{ $participant->registered_at }}</td>
@@ -264,7 +268,11 @@
                             '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                             '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                                         <div class="d-flex align-content-center">
-                                            <span class="material-icons-outlined md-24 mr-3 text-right" style="height: 24px; width: 24px; margin-left: -5px;">edit</span>
+                                            @if($auction->is_approved)
+                                            <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
+                                            @else
+                                                <span class="material-icons-outlined md-24 mr-3 text-right" style="height: 24px; width: 24px; margin-left: -5px;">edit</span>
+                                            @endif
                                             Editovat
                                         </div>
                                     </button>
