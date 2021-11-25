@@ -1,5 +1,5 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog rounded" role="document">
+    <div class="modal-dialog rounded modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-body">
 
@@ -12,7 +12,7 @@
                 <div class="mt-4 mb-5">
                     <h5 class="modal-title" id="exampleModalLabel">Upravit</h5>
                         @csrf
-                        <div class="d-md-flex align-items-center flex-lg-row my-1">
+                        <div class="d-lg-flex align-items-center flex-lg-row my-1 mb-5">
                             <div class="col">
                                 <div class="d-flex justify-content-center align-items-end p-2">
                                     <img id="previewImg" src="../../img/empty.png" class="previewImg img-fluid"/>
@@ -24,35 +24,45 @@
                             </div>
                             <div class="col">
                                 <label for="name">Název</label>
-                                <input type="text" class="form-control" id="edit-name" name="name" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
+                                <input type="text" class="form-control" id="edit-name" name="name" required>
                                 <label for="name">Popis</label>
                                 <textarea class="form-control" id="edit-description" name="description" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="d-md-flex  flex-lg-row mt-3">
+                        <div class="d-lg-flex  flex-lg-row my-1">
                             <div class="col">
                                 <label for="startPrice">Počáteční cena</label>
-                                <input type="number" class="form-control" id="edit-startPrice" name="startPrice" required oninvalid="this.setCustomValidity('Vyplnite toto policko')">
+                                <input type="number" class="form-control startPrice" id="edit-startPrice" name="startPrice" required >
+                                <div id="startPriceError" class="invalid-feedback"></div>
                             </div>
+                            <div class="col">
+                                <label for="endPrice">Konečná cena</label>
+                                <input type="number" class="form-control closingPrice" id="edit-endPrice" name="endPrice" required >
+                                <div id="closingPriceError"  class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="d-lg-flex  flex-lg-row my-1 mb-5">
                             <div class="col">
                                 <label for="bidRange">Rozsah příhozů</label>
-                                <div class="d-flex" id="bidRange">
-                                    <input type="number" class="form-control mr-1" id="edit-startRange" name="min_bid">
-                                    <input type="number" class="form-control ml-1" id="edit-endRange" name="max_bid">
+                                <div class="d-flex bid-range" id="bidRange">
+                                    <input type="number" class="form-control mr-1 bid_min" id="edit-startRange" name="min_bid" required>
+                                    <input type="number" class="form-control ml-1 bid_max" id="edit-endRange" name="max_bid" required> 
                                 </div>
+                                <div id="bidError" class="invalid-feedback"></div>
                             </div>
+                            <div class="col"></div>
                         </div>
 
-                        <div class="d-md-flex  flex-lg-row mt-3">
+                        <div class="d-lg-flex  flex-lg-row mb-5">
                             <div class="col">
                                 <label for="auctionStart">Začátek aukce</label>
-                                <input type="datetime-local" class="form-control" id="edit-auctionStart" name="auctionStart" required oninvalid="this.setCustomValidity('Vyplnite toto policko')"/>
+                                <input type="datetime-local" class="form-control auctionStart" id="edit-auctionStart" name="auctionStart" required />
+                                <div id="auctionStartError" class="invalid-feedback"></div>
                             </div>
-                        </div>
-                        <div class="d-md-flex flex-lg-row my-1">
                             <div class="col">
                                 <label for="auctionEnd">Konec aukce</label>
-                                <input type="datetime-local" class="form-control" id="edit-auctionEnd" name="auctionEnd"/>
+                                <input type="datetime-local" class="form-control auctionEnd" id="edit-auctionEnd" name="auctionEnd" required/>
+                                <div id="auctionEndError" class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -72,7 +82,7 @@
                             })
                         </script>
 
-                        <div class="d-md-flex  flex-lg-row mt-3">
+                        <div class="d-md-flex  flex-lg-row mb-5">
                             <div class="col">
                                 <label for="type">Typ aukce</label>
                                 <div class="d-flex choose-from-2" id="type">
@@ -101,8 +111,10 @@
                             </div>
                         </div>
                 </div>
-                <button type="button" class="btn btn-secondary inv_after_approved" data-dismiss="modal">Zrušit</button>
-                <button type="submit" class="btn btn-success inv_after_approved">Uložit změny</button>
+                <div class="col">
+                    <button type="button" class="btn btn-secondary inv_after_approved" data-dismiss="modal">Zrušit</button>
+                    <button type="submit" class="btn btn-success inv_after_approved" id="submitAuction">Uložit změny</button>
+                </div>
             </form>
         </div>
         </div>
