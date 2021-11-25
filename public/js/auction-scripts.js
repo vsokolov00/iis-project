@@ -105,10 +105,11 @@
     var min = document.getElementById("inputBid").min;
     var value = document.getElementById("inputBid").value;
     if(Number(min)>Number(value)||Number(value)>Number(max)){
-      document.getElementById("wrongRangeSpan").innerHTML = "Výše příhozu musí být v rozsahu "+min+"-"+max;
+      document.getElementById("wrongRangeError").innerHTML = "Výše příhozu musí být v rozsahu "+min+"-"+max;
       document.getElementById("inputBid").classList.add("is-invalid");
+      $("#wrongRangeError").css("display", "block");
     }else{
-      document.getElementById("wrongRangeSpan").innerHTML ="";
+      document.getElementById("wrongRangeError").innerHTML ="";
       document.getElementById("inputBid").classList.remove("is-invalid");
       $.ajaxSetup({
         headers: {
@@ -192,26 +193,26 @@
     $("#auctionEnd").removeClass("is-invalid");
     $("#auctionEndError").empty();
 
-    if($("#stratPrice").val() > $("#closingPrice").val()){
+    if(parseInt($("#stratPrice").val()) > parseInt($("#closingPrice").val())){
       $("#startPriceError").html("Konečná cena musí být vyšší, než počáteční.");
       $("#stratPrice").addClass("is-invalid");
       $("#closingPrice").addClass("is-invalid");
       event.preventDefault();
     }
 
-    if($("#stratPrice").val()<1){
+    if(parseInt($("#stratPrice").val()) < 1){
       $("#startPriceError").html("Počáteční cena musí být alespoň 1.");
       $("#stratPrice").addClass("is-invalid");
       event.preventDefault();
     }
 
-    if($("#closingPrice").val()<1){
+    if(parseInt($("#closingPrice").val()) < 1){
       $("#closingPriceError").html("Konečná cena musí být alespoň 1.");
       $("#closingPrice").addClass("is-invalid");
       event.preventDefault();
     }
 
-    if($("#bid_min").val() > $("#bid_max").val()){
+    if(parseInt($("#bid_min").val()) > parseInt($("#bid_max").val())){
       $("#bidError").html("Maximální výše příhozu musí být vyšší než minimální.");
       $("#bidError").css("display", "block");
       $("#bid_min").addClass("is-invalid");
@@ -219,13 +220,13 @@
       event.preventDefault();
     }
 
-    if($("#bid_min").val()<1){
+    if(parseInt($("#bid_min").val()) < 1){
       $("#bidError").html("Výše příhozu musí být vyšší než 0.");
       $("#bid_min").addClass("is-invalid");
       event.preventDefault();
     }
 
-    if($("#bid_max").val()<1){
+    if(parseInt($("#bid_max").val()) < 1){
       $("#bidError").html("Výše příhozu musí být vyšší než 0.");
       $("#bid_max").addClass("is-invalid");
       event.preventDefault();

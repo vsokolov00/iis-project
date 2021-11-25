@@ -25,7 +25,7 @@
             @auth
               @if ($registered !== 2)
                 @if ($registered == 1)
-                  <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'" id="inputBid" oninput="checkBidRange()" disabled/>
+                  <input type="number"  class="form-control font-size-25" value="{{$auction->bid_min}}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}" id="inputBid" disabled/>
                   <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
@@ -33,7 +33,7 @@
                     </div>  
                   </button>
                 @elseif ($registered == 3)
-                  <input type="number"  class="form-control font-size-25" value="10" min="'.$bidMin.'" max="'.$bidMax.'"  disabled/>
+                  <input type="number"  class="form-control font-size-25" value="{{$auction->bid_min}}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}"  disabled/>
                   <button class="btn btn-success ml-3" href="#"  role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
@@ -48,7 +48,7 @@
               <a class="btn btn-success btn-block btn-lg" href="{{ route('login') }}" id="btnRegister" role="button" style="display: none;">Registrovat</a> 
             @endauth         
           </div>
-          <span id="wrongRangeSpan" ></span>
+          <div id="wrongRangeError" class="invalid-feedback" ></div>
         </div>
       </div>
 
