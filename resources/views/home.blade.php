@@ -84,7 +84,7 @@
                                             arrow_back_ios
                                     </div>
                             </div>
-                            <div class="d-flex mainPage-auction-list" id="favouriteAuctionList">
+                            <div class="d-flex mainPage-auction-list align-items-stretch" id="favouriteAuctionList">
                             @foreach ($endSoon as $auction)
                                 <?php $route = route("auctionDetail", ["id" => $auction->id]) ?>
                                 <div class="mainPage-auction" onclick="window.location='{{$route}}'">
