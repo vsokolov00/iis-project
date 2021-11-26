@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="d-lg-flex  flex-lg-row my-1 mb-5">
-                            <div class="col">
+                            <div class="col bidRange">
                                 <label for="bidRange">Rozsah příhozů</label>
                                 <div class="d-flex bid-range" id="bidRange">
                                     <input type="number" class="form-control mr-1 bid_min" id="edit-startRange" name="min_bid" required>
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col chooseBtn label-yellow text-center chooseBtn-not-checked" id="btnclosed" onclick="chooseFromClicked('#btnclosed', '#btnopen')">
                                         Uzavřená
-                                        <input type="radio" name="is_open" id="closed" class="d-none" value="0" />
+                                        <input type="radio" name="is_open" id="closed" class="d-none closed" value="0" />
                                     </div>
                                 </div>
                             </div>
