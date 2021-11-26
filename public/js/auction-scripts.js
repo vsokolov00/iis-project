@@ -104,26 +104,40 @@
     var max = document.getElementById("inputBid").max;
     var min = document.getElementById("inputBid").min;
     var value = document.getElementById("inputBid").value;
-    if(Number(min)>Number(value)||Number(value)>Number(max)){
-      document.getElementById("wrongRangeError").innerHTML = "Výše příhozu musí být v rozsahu "+min+"-"+max;
-      document.getElementById("inputBid").classList.add("is-invalid");
-      $("#wrongRangeError").css("display", "block");
+    if(is_open == 1){
+      if(Number(min)>Number(value)||Number(value)>Number(max)){
+        document.getElementById("wrongRangeError").innerHTML = "Výše příhozu musí být v rozsahu "+min+"-"+max;
+        document.getElementById("inputBid").classList.add("is-invalid");
+        $("#wrongRangeError").css("display", "block");
+        return;
+      }else{
+        document.getElementById("wrongRangeError").innerHTML ="";
+        document.getElementById("inputBid").classList.remove("is-invalid");
+      }  
     }else{
-      document.getElementById("wrongRangeError").innerHTML ="";
-      document.getElementById("inputBid").classList.remove("is-invalid");
-      $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.post("/auction/bid", {id: auctionId, bid: value}, function(data, status){
-        if (status == "success" && is_open == 0){
-          $("#inputBid").prop("disabled", true);
-          $("#btnBid").prop("disabled", true);
-        }
-      });
-      updatePrice();
+      if(Number(value) <= 0){
+        document.getElementById("wrongRangeError").innerHTML = "Výše příhozu musí být vyšší než 0";
+        document.getElementById("inputBid").classList.add("is-invalid");
+        $("#wrongRangeError").css("display", "block");
+        return;
+      }else{
+        document.getElementById("wrongRangeError").innerHTML ="";
+        document.getElementById("inputBid").classList.remove("is-invalid");
+      }  
     }
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.post("/auction/bid", {id: auctionId, bid: value}, function(data, status){
+      if (status == "success" && is_open == 0){
+        $("#inputBid").prop("disabled", true);
+        $("#btnBid").prop("disabled", true);
+      }
+    });
+    updatePrice();
+    
   }
 
   function checkboxChange(checkboxId, auctionTypeLabelId){
@@ -143,6 +157,18 @@
     $(activeId).removeClass("chooseBtn-not-checked");
     $('#'+inactiveId.slice(4)).prop("checked", false);
     $('#'+activeId.slice(4)).prop("checked", true);
+    
+    if($(".closed").is(":checked")){
+      $(".closingPrice").prop("required", false);
+      $(".bidRange").css("display", "none");
+      $(".bid_min").prop("required", false);
+      $(".bid_max").prop("required", false);
+    }else{
+      $(".closingPrice").prop("required", true);
+      $(".bidRange").css("display", "block");
+      $(".bid_min").prop("required", true);
+      $(".bid_max").prop("required", true);
+    }
   }
 
   function chooseFromClickedRoles(activeRole, inactiveRole1, inactiveRole2){
@@ -252,5 +278,6 @@
       $(".auctionEnd").addClass("is-invalid");
       event.preventDefault();
     }
-
+    
+    
   });

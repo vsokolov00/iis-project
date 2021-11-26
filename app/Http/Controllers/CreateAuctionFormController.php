@@ -55,9 +55,11 @@ class CreateAuctionFormController extends Controller
         $auction->start_time = $req->auctionStart;
         $auction->time_limit = $req->auctionEnd;
         $auction->closing_price = $req->closingPrice;
-        $auction->bid_min = $req->bid_min;
-        $auction->bid_max = $req->bid_max;
-
+        if($req->is_open){
+            $auction->bid_min = $req->bid_min;
+            $auction->bid_max = $req->bid_max;
+        }
+            
         Auction::create($auction->toArray());
 
         #redirect to the list of created auctions TODO
