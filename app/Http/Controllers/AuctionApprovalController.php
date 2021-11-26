@@ -28,12 +28,13 @@ class AuctionApprovalController extends Controller
         if(!Auth::user()->is_auctioneer() && !Auth::user()->is_admin())
             return redirect('/');
 
-        if(isset($request->name) && isset($request->description) &&
+        if(isset($request->name) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
            {
                 $auction = Auction::with('auctionItem')->where('id', '=', $request->id)->first();
-                if($auction->auctionItem->owner == Auth::user()->id)
+
+                if($auction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin() || Auth::user()->is_auctioneer())
                 {
                     $auction->auctionItem->item_name = $request->name;
                     $auction->auctionItem->description = $request->description;
@@ -52,7 +53,7 @@ class AuctionApprovalController extends Controller
                     $auction->save();
                 }
            }
-        else if(isset($request->auctionId) && isset($request->approved))
+        else if(isset($request->auctionId) && isset($request->approved)) {
             if($request->approved >= 0 && $request->approved <= 1)
             {
                 $auction = Auction::where('id', '=', $request->auctionId)->first();
@@ -75,6 +76,9 @@ class AuctionApprovalController extends Controller
                     $auction->save();
                 }
             }
+        } else {
+            return $request->input();
+        }
 
         return $this->index();
     }

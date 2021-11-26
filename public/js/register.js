@@ -275,12 +275,13 @@ $('.auction-result-submit').on('click', function(event) {
 
 
 
-function openModal(id, img, name, description, sprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
+function openModal(id, img, name, description, sprice, eprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
     $("#previewImg").attr("src", img);
     $("#edit-name").val(name);
     $("#edit-description").val(description);
     $("#edit-startPrice").val(sprice);
+    $("#edit-endPrice").val(eprice);
     $("#edit-startRange").val(minbid);
     $("#edit-endRange").val(maxbid);
     $("#edit-auctionStart").val((new Date(stime)).toISOString().slice(0, 16));
