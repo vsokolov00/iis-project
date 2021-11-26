@@ -210,7 +210,7 @@ $('.approve-decline-user').on('click', function(event) {
     var auction = caller.data('auctionid');
 
     result = confirm("Chcete trvale odebrat uživatele " + username + " z účasti v aukci?");
-    
+
     if (result) {
         var formattedData = { userId: id, auctionId: auction, response: 0 }
         console.log(formattedData);
@@ -226,11 +226,11 @@ $('.approve-decline-user').on('click', function(event) {
             success: function (_, _, xhr) {
                 if(xhr.status == 200)
                 {
-                    
+
                 }
                 var parent = caller.parent().parent();
                 parent.css("display", "none");
-            }, 
+            },
             error: function() {
                 alert('Není možné provest tuto akci.')
             }
@@ -246,7 +246,7 @@ $('.auction-result-submit').on('click', function(event) {
     var route = caller.data('target');
 
     result = confirm("Chcete schvalit výsledky této aukcí? ");
-    
+
     if (result) {
         var formattedData = { auctionId: id, response: response }
         console.log(formattedData);
@@ -265,7 +265,7 @@ $('.auction-result-submit').on('click', function(event) {
                 // var results = document.getElementById('auction-result');
                 // results.style.visibility = 'visible';
 
-            }, 
+            },
             error: function() {
                 alert('Není možné provest tuto akci.')
             }
@@ -273,7 +273,25 @@ $('.auction-result-submit').on('click', function(event) {
     }
 });
 
+function invalidateAuction(target, id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
+    $.ajax(target, {
+        type: "POST",
+        data: { "id" : id },
+        success: function (_, _, xhr) {
+            if(xhr.status == 200)
+            {
+                $("#detail-" + id).hide();
+                $("#header-" + id).hide();
+            }
+        }
+    });
+}
 
 function openModal(id, img, name, description, sprice, eprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
@@ -296,7 +314,7 @@ function openModal(id, img, name, description, sprice, eprice, isapproved, minbi
         chooseFromClicked('#btnopen', '#btnclosed');
     else
         chooseFromClicked('#btnclosed', '#btnopen');
-        
+
     if (isapproved != null && isapproved == 1) {
         var editButtons = document.getElementsByClassName('inv_after_approved');
         for (var i = 0; i < editButtons.length; i ++) {
