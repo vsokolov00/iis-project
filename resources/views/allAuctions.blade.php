@@ -10,7 +10,7 @@
 						<div class="allAuctions-item" onclick="window.location='{{$route}}'">
 							<div class="img-container d-flex align-items-center justify-content-center">
 								<div>
-									<img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
+									<img class="img-fluid" src="{{ route('image.displayImage',$auction->auctionItem->image) }}" alt="Položka aukce"/>
 								</div>
 							</div>
 							<h4>{{ $auction->auctionItem->item_name}}</h4>

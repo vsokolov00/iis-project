@@ -50,3 +50,5 @@ Route::get('auction/{id}/status/price', [App\Http\Controllers\PriceController::c
 
 Route::get('users', [App\Http\Controllers\UserListController::class, 'index'])->name('userList');
 Route::post('users', [App\Http\Controllers\UserListController::class, 'triggerToggle'])->name('userList');
+
+Route::get('images/{filename}', [App\Http\Controllers\ImageDisplayController::class, 'displayImage'])->name('image.displayImage');

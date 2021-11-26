@@ -7,7 +7,7 @@
       <h1>{{$auction->auctionItem->item_name}}</h1>
       <div class="d-md-flex flex-md-row two-columns align-items-stretch py-3">
         <div class="img-auction-detail mb-1 d-flex align-items-center justify-content-center">
-          <img class="img-fluid" src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce">
+          <img class="img-fluid" src="{{ route('image.displayImage',$auction->auctionItem->image) }}" alt="Položka aukce">
         </div>
         <div class="auction-detail-panel">
           @if ($auction->is_open)

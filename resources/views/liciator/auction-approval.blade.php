@@ -15,7 +15,6 @@
 				</tr>
 			</thead>
 			<tbody>
-                <?php $imagePath = "storage/images/"; ?>
 				@foreach ($auctions as $auction)
                     <tr data-toggle="collapse" data-target="#detail-{{ $auction->id }}" id="header-{{$auction->id}}">
                         <td class="table-item">{{$auction->auctionItem->item_name}}</td>
@@ -56,7 +55,7 @@
                                 <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
                             @else
                                 <span class="material-icons-outlined green-text md-24 pl-4 pr-3 text-right" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
-                                    '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
+                                    '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                                     '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
                             @endif
                         </td>
@@ -70,7 +69,7 @@
                                         <div class="d-md-flex align-items-center flex-lg-row my-1">
                                             <div class="col">
                                                 <div class="d-flex justify-content-center align-items-end p-2">
-                                                    <img id="detail-previewImg" src="{{ asset($imagePath . $auction->auctionItem->image); }}" class="previewImg img-fluid"/>
+                                                    <img id="detail-previewImg" src="{{ route('image.displayImage',$auction->auctionItem->image) }}" class="previewImg img-fluid"/>
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -197,10 +196,15 @@
                                             <input class="auction-result-submit" type="submit" value="Zamitnout výsledek" data-auctionid="{{ $auction->id }}" data-response="0" data-target="{{ route('approveAuction') }}">
                                         </div>
                                         @endif
-                                        @if($auction->results_approved)
+                                        @if($auction->results_approved && isset($winners))
                                             <p style="color: green">Výsledky aukce jsou již schvalené!</p>
-                                            <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
-                                            <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>
+                                            @if(!is_null($winners[$auction->id][0]))
+                                            <!--Get winner name and final price if exist-->
+                                             <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
+                                             <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>
+                                            @else
+                                            <p>Není winner</p>
+                                            @endif
                                         @endif
                                 </div>
                             </div>
@@ -268,7 +272,7 @@
 
                                 <div class="d-flex justify-content-center mt-3 mb-3">
                                     <button type="button" class="btn btn-success" onclick="openModal('{{ $auction->id }}',
-                            '{{ asset($imagePath . $auction->auctionItem->image); }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
+                            '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                             '{{ $auction->starting_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
                                         <div class="d-flex align-content-center">
                                             @if($auction->is_approved)
@@ -289,7 +293,7 @@
                                     <div class="mt-4 mb-4">
                                             @csrf
                                             <div class="d-flex justify-content-center align-items-end p-2 mb-4">
-                                                <img id="detail-previewImg" src="{{ asset($imagePath . $auction->auctionItem->image); }}" class="previewImg img-fluid"/>
+                                                <img id="detail-previewImg" src="{{ route('image.displayImage',$auction->auctionItem->image) }}" class="previewImg img-fluid"/>
                                             </div>
                                             <h3><?= $auction->auctionItem->item_name ?></h3>
                                             <br>

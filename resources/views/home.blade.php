@@ -41,10 +41,10 @@
                                     <?php $route = route("auctionDetail", ["id" => $auction->id]) ?>
                                     <div class="mainPage-auction" onclick="window.location='{{$route}}'">
                                             <div class="img-container">
-                                                @if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
-                                                    <img src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
+                                                @if ($auction->auctionItem->image)
+                                                    <img src="{{ route('image.displayImage',$auction->auctionItem->image) }}" alt="Položka aukce"/>
                                                 @else
-                                                    <img src="{{ url('/') }}/assets/empty.png" alt="Položka aukce"/>
+                                                    <img src="{{ route('image.displayImage','empty.png') }}" alt="Položka aukce"/>
                                                 @endif
                                             </div>
                                             <h4>{{ $auction->auctionItem->item_name }}</h4>
@@ -89,10 +89,10 @@
                                 <?php $route = route("auctionDetail", ["id" => $auction->id]) ?>
                                 <div class="mainPage-auction" onclick="window.location='{{$route}}'">
                                         <div class="img-container">
-                                            @if (file_exists('storage/images/'.$auction->auctionItem->image) and $auction->auctionItem->image)
-                                                <img src="{{ asset('storage/images/'.$auction->auctionItem->image) }}" alt="Položka aukce"/>
+                                            @if ($auction->auctionItem->image)
+                                                <img src="{{ route('image.displayImage',$auction->auctionItem->image) }}" alt="Položka aukce"/>
                                             @else
-                                                <img src="{{ url('/') }}/assets/empty.png" alt="Položka aukce"/>
+                                                <img src="{{ route('image.displayImage','empty.png') }}" alt="Položka aukce"/>
                                             @endif
                                         </div>
                                         <h4>{{ $auction->auctionItem->item_name }}</h4>
