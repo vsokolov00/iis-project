@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Auction;
+use App\Models\User;
 use App\Models\ParticipantsOf;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -31,8 +32,14 @@ class AuctionController extends Controller
                 }
             }
         }
-       
-        return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered]);
+        if(!is_null($auction->winner)) {
+            $winner = Auction::with('winner')->where('id', $id)->first();
+            $winner = User::find($winner->winner);
+        } else {
+            $winner = null;
+        }
+        
+        return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered, "winner" => $winner]);
  
     }
 

@@ -63,4 +63,10 @@ class UserAuctionsController extends Controller
         App::setLocale('cs');
         return view('user/userAuctions', ["auctions" => $auctions]);
     }
+
+    public function wonAuctions() {
+        $wonAuctions = Auction::with('auctionItem')->where('winner', Auth::user()->id)->get();
+        
+        return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce"]);
+    }
 }

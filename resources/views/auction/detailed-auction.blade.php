@@ -13,6 +13,9 @@
           @if ($auction->is_open)
             <h5>Otevřená aukce</h5>
             <h4 id="startTime"></h4>
+            @isset($winner)
+              <h5 id="winnerName" style="color: green">Winner je {{ $winner->name }}</h5>
+            @endisset($winner)
             <h5 id="priceName"></h5>
           @else
             <h5>Uzavřená aukce</h5>

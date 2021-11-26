@@ -33,6 +33,7 @@ Route::get('/auction/price', [App\Http\Controllers\AuctionController::class, 'pr
 
 Route::get('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'index'])->name('userAuctions');
 Route::post('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'updateAuction'])->name('userAuctions');
+Route::get('/user/auctions/won', [App\Http\Controllers\UserAuctionsController::class, 'wonAuctions'])->name('wonAuctions');
 
 Route::get('/auctions/approval', [App\Http\Controllers\AuctionApprovalController::class, 'index'])->name('auctionApproval');
 Route::post('/auctions/approval', [App\Http\Controllers\AuctionApprovalController::class, 'updateAuction'])->name('auctionApproval');

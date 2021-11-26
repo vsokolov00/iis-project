@@ -44,6 +44,7 @@
 
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
                 <a class="dropdown-item" href=" {{ route('userTakesPartIn') }} ">Registrované aukce</a>
+                <a class="dropdown-item" href=" {{ route('wonAuctions') }} ">Vyhrané aukce</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit()">
@@ -86,9 +87,10 @@
                 @if(Auth::user()->is_admin() || Auth::user()->is_auctioneer())
                     <a href="{{ route('approvedByYou') }}" class="dropdown-item">Aukce schvalené mnou</a>
                 @endif
-
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
                 <a class="dropdown-item" href=" {{ route('userTakesPartIn') }} ">Registrované aukce</a>
+                <a class="dropdown-item" href=" {{ route('wonAuctions') }} ">Vyhrané aukce</a>
+                
                 <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit()">
