@@ -50,7 +50,7 @@
                         <td class="text-right table-item">
                             {{number_format($auction->starting_price,0,"", " ")}} Kč
                         </td>
-                        <td style="padding-right: 0; text-align: right;" class="table-item d-flex justify-content-end">
+                        <td style="padding-right: 0; text-align: right;" class="table-item">
                             @if($auction->is_approved)
                                 <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
                             @else
@@ -271,16 +271,22 @@
                                 </table>
 
                                 <div class="d-flex justify-content-center mt-3 mb-3">
-                                    <button type="button" class="btn btn-success" onclick="openModal('{{ $auction->id }}',
-                            '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
-                            '{{ $auction->starting_price }}', '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
+                                    <button type="button" class="btn {{ $auction->is_approved ? 'btn-danger' : 'btn-success'}}"
+                                        @if($auction->is_approved)
+                                            onclick="openModal('{{ $auction->id }}', '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`, '{{ $auction->starting_price }}',
+                                            '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')"
+                                        @else
+                                            onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')"
+                                        @endif
+                                        >
                                         <div class="d-flex align-content-center">
                                             @if($auction->is_approved)
-                                            <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
+                                                <span type="submit" class="material-icons-outlined md-24 mr-3" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
+                                                Zrušit schválení
                                             @else
                                                 <span class="material-icons-outlined md-24 mr-3 text-right" style="height: 24px; width: 24px; margin-left: -5px;">edit</span>
+                                                Editovat
                                             @endif
-                                            Editovat
                                         </div>
                                     </button>
                                 </div>
