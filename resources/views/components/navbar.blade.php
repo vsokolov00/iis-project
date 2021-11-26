@@ -66,42 +66,41 @@
         </div>
         <div class="d-lg-none collapse navbar-collapse pt-4" id="navbarSupportedContent">
         @guest
-            <div class="list-group d-lg-none">
                 @if (Route::has('login'))
-                    <a class="list-group-item list-group-item-action" href="{{ route('login') }}">Přihlásit</a>
+                    <a class="dropdown-item" href="{{ route('login') }}">Přihlásit</a>
                 @endif
 
                 @if (Route::has('register'))
-                    <a class="list-group-item list-group-item-action" href="{{ route('register') }}">Registrovat</a>
+                    <a class="dropdown-item" href="{{ route('register') }}">Registrovat</a>
                 @endif
-            </div>
-        @else
-            <a href="{{ route('profile') }}" class="dropdown-item"><h4 class="d-lg-none" >{{ Auth::user()->name }}</h4></a>
-
-            <div class="list-group d-lg-none">
+            @else
+                <a href="{{ route('profile') }}" class="dropdown-item"><h4>{{ Auth::user()->name }}</h4></a>
                 @if(Auth::user()->is_admin())
-                    <a href="{{ route('userList') }}" class="list-group-item list-group-item-action"><b>Sprava uživatelů</b></a>
+                    <a href="{{ route('userList') }}" class="dropdown-item">Sprava uživatelů</a>
                 @endif
-
-                <a href="{{ route('userAuctions') }}" class="list-group-item list-group-item-action">Moje nabídky</a>
 
                 @if(Auth::user()->is_auctioneer() || Auth::user()->is_admin())
-                    <a href="{{ route('auctionApproval') }}" class="list-group-item list-group-item-action"><b>Neschválené aukce</b></a>
+                    <a href="{{ route('auctionApproval') }}" class="dropdown-item">Neschválené aukce</a>
                 @endif
 
-                <a href="#" class="list-group-item list-group-item-action">Registrované aukce</a>
-                <a href="#" class="list-group-item list-group-item-action">Nastavení</a>
-                <a class="list-group-item list-group-item-action" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        Odhlásit se
+                @if(Auth::user()->is_admin() || Auth::user()->is_auctioneer())
+                    <a href="{{ route('approvedByYou') }}" class="dropdown-item">Aukce schvalené mnou</a>
+                @endif
+
+                <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
+                <a class="dropdown-item" href=" {{ route('userTakesPartIn') }} ">Registrované aukce</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit()">
+                            Odhlásit se
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-            </div>
-        @endguest
+
+                <div class="dropdown-divider"></div>
+            @endguest
         </div>
     </div>
 </nav>

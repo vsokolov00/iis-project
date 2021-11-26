@@ -188,16 +188,19 @@
                                                 <b> Nemůžete schválit svoji aukci</b>
                                             @endif
                                         @elseif(!$auction->results_approved && now() > $auction->time_limit)
-                                       <div>
+                                        <div id="auction-result">
+                                            <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
+                                            <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>
+                                        </div>
+                                        <div>
                                             <input class="auction-result-submit" type="submit" value="Schvalit výsledek" data-auctionid="{{ $auction->id }}" data-response="1" data-target="{{ route('approveAuction') }}">
                                             <input class="auction-result-submit" type="submit" value="Zamitnout výsledek" data-auctionid="{{ $auction->id }}" data-response="0" data-target="{{ route('approveAuction') }}">
                                         </div>
                                         @endif
                                         @if($auction->results_approved)
-                                        <div id="auction-result">
-                                            <p style="color: green">Winner je {{ $winners[$auction->id]->user->name }} </p>
-                                            <p style="color: green">Výsledky aukce jsou schvalené!</p>
-                                        </div>
+                                            <p style="color: green">Výsledky aukce jsou již schvalené!</p>
+                                            <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
+                                            <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>
                                         @endif
                                 </div>
                             </div>

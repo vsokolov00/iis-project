@@ -123,10 +123,12 @@ class AuctionApprovalController extends Controller
         foreach ($auctions as $auction) {
             if($auction->is_open) {
                 $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('date_of_last_bid', 'desc')->first();
-                $auction_winners[$auction->id] = $current_winner;
+                $current_price = Auction::find($auction->id)->participants->sum('last_bid') + Auction::find($auction->id)->starting_price;
+                $auction_winners[$auction->id] = [$current_winner, $current_price];
             } else {
                 $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
-                $auction_winners[$auction->id] = $current_winner;
+                $current_price = Auction::find($auction->id)->participants->max('last_bid') + Auction::find($auction->id)->starting_price;
+                $auction_winners[$auction->id] = [$current_winner, $current_price];
             }
         }
 
@@ -149,8 +151,15 @@ class AuctionApprovalController extends Controller
 
     public function approveAuction(Request $request) {
         if(Auth::check() && (Auth::user()->is_admin() || Auth::user()->is_auctioneer())) {
+            $auction = Auction::where('id', $request->auctionId)->first();
             if(isset($request->response) && (isset($request->auctionId))) {
-                Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response]);;
+                if($auction->is_open) {
+                    $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('date_of_last_bid', 'desc')->first();
+                } else {
+                    $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
+                }
+
+                Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response, "winner" => $winner->participant]);
                 return response('OK', 200);
             }
             else {
