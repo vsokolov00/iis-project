@@ -23,15 +23,22 @@ class AuctionController extends Controller
             $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
             if($auction->auctionItem->owner == Auth::user()->id)
                 $registered = 2;  
-            
-            if(!$auction->is_open){
-                $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->first();
-                if($participant != null){
+
+            $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->first();
+
+            if($participant != null){
+                
+                if(!$auction->is_open){
                     if($participant->last_bid != 0)
                     $registered = 3;
                 }
-            }
+
+                if($participant->is_approved == 0)  
+                    $registered = 4;
+            }    
         }
+
+            
         if(!is_null($auction->winner)) {
             $winner = Auction::with('winner')->where('id', $id)->first();
             $winner = User::find($winner->winner);
@@ -72,6 +79,7 @@ class AuctionController extends Controller
         $participant->participant = Auth::user()->id;
         $participant->auction = $id;
         $participant->last_bid = 0;
+        $participant->is_approved = 1;
         ParticipantsOf::create($participant->toArray());
         return redirect("/auction/$$id");
     }

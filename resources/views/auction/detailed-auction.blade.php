@@ -43,6 +43,8 @@
                       Přihodit
                     </div>  
                   </button>
+                @elseif ($registered == 4)
+                <h4 class="mt-3" style="color:#FF0000">Bylo Vám zakázáno zúčastnit se aukce.</h4>  
                 @else
                   <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button" style="display: none;">Registrovat</a> 
                 @endif
@@ -52,6 +54,9 @@
             @endauth         
           </div>
           <div id="wrongRangeError" class="invalid-feedback" ></div>
+          @if ($registered === 3)
+            <h4 class="mt-3" style="color:#42AA1F">Váš příhoz byl zaznamenán.</h4>
+          @endif
         </div>
       </div>
 
