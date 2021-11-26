@@ -23,7 +23,6 @@ class CreateAuctionsTable extends Migration
             $table->unsignedInteger('bid_min')->nullable();
             $table->unsignedInteger('bid_max')->nullable();
             $table->dateTime('start_time')->nullable();
-            $table->tinyInteger('is_active')->default(0);
             $table->float('closing_price', 10, 0)->nullable();
             $table->dateTime('time_limit')->nullable();
             $table->tinyInteger('results_approved')->nullable();

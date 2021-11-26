@@ -35,7 +35,6 @@ CREATE TABLE `auctions` (
     `bid_min`           int(10) unsigned DEFAULT NULL,
     `bid_max`           int(10) unsigned DEFAULT NULL,
     `start_time`        datetime DEFAULT NULL,
-    `is_active`         tinyint(1) NOT NULL DEFAULT 0,
     `closing_price`     float DEFAULT NULL,
     `time_limit`        datetime DEFAULT NULL,
     `results_approved`  tinyint(1) DEFAULT NULL,
@@ -50,22 +49,26 @@ CREATE TABLE `auctions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `participants_of` (
+    `id`                int(10) unsigned NOT NULL AUTO_INCREMENT,
     `participant`       int(10) unsigned NOT NULL,
     `auction`           int(10) unsigned NOT NULL,
     `registered_at`     datetime,
-    `is_approved`       tinyint(1) DEFAULT 0,
+    `is_approved`       tinyint(1) DEFAULT 1,
     `last_bid`          decimal(10,0) DEFAULT NULL,
     `date_of_last_bid`  datetime DEFAULT NULL,
-    PRIMARY KEY (`participant`,`auction`),
+    PRIMARY KEY (`id`),
+    UNIQUE (`participant`,`auction`),
     KEY `part_of_fk` (`auction`),
     CONSTRAINT `part_fk` FOREIGN KEY (`participant`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `part_of_fk` FOREIGN KEY (`auction`) REFERENCES `auctions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `auctioneers_of` (
+    `id`   int(10) unsigned NOT NULL AUTO_INCREMENT,
     `user` int(10) unsigned NOT NULL,
     `auction` int(10) unsigned NOT NULL,
-    PRIMARY KEY (`user`,`auction`),
+    PRIMARY KEY (`id`),
+    UNIQUE (`user`,`auction`),
     KEY `auction_fk` (`auction`),
     CONSTRAINT `auction_fk` FOREIGN KEY (`auction`) REFERENCES `auctions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `auctioneer_fk` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

@@ -14,10 +14,11 @@ class CreateAuctioneersOfTable extends Migration
     public function up()
     {
         Schema::create('auctioneers_of', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('user');
             $table->unsignedInteger('auction')->index('auction_fk');
 
-            $table->primary(['user', 'auction']);
+            $table->unique(['user', 'auction'], 'user');
         });
     }
 

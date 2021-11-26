@@ -14,14 +14,15 @@ class CreateParticipantsOfTable extends Migration
     public function up()
     {
         Schema::create('participants_of', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('participant');
             $table->unsignedInteger('auction')->index('part_of_fk');
             $table->dateTime('registered_at')->nullable();
-            $table->tinyInteger('is_approved')->nullable()->default(0);
+            $table->tinyInteger('is_approved')->nullable()->default(1);
             $table->decimal('last_bid', 10, 0)->nullable();
             $table->dateTime('date_of_last_bid')->nullable();
 
-            $table->primary(['participant', 'auction']);
+            $table->unique(['participant', 'auction'], 'participant');
         });
     }
 
