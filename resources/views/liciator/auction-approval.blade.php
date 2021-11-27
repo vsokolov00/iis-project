@@ -101,7 +101,7 @@
                                                         <font color="red">
                                                     @endif
 
-                                                        <?= $auction->start_time ?>
+                                                        {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                                                     @if($auction->start_time < now())
                                                         </font>
@@ -115,7 +115,7 @@
                                                         <font color="red">
                                                     @endif
 
-                                                        <?= $auction->time_limit ?>
+                                                        {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                                                     @if($auction->start_time < now())
                                                         </font>
@@ -395,7 +395,7 @@
                                             @isset($newParticipants)
                                                 @if(!$auction->results_approved)
                                                     <div class="table-responsive mt-3">
-                                                        <table>
+                                                        <table style="width:100%">
                                                             <thead>
                                                                 <tr>
                                                                     <th colspan="2">Registrovaní uživatelé</th>
@@ -407,7 +407,7 @@
                                                             @if($auction->id == $participant->auction)
                                                                 <tr>
                                                                     <td>
-                                                                <table  class="table-plain">
+                                                                <table  class="table-plain" style="width:100%">
                                                                     <tbody>
                                                                         <tr>
                                                                             <th>Uživatel</th>

@@ -13,9 +13,7 @@
           @if ($auction->is_open)
             <h5>Otevřená aukce</h5>
             <h4 id="startTime"></h4>
-            @isset($winner)
-              <h5 id="winnerName" style="color: green">Winner je {{ $winner->name }}</h5>
-            @endisset($winner)
+           
             <h5 id="priceName"></h5>
           @else
             <h5>Uzavřená aukce</h5>
@@ -56,7 +54,10 @@
           <div id="wrongRangeError" class="invalid-feedback" ></div>
           @if ($registered === 3)
             <h4 class="mt-3" style="color:#42AA1F">Váš příhoz byl zaznamenán.</h4>
-          @endif
+          @endif 
+          @isset($winner)
+              <h4 id="winnerName" class="mt-2" style="color: #42AA1F">Vítěz: {{ $winner->name }}</h4>
+          @endisset($winner)
         </div>
       </div>
 
