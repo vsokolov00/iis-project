@@ -57,7 +57,13 @@
           @endif 
           @isset($winner)
               <h4 id="winnerName" class="mt-2" style="color: #42AA1F">Vítěz: {{ $winner->name }}</h4>
+              <h5  style="color: #42AA1F">Kontakt: {{ $winner->email }}</h5>
           @endisset($winner)
+          @isset($auction->results_approved)
+            @if($auction->results_approved === 0)
+              <h4 class="mt-2" style="color: red"> Výsledek aukce byl zamítnut</h4>
+            @endif
+          @endisset
         </div>
       </div>
 
