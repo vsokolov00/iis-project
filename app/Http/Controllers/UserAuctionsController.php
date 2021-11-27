@@ -71,7 +71,8 @@ class UserAuctionsController extends Controller
     }
 
     private function getAllBids($auctions)
-    {
+    {   
+        $bids = [];
         foreach ($auctions as $auction) {
             $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
         }
