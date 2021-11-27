@@ -198,8 +198,13 @@
                                             @endif
                                         @elseif(is_null($auction->results_approved) && now() > $auction->time_limit)
                                         <div id="auction-result">
-                                            <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
-                                            <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>
+                                            @if(!is_null($winners[$auction->id][0]))
+                                            <!--Get winner name and final price if exist-->
+                                             <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
+                                             <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>
+                                            @else
+                                            <p>Nikdo nepříhodil</p>
+                                            @endif
                                         </div>
                                         <div>
                                             <input class="auction-result-submit" type="submit" value="Schvalit výsledek" data-auctionid="{{ $auction->id }}" data-response="1" data-target="{{ route('approveAuction') }}">
