@@ -144,27 +144,37 @@
                                         </div>
                                         @isset($newParticipants)
                                         @if(!$auction->results_approved)
-                                        <div class="d-md-flex flex-lg-row mt-4 mb-5">
-                                        <div class="col">
-                                                <table>
-                                                <tr>
-                                                    <th>Uživatel</th>
-                                                    <th>Datum přihlášení</th>
-                                                    <th>Příhoz</th>
-                                                </tr>
-                                                @foreach($newParticipants as $participant)
-                                                @if($auction->id == $participant->auction)
-                                                    <tr>
-                                                        <td>{{ $participant->user->name }}</td>
-                                                        <td>{{ $participant->registered_at }}</td>
-                                                        <td>{{ $participant->last_bid }} Kč</td>
-                                                        <td><input class="approve-decline-user" data-username="{{ $participant->user->name }}" data-userid="{{ $participant->user->id }}" data-auctionid = "{{ $auction->id }}" type="submit" value="Vyhodit"></td>
-                                                    </tr>
-                                                @endif
-                                                @endforeach
+                                            <div class="table-responsive">
+                                                <table  class="table table-striped"> 
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Uživatel</th>
+                                                            <th>Datum přihlášení</th>
+                                                            <th>Příhoz</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>     
+                                                    <tbody>       
+                                                        <tr></tr>
+                                                        @foreach($newParticipants as $participant)
+                                                        @if($auction->id == $participant->auction)
+                                                            <tr>
+                                                                <td class="align-middle">{{ $participant->user->name }}</td>
+                                                                <td class="align-middle">{{ $participant->registered_at }}</td>
+                                                                <td class="align-middle">{{ $participant->last_bid }} Kč</td>
+                                                                <td class="align-middle text-right">
+                                                                    <label for="removeUser{{$auction->id}}{{$participant->user->id}}" class="m-0 invalidate decline-user" data-toggle="tooltip" data-placement="left" title="Odebrat účastníka z aukce">
+                                                                        <span class="material-icons md-24 align-middle">person_remove</span>
+                                                                    </label>
+                                                                    <input class="approve-decline-user d-none" id="removeUser{{$auction->id}}{{$participant->user->id}}" data-username="{{ $participant->user->name }}" data-userid="{{ $participant->user->id }}" data-auctionid = "{{ $auction->id }}" type="submit">
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
                                                 </table>
                                             </div>
-                                        </div>
+                                        
                                         @endif
                                         @endisset($newParticipants)
                                         @if(!$auction->is_approved)
@@ -332,8 +342,7 @@
                                                     @if($auction->start_time < now())
                                                         <font color="red">
                                                     @endif
-
-                                                        <?= $auction->start_time ?>
+                                                        {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                                                     @if($auction->start_time < now())
                                                         </font>
@@ -350,7 +359,7 @@
                                                         <font color="red">
                                                     @endif
 
-                                                        <?= $auction->time_limit ?>
+                                                        {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                                                     @if($auction->start_time < now())
                                                         </font>
@@ -383,6 +392,55 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            @isset($newParticipants)
+                                                @if(!$auction->results_approved)
+                                                    <div class="table-responsive mt-3">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="2">Registrovaní uživatelé</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr></tr>
+                                                        @foreach($newParticipants as $participant)
+                                                            @if($auction->id == $participant->auction)
+                                                                <tr>
+                                                                    <td>
+                                                                <table  class="table-plain">     
+                                                                    <tbody>   
+                                                                        <tr>
+                                                                            <th>Uživatel</th>
+                                                                            <td class="align-middle">{{ $participant->user->name }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Datum přihlášení</th>
+                                                                            <td class="align-middle"> {{date("j. n. Y H:i", strtotime($participant->registered_at))}}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>Příhoz</th>
+                                                                            <td class="align-middle">{{ $participant->last_bid }} Kč</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            
+                                                                            <td colspan="2" class="align-middle text-right">
+                                                                                <label for="removeUserMob{{$auction->id}}{{$participant->user->id}}" class="m-0 invalidate">
+                                                                                    <span class="material-icons md-24 align-middle">person_remove</span>
+                                                                                </label>
+                                                                                <input class="approve-decline-user d-none" id="removeUserMob{{$auction->id}}{{$participant->user->id}}" data-username="{{ $participant->user->name }}" data-userid="{{ $participant->user->id }}" data-auctionid = "{{ $auction->id }}" type="submit">
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>    
+                                                                </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach         
+                                                        </tbody>
+                                                        </table>                                           
+                                                    </div>                                        
+                                                @endif
+                                            @endisset($newParticipants)
                                             @if(!$auction->is_approved)
                                                 @if(Auth::user()->is_admin() || Auth::user()->id !=  $auction->auctionItem->owner)
                                                 <div class="m-3 mt-5 d-flex justify-content-center">

@@ -278,6 +278,6 @@
       $(".auctionEnd").addClass("is-invalid");
       event.preventDefault();
     }
-    
-    
   });
+
+  $(".decline-user").tooltip();
