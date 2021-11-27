@@ -118,7 +118,11 @@ class AuctionApprovalController extends Controller
 
     public function approvedByYou() {
         $auctionsIapproved = AuctioneerOf::where('user', Auth::user()->id)->pluck('auction');
-        $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->whereIn('id', $auctionsIapproved)->where('is_approved', '=', '1')->get();
+
+        if(Auth::user()->is_admin())
+            $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->where('is_approved', '=', '1')->get();
+        else
+            $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->whereIn('id', $auctionsIapproved)->where('is_approved', '=', '1')->get();
 
         $newRegisteredUsers = ParticipantsOf::with('user')->whereIn('auction', $auctionsIapproved)->where('is_approved', 1)->get();
 
@@ -136,7 +140,10 @@ class AuctionApprovalController extends Controller
             }
         }
 
-        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Aukce schvalené mnou"]);
+        if(Auth::user()->is_admin())
+        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Všechny schválené aukce"]);
+        else
+            return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Aukce schvalené mnou"]);
     }
 
     public function handleNewRegisteredUser(Request $request) {

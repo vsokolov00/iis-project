@@ -298,7 +298,9 @@ function invalidateAuction(target, id) {
             if(xhr.status == 200)
             {
                 $("#detail-" + id).hide();
+                $("#detail-small-" + id).hide();
                 $("#header-" + id).hide();
+                $("#header-small-" + id).hide();
             }
         }
     });
