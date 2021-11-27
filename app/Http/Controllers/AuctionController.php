@@ -16,10 +16,17 @@ class AuctionController extends Controller
     }
 
     function index($id) {
+        /**
+         * 0 - nepřihlášený
+         *   1 - přihlášený, registrovaný na aukci
+         *   2 - owner
+         *   3 - uzavřená aukce a uživatel už přihodil
+         *   4 - uživatel byl zamítnut liciátorem
+         */
         $auction = Auction::with('auctionItem')->where('id', '=', $id)->get()->first();
-        if(Auth::user() == null)
+        if(!Auth::check()) {
             $registered = 0;
-        else{
+        } else{
             $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
             if($auction->auctionItem->owner == Auth::user()->id)
                 $registered = 2;
@@ -37,12 +44,15 @@ class AuctionController extends Controller
                     $registered = 4;
             }
         }
-
-        if($auction->is_open ||
-            Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first() == null)
+        if (Auth::check()) {
+            if($auction->is_open ||
+                Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first() == null)
+                $default_bid = $auction->min_bid;
+            else
+                $default_bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first()->last_bid;
+        } else {
             $default_bid = $auction->min_bid;
-        else
-            $default_bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first()->last_bid;
+        }
 
 
         if(!is_null($auction->winner)) {

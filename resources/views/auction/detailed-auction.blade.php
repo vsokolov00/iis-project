@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="background-grey">
+<div class="background-grey pt-4">
     <div class="container">
       <h1>{{$auction->auctionItem->item_name}}</h1>
       <div class="d-md-flex flex-md-row two-columns align-items-stretch py-3">
