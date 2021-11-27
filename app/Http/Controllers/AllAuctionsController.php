@@ -69,6 +69,6 @@ class AllAuctionsController extends Controller
         $auctionsITakePartIn = Auction::with('auctionItem')->whereIn('id', $auctionIDsITakePartIt)->get();
 
         return view('allAuctions', ["auctions" => $auctionsITakePartIn, "title" => "Aukce, kterych jste se zůčastnil"]);
-        return view('user/registeredAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $this->getAllBids($auctionsITakePartIn),]);
+        return view('user/registeredAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $this->getAllBids($auctionsITakePartIn)]);
     }
 }

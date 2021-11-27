@@ -67,6 +67,15 @@ class UserAuctionsController extends Controller
     public function wonAuctions() {
         $wonAuctions = Auction::with('auctionItem')->where('winner', Auth::user()->id)->get();
         
-        return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce"]);
+        return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce", "bids" => $this->getAllBids($wonAuctions)]);
+    }
+
+    private function getAllBids($auctions)
+    {
+        foreach ($auctions as $auction) {
+            $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
+        }
+
+        return $bids;
     }
 }
