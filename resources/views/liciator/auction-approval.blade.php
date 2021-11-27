@@ -52,9 +52,9 @@
                         </td>
                         <td style="padding-right: 0; text-align: right;" class="table-item">
                             @if($auction->is_approved)
-                                <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
+                                <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate dont-propagate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
                             @else
-                                <span class="material-icons-outlined green-text md-24 pl-4 pr-3 text-right" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
+                                <span class="clickable material-icons-outlined green-text md-24 pl-4 pr-3 text-right dont-propagate" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
                                     '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                                     '{{ $auction->starting_price }}', '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
                             @endif
@@ -145,7 +145,7 @@
                                         @isset($newParticipants)
                                         @if(!$auction->results_approved)
                                             <div class="table-responsive">
-                                                <table  class="table table-striped"> 
+                                                <table  class="table table-striped">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Uživatel</th>
@@ -153,8 +153,8 @@
                                                             <th>Příhoz</th>
                                                             <th></th>
                                                         </tr>
-                                                    </thead>     
-                                                    <tbody>       
+                                                    </thead>
+                                                    <tbody>
                                                         <tr></tr>
                                                         @foreach($newParticipants as $participant)
                                                         @if($auction->id == $participant->auction)
@@ -174,7 +174,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        
+
                                         @endif
                                         @endisset($newParticipants)
                                         @if(!$auction->is_approved)
@@ -281,7 +281,7 @@
                                 </table>
 
                                 <div class="d-flex justify-content-center mt-3 mb-3">
-                                    <button type="button" class="btn {{ $auction->is_approved ? 'btn-danger' : 'btn-success'}}"
+                                    <button type="button" class="btn dont-propagate clickable {{ $auction->is_approved ? 'btn-danger' : 'btn-success'}}"
                                         @if($auction->is_approved)
                                             onclick="openModal('{{ $auction->id }}', '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`, '{{ $auction->starting_price }}',
                                             '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')"
@@ -407,8 +407,8 @@
                                                             @if($auction->id == $participant->auction)
                                                                 <tr>
                                                                     <td>
-                                                                <table  class="table-plain">     
-                                                                    <tbody>   
+                                                                <table  class="table-plain">
+                                                                    <tbody>
                                                                         <tr>
                                                                             <th>Uživatel</th>
                                                                             <td class="align-middle">{{ $participant->user->name }}</td>
@@ -422,7 +422,7 @@
                                                                             <td class="align-middle">{{ $participant->last_bid }} Kč</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            
+
                                                                             <td colspan="2" class="align-middle text-right">
                                                                                 <label for="removeUserMob{{$auction->id}}{{$participant->user->id}}" class="m-0 invalidate">
                                                                                     <span class="material-icons md-24 align-middle">person_remove</span>
@@ -431,14 +431,14 @@
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
-                                                                </table>    
+                                                                </table>
                                                                 </td>
                                                                 </tr>
                                                             @endif
-                                                        @endforeach         
+                                                        @endforeach
                                                         </tbody>
-                                                        </table>                                           
-                                                    </div>                                        
+                                                        </table>
+                                                    </div>
                                                 @endif
                                             @endisset($newParticipants)
                                             @if(!$auction->is_approved)

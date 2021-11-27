@@ -244,6 +244,8 @@ $('#deleteButton').on('click', function(event) {
         event.preventDefault();
 });
 
+$('.dont-propagate').on('click', function(event) { event.stopPropagation(); });
+
 $('.auction-result-submit').on('click', function(event) {
     event.preventDefault();
     var caller = $(event.target);

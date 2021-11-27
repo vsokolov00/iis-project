@@ -49,3 +49,4 @@ a.form-icon { margin-top: 5px; color: black; }
 .invalidate { color: red; margin-left: -5px; }
 a.add-button { background-color: #28A742; width: 45px; height: 45px; text-decoration: none; }
 .flex-1 { flex: 1; }
+.clickable { cursor: pointer; }

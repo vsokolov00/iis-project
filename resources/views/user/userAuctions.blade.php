@@ -4,8 +4,8 @@
 	<div class="container">
         <div class="d-flex justify-content-end">
 		    <h1 class="flex-1">Vytvořené aukce</h1>
-            <a href="{{ route('newAuction') }}" class="add-button rounded-circle d-flex align-items-center justify-content-center">
-                <span class="material-icons text-white">add</span>
+            <a href="{{ route('newAuction') }}" class="add-button clickable rounded-circle d-flex align-items-center justify-content-center">
+                <span class="clickable material-icons text-white">add</span>
             </a>
         </div>
 		<table class="table table-striped table-display-lg ">

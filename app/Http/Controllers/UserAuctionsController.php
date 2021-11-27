@@ -25,12 +25,9 @@ class UserAuctionsController extends Controller
         {
             $targetAuction = Auction::with('auctionItem')->where('id', $request->id)->first();
 
-            if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin)
-                Auction::where('id', $request->id)->delete();
-        }
-        else if (isset($request->id))
-        {
-            return $request;
+            if($targetAuction != null)
+                if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin)
+                    Auction::where('id', $request->id)->delete();
         }
         else if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
@@ -71,7 +68,6 @@ class UserAuctionsController extends Controller
      */
     public function index()
     {
-        echo "Helo";
         $items = AuctionItem::select('id')->where('owner','=',Auth::user()->id)->get();
         $auctions = Auction::with('auctionItem')->whereIn('item', $items)->get();
 
