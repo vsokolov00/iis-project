@@ -1,5 +1,6 @@
 jQuery(function() {
-    $("[data-toggle=popover]").popover();
+    if($("[data-toggle=popover]").length)
+        $("[data-toggle=popover]").popover();
 
     //LOGIN FORM
     $("#eyeIcon").on("click", function (event) {
@@ -238,6 +239,11 @@ $('.approve-decline-user').on('click', function(event) {
     }
 });
 
+$('#deleteButton').on('click', function(event) {
+    if (!confirm("Opravdu chcete smazat tuto aukci?"))
+        event.preventDefault();
+});
+
 $('.auction-result-submit').on('click', function(event) {
     event.preventDefault();
     var caller = $(event.target);
@@ -265,7 +271,7 @@ $('.auction-result-submit').on('click', function(event) {
             success: function (_, _, xhr) {
                 var parent = caller.parent();
                 parent.css("display", "none");
-                
+
                 if (response == 0)
                     $("#auction-result").hide();
             },
@@ -318,17 +324,10 @@ function openModal(id, img, name, description, sprice, eprice, isapproved, minbi
     else
         chooseFromClicked('#btnclosed', '#btnopen');
 
-    if (isapproved != null && isapproved == 1) {
-        var editButtons = document.getElementsByClassName('inv_after_approved');
-        for (var i = 0; i < editButtons.length; i ++) {
-            editButtons[i].style.display = 'none';
-        }
-    } else {
-        var editButtons = document.getElementsByClassName('inv_after_approved');
-        for (var i = 0; i < editButtons.length; i ++) {
-            editButtons[i].style.display = 'inline';
-        }
-    }
+    if (isapproved != null && isapproved == 1)
+        $(".inv_after_approved").hide();
+    else
+        $(".inv_after_approved").show();
 
     $("#editModal").modal('show');
 };
