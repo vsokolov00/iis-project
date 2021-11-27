@@ -296,6 +296,13 @@ function invalidateAuction(target, id) {
     });
 }
 
+function formatTime(time){
+    var dateTime = new Date(time);
+    var month = parseInt(dateTime.getMonth())+parseInt(1);
+    var time = dateTime.toTimeString().slice(0,5);
+    return dateTime.getFullYear()+"-"+month+"-"+dateTime.getDate()+"T"+time;
+}
+
 function openModal(id, img, name, description, sprice, eprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
     $("#id").val(id);
     $("#previewImg").attr("src", img);
@@ -305,8 +312,8 @@ function openModal(id, img, name, description, sprice, eprice, isapproved, minbi
     $("#edit-endPrice").val(eprice);
     $("#edit-startRange").val(minbid);
     $("#edit-endRange").val(maxbid);
-    $("#edit-auctionStart").val((new Date(stime)).toISOString().slice(0, 16));
-    $("#edit-auctionEnd").val((new Date(etime)).toISOString().slice(0, 16));
+    $("#edit-auctionStart").val(formatTime(stime));
+    $("#edit-auctionEnd").val(formatTime(etime));
 
     if(issell == "1")
         chooseFromClicked('#btnsell', '#btnbuy');
