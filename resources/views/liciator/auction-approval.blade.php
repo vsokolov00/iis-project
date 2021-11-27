@@ -436,6 +436,95 @@
                                                     @endif
                                                 </div>
                                             </div>
+
+                                            @if(is_null($auction->results_approved) && now() > $auction->time_limit && $auction->is_approved)
+                                                <div class="auction-detail-panel my-5">
+                                                    <div id="auction-result" class="mt-3 mb-3">
+                                                        @if(!is_null($winners[$auction->id][0]))
+                                                            <!--Get winner name and final price if exist-->
+                                                            <div class="d-flex flex-lg-row mt-2">
+                                                                <div class="col">
+                                                                    <b>Vítěz</b>
+                                                                </div>     
+                                                                <div class="col">
+                                                                    <div class="auctionTypeLabel label-green ml-2">{{ $winners[$auction->id][0]->user->name }}</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex flex-lg-row mt-2">
+                                                                <div class="col">
+                                                                    <b>Konečná cena:</b> 
+                                                                </div>
+                                                                <div class="col">
+                                                                    @if($auction->closing_price > $winners[$auction->id][1] && $auction->is_open)
+                                                                        <div class="ml-2" style="color: red;">{{ $winners[$auction->id][1] }} Kč</div> 
+                                                                        <div class="ml-2" style="color: red;">({{$auction->closing_price}} Kč)</div> 
+                                                                        <div class="ml-2" style="color: red;">Nižší než požadovaná!</div>
+                                                                    @else
+                                                                        <div class="auctionTypeLabel label-green ml-2">{{ $winners[$auction->id][1] }} Kč</div> 
+
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <h5 style="color: red;">Ani jeden uživatel nepřihodil.</h5>
+                                                        @endif
+                                                    </div>
+                                                    <div>
+                                                        <div class="d-flex flex-lg-row mt-2">
+                                                            <div class="col">
+                                                                <input class="auction-result-submit btn btn-success mr-2" type="submit" value="Schválit" data-auctionid="{{ $auction->id }}" data-response="1" data-target="{{ route('approveAuction') }}">
+                                                            </div>
+                                                            <div class="col">   
+                                                                <input class="auction-result-submit btn btn-danger" type="submit" value="Zamítnout" data-auctionid="{{ $auction->id }}" data-response="0" data-target="{{ route('approveAuction') }}">
+                                                            </div>
+                                                        </div>
+                                                         </div>
+                                                </div>    
+                                            @endif
+                                            @if(!is_null($auction->results_approved) && now() > $auction->time_limit && $auction->is_approved)
+                                                <div id="auction-result" class="d-md-flex flex-lg-row mt-3 mb-3">
+                                                    @if(!is_null($winners[$auction->id][0]))
+                                                        <!--Get winner name and final price if exist-->
+                                                        <div class="d-flex flex-lg-row mt-2">
+                                                                <div class="col">
+                                                                    <b>Vítěz</b>
+                                                                </div>     
+                                                                <div class="col">
+                                                                    <div class="auctionTypeLabel label-green ml-2">{{ $winners[$auction->id][0]->user->name }}</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex flex-lg-row mt-2">
+                                                                <div class="col">
+                                                                    <b>Konečná cena:</b> 
+                                                                </div>
+                                                                <div class="col">
+                                                                    @if($auction->closing_price > $winners[$auction->id][1] && $auction->is_open)
+                                                                        <div class="ml-2" style="color: red;">{{ $winners[$auction->id][1] }} Kč</div> 
+                                                                        <div class="ml-2" style="color: red;">({{$auction->closing_price}} Kč)</div> 
+                                                                        <div class="ml-2" style="color: red;">Nižší než požadovaná!</div>
+                                                                    @else
+                                                                        <div class="auctionTypeLabel label-green ml-2">{{ $winners[$auction->id][1] }} Kč</div> 
+
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                    @else
+                                                        <h5 style="color: red;">Ani jeden uživatel nepřihodil.</h5>
+                                                    @endif
+                                                </div>
+                                                <div class="d-flex flex-lg-row mt-3 mb-5">
+                                                    <div class="col">
+                                                        <b>Stav aukce</b>
+                                                    </div>
+                                                    <div class="col">
+                                                        @if($auction->results_approved === 0)
+                                                            <div class="ml-2" style="color: red;">Výsledek aukce byl zamítnut.</div>
+                                                        @else
+                                                            <div class="auctionTypeLabel label-green ml-2">Výsledek aukce byl schválen.</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endif
                                             @isset($newParticipants)
                                                 @if(!$auction->results_approved)
                                                     <div class="table-responsive mt-3">
@@ -504,8 +593,6 @@
                                                 @else
                                                     <b> Nemůžete schválit svoji aukci</b>
                                                 @endif
-                                            @elseif(!$auction->results_approved)
-                                                <button>Schvalit vysledek</button>
                                             @endif
                                     </div>
                                 </div>
