@@ -38,8 +38,10 @@
                     <a href="{{ route('auctionApproval') }}" class="dropdown-item">Neschválené aukce</a>
                 @endif
 
-                @if(Auth::user()->is_admin() || Auth::user()->is_auctioneer())
+                @if(Auth::user()->is_auctioneer())
                     <a href="{{ route('approvedByYou') }}" class="dropdown-item">Aukce schvalené mnou</a>
+                @elseif(Auth::user()->is_admin())
+                    <a href="{{ route('approvedByYou') }}" class="dropdown-item">Všechny schválené aukce</a>
                 @endif
 
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
@@ -84,13 +86,16 @@
                     <a href="{{ route('auctionApproval') }}" class="dropdown-item">Neschválené aukce</a>
                 @endif
 
-                @if(Auth::user()->is_admin() || Auth::user()->is_auctioneer())
+                @if(Auth::user()->is_auctioneer())
                     <a href="{{ route('approvedByYou') }}" class="dropdown-item">Aukce schvalené mnou</a>
+                @elseif(Auth::user()->is_admin())
+                    <a href="{{ route('approvedByYou') }}" class="dropdown-item">Všechny schválené aukce</a>
                 @endif
+
                 <a href="{{ route('userAuctions') }}" class="dropdown-item">Moje nabídky</a>
                 <a class="dropdown-item" href=" {{ route('userTakesPartIn') }} ">Registrované aukce</a>
                 <a class="dropdown-item" href=" {{ route('wonAuctions') }} ">Vyhrané aukce</a>
-                
+
                 <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit()">
