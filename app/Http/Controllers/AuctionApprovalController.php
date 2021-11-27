@@ -162,8 +162,12 @@ class AuctionApprovalController extends Controller
                 } else {
                     $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
                 }
+                if ($request->response) {
+                    Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response, "winner" => $winner->participant]);
+                } else {
+                    Auction::where('id', $request->auctionId)->update(['results_approved'=> 0]);
+                }
 
-                Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response, "winner" => $winner->participant]);
                 return response('OK', 200);
             }
             else {

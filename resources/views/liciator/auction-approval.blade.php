@@ -196,7 +196,7 @@
                                             @else
                                                 <b> Nemůžete schválit svoji aukci</b>
                                             @endif
-                                        @elseif(!$auction->results_approved && now() > $auction->time_limit)
+                                        @elseif(is_null($auction->results_approved) && now() > $auction->time_limit)
                                         <div id="auction-result">
                                             <p style="color: green">Winner je {{ $winners[$auction->id][0]->user->name }} </p>
                                             <p style="color: green">Konečná cena: {{ $winners[$auction->id][1] }} Kč </p>

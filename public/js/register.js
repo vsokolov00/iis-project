@@ -245,11 +245,14 @@ $('.auction-result-submit').on('click', function(event) {
     var response = caller.data('response');
     var route = caller.data('target');
 
-    result = confirm("Chcete schvalit výsledky této aukcí? ");
+    if(response == 1) {
+        result = confirm("Chcete schvalit výsledky této aukcí? ");
+    } else {
+        result = confirm("Chcete zamitnout výsledky této aukcí? ");
+    }
 
     if (result) {
         var formattedData = { auctionId: id, response: response }
-        console.log(formattedData);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -262,9 +265,9 @@ $('.auction-result-submit').on('click', function(event) {
             success: function (_, _, xhr) {
                 var parent = caller.parent();
                 parent.css("display", "none");
-                // var results = document.getElementById('auction-result');
-                // results.style.visibility = 'visible';
-
+                
+                if (response == 0)
+                    $("#auction-result").hide();
             },
             error: function() {
                 alert('Není možné provest tuto akci.')
