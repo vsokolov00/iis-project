@@ -325,9 +325,17 @@ function invalidateAuction(target, id) {
 
 function formatTime(time){
     var dateTime = new Date(time);
+    var day = dateTime.getDate();
     var month = parseInt(dateTime.getMonth())+parseInt(1);
     var time = dateTime.toTimeString().slice(0,5);
-    return dateTime.getFullYear()+"-"+month+"-"+dateTime.getDate()+"T"+time;
+
+    if(day < 10)
+        day = "0"+day;
+
+    if(month < 10)
+        month = "0"+month;
+
+    return dateTime.getFullYear()+"-"+month+"-"+day+"T"+time;
 }
 
 function openModal(id, img, name, description, sprice, eprice, isapproved, minbid, maxbid, stime, etime, isopen, issell) {
