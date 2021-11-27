@@ -2,7 +2,12 @@
 
 @section('content')
 	<div class="container">
-		<h1>Vytvořené aukce</h1>
+        <div class="d-flex justify-content-end">
+		    <h1 class="flex-1">Vytvořené aukce</h1>
+            <a href="{{ route('newAuction') }}" class="add-button rounded-circle d-flex align-items-center justify-content-center">
+                <span class="material-icons text-white">add</span>
+            </a>
+        </div>
 		<table class="table table-striped table-display-lg ">
 			<thead>
 				<tr>

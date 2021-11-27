@@ -47,3 +47,5 @@ a.form-icon { margin-top: 5px; color: black; }
 .color-warning { color: rgba(255, 193, 7, 1); }
 
 .invalidate { color: red; margin-left: -5px; }
+a.add-button { background-color: #28A742; width: 45px; height: 45px; text-decoration: none; }
+.flex-1 { flex: 1; }

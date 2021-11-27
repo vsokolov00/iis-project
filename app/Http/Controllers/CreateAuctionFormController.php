@@ -59,10 +59,9 @@ class CreateAuctionFormController extends Controller
             $auction->bid_min = $req->bid_min;
             $auction->bid_max = $req->bid_max;
         }
-            
+
         Auction::create($auction->toArray());
 
-        #redirect to the list of created auctions TODO
-        return redirect('/');
+        return redirect(route('userAuctions'));
     }
 }
