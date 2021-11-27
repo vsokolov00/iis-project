@@ -23,7 +23,11 @@
 									Poptávka
 								</div>
 							@endif
-							<h3>{{ $auction->is_open ? $auction->starting_price + $bids[$auction->id] : $auction->starting_price }} Kč</h3>
+							@if(isset($bids) && !is_null($bids))
+								<h3>{{ $auction->is_open ? $auction->starting_price + $bids[$auction->id] : $auction->starting_price }} Kč</h3>
+							@else
+								<h3>{{ $auction->starting_price }} Kč</h3>
+							@endif
 							<span>Začátek: {{ $auction->start_time }}</span>
 						</div>
 					@endforeach
