@@ -155,7 +155,7 @@ class AuctionApprovalController extends Controller
     public function handleNewRegisteredUser(Request $request) {
         if(Auth::check() && (Auth::user()->is_admin() || Auth::user()->is_auctioneer())) {
             if(isset($request->userId) && (isset($request->auctionId))) {
-                ParticipantsOf::where('auction', $request->auctionId)->where('participant', $request->userId)->update(['is_approved'=>False]);;
+                ParticipantsOf::where('auction', $request->auctionId)->where('participant', $request->userId)->update(['is_approved'=>False, 'last_bid' => 0]);;
                 return response('OK', 200);
             }
             else {
