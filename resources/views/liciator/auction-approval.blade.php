@@ -52,9 +52,9 @@
                         </td>
                         <td style="padding-right: 0; text-align: right;" class="table-item">
                             @if($auction->is_approved)
-                                <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate dont-propagate" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
+                                <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate dont-propagate clickable" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')">close</span>
                             @else
-                                <span class="clickable material-icons-outlined green-text md-24 pl-4 pr-3 text-right dont-propagate" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
+                                <span class="clickable material-icons-outlined green-text md-24 pl-4 pr-3 text-right dont-propagate clickable" style="height: 24px;" onclick="openModal('{{ $auction->id }}',
                                     '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                                     '{{ $auction->starting_price }}', '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">edit</span>
                             @endif
@@ -101,7 +101,7 @@
                                                         <font color="red">
                                                     @endif
 
-                                                        <?= $auction->start_time ?>
+                                                        {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                                                     @if($auction->start_time < now())
                                                         </font>
@@ -115,7 +115,7 @@
                                                         <font color="red">
                                                     @endif
 
-                                                        <?= $auction->time_limit ?>
+                                                        {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                                                     @if($auction->start_time < now())
                                                         </font>
@@ -232,7 +232,7 @@
 			<table class="table table-striped table-display-sm" >
 				<tbody>
 					@foreach ($auctions as $auction)
-                        <tr data-toggle="collapse" data-target="#detail-small-{{ $auction->id }}">
+                        <tr data-toggle="collapse" class="#header-small-{{ $auction->id }}" data-target="#detail-small-{{ $auction->id }}">
                             <td>
                                 <table class="table-plain">
                                     <tbody>
@@ -286,12 +286,12 @@
                                 </table>
 
                                 <div class="d-flex justify-content-center mt-3 mb-3">
-                                    <button type="button" class="btn dont-propagate clickable {{ $auction->is_approved ? 'btn-danger' : 'btn-success'}}"
+                                    <button type="button" class="btn dont-propagate {{ $auction->is_approved ? 'btn-danger' : 'btn-success'}}"
                                         @if($auction->is_approved)
+                                            onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')"
+                                        @else
                                             onclick="openModal('{{ $auction->id }}', '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`, '{{ $auction->starting_price }}',
                                             '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')"
-                                        @else
-                                            onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')"
                                         @endif
                                         >
                                         <div class="d-flex align-content-center">
@@ -400,7 +400,7 @@
                                             @isset($newParticipants)
                                                 @if(!$auction->results_approved)
                                                     <div class="table-responsive mt-3">
-                                                        <table>
+                                                        <table style="width:100%">
                                                             <thead>
                                                                 <tr>
                                                                     <th colspan="2">Registrovaní uživatelé</th>
@@ -412,7 +412,7 @@
                                                             @if($auction->id == $participant->auction)
                                                                 <tr>
                                                                     <td>
-                                                                <table  class="table-plain">
+                                                                <table  class="table-plain" style="width:100%">
                                                                     <tbody>
                                                                         <tr>
                                                                             <th>Uživatel</th>

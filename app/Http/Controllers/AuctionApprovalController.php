@@ -118,7 +118,11 @@ class AuctionApprovalController extends Controller
 
     public function approvedByYou() {
         $auctionsIapproved = AuctioneerOf::where('user', Auth::user()->id)->pluck('auction');
-        $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->whereIn('id', $auctionsIapproved)->where('is_approved', '=', '1')->get();
+
+        if(Auth::user()->is_admin())
+            $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->where('is_approved', '=', '1')->get();
+        else
+            $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->whereIn('id', $auctionsIapproved)->where('is_approved', '=', '1')->get();
 
         $newRegisteredUsers = ParticipantsOf::with('user')->whereIn('auction', $auctionsIapproved)->where('is_approved', 1)->get();
 
@@ -126,7 +130,7 @@ class AuctionApprovalController extends Controller
 
         foreach ($auctions as $auction) {
             if($auction->is_open) {
-                $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('date_of_last_bid', 'desc')->first();
+                $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->where('last_bid', '!=', 0)->orderBy('date_of_last_bid', 'desc')->first();
                 $current_price = Auction::find($auction->id)->participants->sum('last_bid') + Auction::find($auction->id)->starting_price;
                 $auction_winners[$auction->id] = [$current_winner, $current_price];
             } else {
@@ -136,7 +140,10 @@ class AuctionApprovalController extends Controller
             }
         }
 
-        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Aukce schvalené mnou"]);
+        if(Auth::user()->is_admin())
+        return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Všechny schválené aukce"]);
+        else
+            return view('liciator/auction-approval', ["auctions" => $auctions, "newParticipants" => $newRegisteredUsers, "winners" => $auction_winners, "title" => "Aukce schvalené mnou"]);
     }
 
     public function handleNewRegisteredUser(Request $request) {
@@ -158,7 +165,7 @@ class AuctionApprovalController extends Controller
             $auction = Auction::where('id', $request->auctionId)->first();
             if(isset($request->response) && (isset($request->auctionId))) {
                 if($auction->is_open) {
-                    $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('date_of_last_bid', 'desc')->first();
+                    $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->where('last_bid', '!=', 0)->orderBy('date_of_last_bid', 'desc')->first();
                 } else {
                     $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
                 }
