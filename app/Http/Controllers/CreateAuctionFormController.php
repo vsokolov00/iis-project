@@ -18,29 +18,13 @@ class CreateAuctionFormController extends Controller
     }
 
     public function create(Request $req) {
-        //TODO
-        // $validator = Validator::make($req->toArray(),
-        // [
-        //     'item_name' => 'required|string|max:255',
-        //     'description' => 'required|string|max:255',
-        //     'image' => 'string|max:255',
-        //     'password' => 'required|string|min:6|confirmed',
-        //     'start_time' => 'required|integer',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return response()->json(['errors'=>$validator->errors()]);
-        // } else {
-        //     return "";
-        // }
-
         $auction_item = new AuctionItem();
         $auction = new Auction();
 
         $auction_item->item_name = $req->name;
-
+        
         if ($req->hasFile('image')) {
-            $auction_item->image = basename($req->image->store('public/images'));
+            $auction_item->image = basename($req->image->store('public/images', 's3'));
         } else {
             $auction_item->image = "empty.png";
         }
