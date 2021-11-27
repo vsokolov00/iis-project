@@ -46,7 +46,7 @@
                                 <label for="bidRange">Rozsah příhozů</label>
                                 <div class="d-flex bid-range" id="bidRange">
                                     <input type="number" class="form-control mr-1 bid_min" id="edit-startRange" name="min_bid" required>
-                                    <input type="number" class="form-control ml-1 bid_max" id="edit-endRange" name="max_bid" required> 
+                                    <input type="number" class="form-control ml-1 bid_max" id="edit-endRange" name="max_bid" required>
                                 </div>
                                 <div id="bidError" class="invalid-feedback"></div>
                             </div>
@@ -111,9 +111,14 @@
                             </div>
                         </div>
                 </div>
-                <div class="col">
-                    <button type="button" class="btn btn-secondary inv_after_approved" data-dismiss="modal">Zrušit</button>
-                    <button type="submit" class="btn btn-success inv_after_approved" id="submitAuction">Uložit změny</button>
+                <div class="col d-flex justify-content-end align-items-end">
+                    <div class="flex-1">
+                        <button type="button" class="btn btn-secondary m-1" data-dismiss="modal">Zrušit</button>
+                        <button type="submit" class="btn btn-success inv_after_approved m-1" id="submitAuction">Uložit změny</button>
+                    </div>
+                    @if(Route::currentRouteName() == 'userAuctions' || Auth::user()->is_admin())
+                        <button type="submit" id="deleteButton" name="deleteItem" value="true" class="btn btn-danger inv_after_approved m-1" style="height: 40px;">Smazat</button>
+                    @endif
                 </div>
             </form>
         </div>

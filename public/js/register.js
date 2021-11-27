@@ -1,5 +1,6 @@
 jQuery(function() {
-    $("[data-toggle=popover]").popover();
+    if($("[data-toggle=popover]").length)
+        $("[data-toggle=popover]").popover();
 
     //LOGIN FORM
     $("#eyeIcon").on("click", function (event) {
@@ -315,17 +316,10 @@ function openModal(id, img, name, description, sprice, eprice, isapproved, minbi
     else
         chooseFromClicked('#btnclosed', '#btnopen');
 
-    if (isapproved != null && isapproved == 1) {
-        var editButtons = document.getElementsByClassName('inv_after_approved');
-        for (var i = 0; i < editButtons.length; i ++) {
-            editButtons[i].style.display = 'none';
-        }
-    } else {
-        var editButtons = document.getElementsByClassName('inv_after_approved');
-        for (var i = 0; i < editButtons.length; i ++) {
-            editButtons[i].style.display = 'inline';
-        }
-    }
+    if (isapproved != null && isapproved == 1)
+        $(".inv_after_approved").hide();
+    else
+        $(".inv_after_approved").show();
 
     $("#editModal").modal('show');
 };

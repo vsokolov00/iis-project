@@ -8,6 +8,9 @@ use App\Models\Auction;
 use App\Models\AuctionItem;
 use Auth;
 use App;
+use Monolog\Handler\FirePHPHandler;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserAuctionsController extends Controller
 {
@@ -18,7 +21,18 @@ class UserAuctionsController extends Controller
 
     public function updateAuction(Request $request)
     {
-        if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&
+        if(isset($request->deleteItem) && isset($request->id))
+        {
+            $targetAuction = Auction::with('auctionItem')->where('id', $request->id)->first();
+
+            if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin)
+                Auction::where('id', $request->id)->delete();
+        }
+        else if (isset($request->id))
+        {
+            return $request;
+        }
+        else if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
            {
@@ -57,6 +71,7 @@ class UserAuctionsController extends Controller
      */
     public function index()
     {
+        echo "Helo";
         $items = AuctionItem::select('id')->where('owner','=',Auth::user()->id)->get();
         $auctions = Auction::with('auctionItem')->whereIn('item', $items)->get();
 
@@ -66,7 +81,7 @@ class UserAuctionsController extends Controller
 
     public function wonAuctions() {
         $wonAuctions = Auction::with('auctionItem')->where('winner', Auth::user()->id)->get();
-        
+
         return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce"]);
     }
 }
