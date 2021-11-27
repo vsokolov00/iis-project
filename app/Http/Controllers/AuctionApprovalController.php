@@ -58,7 +58,7 @@ class AuctionApprovalController extends Controller
             {
                 $auction = Auction::where('id', '=', $request->auctionId)->first();
 
-                if($auction != NULL)
+                if($auction != NULL && $auction->is_approved == NULL)
                 {
                     $auction->is_approved = $request->approved;
 
@@ -123,7 +123,7 @@ class AuctionApprovalController extends Controller
         $newRegisteredUsers = ParticipantsOf::with('user')->whereIn('auction', $auctionsIapproved)->where('is_approved', 1)->get();
 
         $auction_winners = [];
-        
+
         foreach ($auctions as $auction) {
             if($auction->is_open) {
                 $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('date_of_last_bid', 'desc')->first();

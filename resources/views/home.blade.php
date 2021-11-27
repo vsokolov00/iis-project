@@ -72,7 +72,7 @@
                     </div>
             </div>
             <div class="mt-5">
-                    <a href="#" class="lists-links">
+                    <a href="{{ route('activeAuctions') }}" class="lists-links">
                         <div class="d-flex">
                             <h2 class="mr-1">Stihni přihodit</h2>
                             <span class="material-icons md-36">navigate_next</span>
