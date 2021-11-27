@@ -21,37 +21,37 @@
             <h5>Uzavřená aukce</h5>
             <h4 id="startTime"></h4>
             <h5>Počáteční cena:</h5>
-          @endif  
+          @endif
           <div class="d-flex align-items-top flex-wrap" id="detailPrice">
           </div>
           <div class="d-flex">
             @auth
               @if ($registered !== 2)
                 @if ($registered == 1)
-                  <input type="number"  class="form-control font-size-25" value="{{$auction->bid_min}}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}" id="inputBid" disabled/>
+                  <input type="number"  class="form-control font-size-25" value="{{ $auction->bid_min }}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}" id="inputBid" disabled/>
                   <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
                       Přihodit
-                    </div>  
+                    </div>
                   </button>
                 @elseif ($registered == 3)
-                  <input type="number"  class="form-control font-size-25" value="{{$auction->bid_min}}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}"  disabled/>
+                  <input type="number"  class="form-control font-size-25" value="{{ $default_bid }}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}"  disabled/>
                   <button class="btn btn-success ml-3" href="#"  role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
                       Přihodit
-                    </div>  
+                    </div>
                   </button>
                 @elseif ($registered == 4)
-                <h4 class="mt-3" style="color:#FF0000">Bylo Vám zakázáno zúčastnit se aukce.</h4>  
+                <h4 class="mt-3" style="color:#FF0000">Bylo Vám zakázáno zúčastnit se aukce.</h4>
                 @else
-                  <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button" style="display: none;">Registrovat</a> 
+                  <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button" style="display: none;">Registrovat</a>
                 @endif
               @endif
             @else
-              <a class="btn btn-success btn-block btn-lg" href="{{ route('login') }}" id="btnRegister" role="button" style="display: none;">Registrovat</a> 
-            @endauth         
+              <a class="btn btn-success btn-block btn-lg" href="{{ route('login') }}" id="btnRegister" role="button" style="display: none;">Registrovat</a>
+            @endauth
           </div>
           <div id="wrongRangeError" class="invalid-feedback" ></div>
           @if ($registered === 3)
@@ -71,7 +71,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type= "text/javascript">
     $(document).ready(function() {
-      startTimer(new Date("{{$auction->start_time}}"), new Date("{{$auction->time_limit}}"), "{{$auction->id}}");  
+      startTimer(new Date("{{$auction->start_time}}"), new Date("{{$auction->time_limit}}"), "{{$auction->id}}");
     });
   </script>
 @endsection('content')

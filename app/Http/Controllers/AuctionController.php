@@ -22,32 +22,35 @@ class AuctionController extends Controller
         else{
             $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
             if($auction->auctionItem->owner == Auth::user()->id)
-                $registered = 2;  
+                $registered = 2;
 
             $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->first();
 
             if($participant != null){
-                
+
                 if(!$auction->is_open){
                     if($participant->last_bid != 0)
                     $registered = 3;
                 }
 
-                if($participant->is_approved == 0)  
+                if($participant->is_approved == 0)
                     $registered = 4;
-            }    
+            }
         }
 
-            
+        if($auction->is_open)
+            $default_bid = $auction->min_bid;
+        else
+            $default_bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first()->last_bid;
+
         if(!is_null($auction->winner)) {
             $winner = Auction::with('winner')->where('id', $id)->first();
             $winner = User::find($winner->winner);
         } else {
             $winner = null;
         }
-        
-        return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered, "winner" => $winner]);
- 
+
+        return view('auction/detailed-auction', ["auction" => $auction, "registered" => $registered, "winner" => $winner, "default_bid" => $default_bid]);
     }
 
     function bid(Request $req) {
@@ -62,16 +65,10 @@ class AuctionController extends Controller
                 ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid, 'date_of_last_bid'=>date('Y-m-d H:i:s')]);
             }
         }
-        
     }
 
     function time(){
         return date("c");
-    }
-
-    function price(){
-        return '<div class="yellow-text">100 Kč</div> 
-            <div class="green-text">(+5)</div>';
     }
 
     function register($id){

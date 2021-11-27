@@ -19,13 +19,22 @@ class AllAuctionsController extends Controller
     {
     }
 
+    private function getAllBids($auctions)
+    {
+        foreach ($auctions as $auction) {
+            $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
+        }
+
+        return $bids;
+    }
+
     public function sellingAuctions()
     {
         $data = Auction::with('auctionItem')->where('is_selling', '=', '1')->where('is_approved', '=', '1')
             ->where('time_limit', '<', now())->orderBy('start_time')->get();
 
         App::setLocale('cs');
-        return view('allAuctions', ["auctions" => $data, "title" => "Lidé prodávají"]);
+        return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Lidé prodávají"]);
     }
 
     public function buyingAuctions()
@@ -34,7 +43,7 @@ class AllAuctionsController extends Controller
             ->where('time_limit', '<', now())->orderBy('start_time')->get();
 
         App::setLocale('cs');
-        return view('allAuctions', ["auctions" => $data, "title" => "Lidé shánějí"]);
+        return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Lidé shánějí"]);
     }
 
     public function closestAuctions()
@@ -42,7 +51,7 @@ class AllAuctionsController extends Controller
         $data = Auction::with('auctionItem')->orderBy('start_time')->where('start_time', '<', now())->where('is_approved', '=', '1')->get();
 
         App::setLocale('cs');
-        return view('allAuctions', ["auctions" => $data, "title" => "Nejbližší aukce"]);
+        return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Nejbližší aukce"]);
     }
 
     public function activeAuctions()
@@ -51,7 +60,7 @@ class AllAuctionsController extends Controller
             ->where('time_limit', '>', now())->where('is_approved', '=', '1')->get();
 
         App::setLocale('cs');
-        return view('allAuctions', ["auctions" => $data, "title" => "Aktivní aukce"]);
+        return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Aktivní aukce"]);
     }
 
     public function userTakesPartIn() {
@@ -59,11 +68,7 @@ class AllAuctionsController extends Controller
 
         $auctionsITakePartIn = Auction::with('auctionItem')->whereIn('id', $auctionIDsITakePartIt)->get();
 
-        $bids = [];
-        foreach ($auctionsITakePartIn as $auction) {
-            $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
-        }
         return view('allAuctions', ["auctions" => $auctionsITakePartIn, "title" => "Aukce, kterych jste se zůčastnil"]);
-        return view('user/registeredAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $bids]);
+        return view('user/registeredAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $this->getAllBids($auctionsITakePartIn),]);
     }
 }
