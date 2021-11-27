@@ -23,12 +23,10 @@ class EditUserController extends Controller
         if (isset($request->byAdmin)) {
             User::where('id', $request->id)->update(['name' => $request->username]);
             User::where('id', $request->id)->update(['email' => $request->email]);
-            #ROLE
-            #User::where('id', $request->id)->update(['typ' => $request->type]);
             if (isset($request->password)) {
                 User::where('id', $request->id)->update(['password' => Hash::make($request->password),]);
             }
-            return redirect('userslist');
+            return redirect('users');
         }
 
         if(isset($request->username))

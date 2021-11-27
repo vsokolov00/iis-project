@@ -38,10 +38,12 @@ class AuctionController extends Controller
             }
         }
 
-        if($auction->is_open)
+        if($auction->is_open ||
+            Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first() == null)
             $default_bid = $auction->min_bid;
         else
             $default_bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->first()->last_bid;
+
 
         if(!is_null($auction->winner)) {
             $winner = Auction::with('winner')->where('id', $id)->first();
