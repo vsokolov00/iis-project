@@ -41,7 +41,7 @@ class UserAuctionsController extends Controller
                     $auction->auctionItem->description = $request->description;
 
                     if ($request->hasFile('image')) {
-                        $auction->auctionItem->image = basename($request->image->store('public/images'));
+                        $auction->auctionItem->image = basename($req->image->store('public/images', 's3'));
                     }
 
                     $auction->bid_min = $request->min_bid;
