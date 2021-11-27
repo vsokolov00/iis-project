@@ -117,7 +117,7 @@
                         <button type="submit" class="btn btn-success inv_after_approved m-1" id="submitAuction">Uložit změny</button>
                     </div>
                     @if(Route::currentRouteName() == 'userAuctions' || Auth::user()->is_admin())
-                        <button type="submit" id="deleteButton" name="deleteItem" value="true" class="btn btn-danger inv_after_approved m-1" style="height: 40px;">Smazat</button>
+                        <button type="button" id="deleteButton" name="deleteItem" value="true" class="btn btn-danger inv_after_approved m-1" style="height: 40px;" data-target="{{ url()->current() }}">Smazat</button>
                     @endif
                 </div>
             </form>

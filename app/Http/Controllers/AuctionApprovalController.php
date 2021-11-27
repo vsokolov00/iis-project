@@ -28,6 +28,14 @@ class AuctionApprovalController extends Controller
         if(!Auth::user()->is_auctioneer() && !Auth::user()->is_admin())
             return redirect('/');
 
+        if(isset($request->deleteItem) && isset($request->id))
+        {
+            $targetAuction = Auction::with('auctionItem')->where('id', $request->id)->first();
+
+            if($targetAuction != NULL)
+                if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin())
+                    Auction::where('id', $request->id)->delete();
+        }
         if(isset($request->name) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
@@ -76,8 +84,6 @@ class AuctionApprovalController extends Controller
                     $auction->save();
                 }
             }
-        } else {
-            return $request->input();
         }
 
         return $this->index();
@@ -173,7 +179,7 @@ class AuctionApprovalController extends Controller
                     if ($winner != null)
                         Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response, "winner" => $winner->participant]);
                     else
-                        Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response]); 
+                        Auction::where('id', $request->auctionId)->update(['results_approved'=> $request->response]);
                 } else {
                     Auction::where('id', $request->auctionId)->update(['results_approved'=> 0]);
                 }

@@ -26,7 +26,7 @@ class UserAuctionsController extends Controller
             $targetAuction = Auction::with('auctionItem')->where('id', $request->id)->first();
 
             if($targetAuction != null)
-                if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin)
+                if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin())
                     Auction::where('id', $request->id)->delete();
         }
         else if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&

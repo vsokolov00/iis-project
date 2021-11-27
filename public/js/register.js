@@ -214,7 +214,6 @@ $('.approve-decline-user').on('click', function(event) {
 
     if (result) {
         var formattedData = { userId: id, auctionId: auction, response: 0 }
-        console.log(formattedData);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -241,7 +240,25 @@ $('.approve-decline-user').on('click', function(event) {
 
 $('#deleteButton').on('click', function(event) {
     if (!confirm("Opravdu chcete smazat tuto aukci?"))
-        event.preventDefault();
+        return;
+    else
+    {
+        var url = $(event.target).data('target');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax(url, {
+            type: "POST",
+            data: { "id": $("#id").val(), "deleteItem": true },
+            success: function (msg, _, xhr) {
+                location.reload();
+            }
+        });
+    }
 });
 
 $('.dont-propagate').on('click', function(event) { event.stopPropagation(); });
