@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Auction;
 use App\Models\User;
 use App\Models\ParticipantsOf;
+use App\Models\AuctioneerOf;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
@@ -17,9 +18,9 @@ class AuctionController extends Controller
 
     function index($id) {
         /**
-         * 0 - nepřihlášený
+         *   0 - nepřihlášený
          *   1 - přihlášený, registrovaný na aukci
-         *   2 - owner
+         *   2 - owner, nebo liciátor
          *   3 - uzavřená aukce a uživatel už přihodil
          *   4 - uživatel byl zamítnut liciátorem
          */
@@ -28,7 +29,8 @@ class AuctionController extends Controller
             $registered = 0;
         } else{
             $registered =! ParticipantsOf::all()->where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->isEmpty();
-            if($auction->auctionItem->owner == Auth::user()->id)
+
+            if($auction->auctionItem->owner == Auth::user()->id || !AuctioneerOf::all()->where("user", Auth::user()->id)->where("auction", $id)->isEmpty())
                 $registered = 2;
 
             $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $id)->first();

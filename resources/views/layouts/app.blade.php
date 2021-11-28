@@ -23,10 +23,8 @@
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
         <!-- Default font link. -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-        <!--Register js script-->
-        <script src="{{ asset('js/register.js') }}" defer></script>
         <!--Auction js script-->
-        <script src="{{ asset('js/auction-scripts.js') }}" defer></script>
+        <script src="{{ asset('js/general.js') }}" defer></script>
         <!-- General project styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/general.css') }}">
 
