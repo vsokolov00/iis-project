@@ -159,12 +159,10 @@
     $('#'+activeId.slice(4)).prop("checked", true);
     
     if($(".closed").is(":checked")){
-      $(".closingPrice").prop("required", false);
       $(".bidRange").css("display", "none");
       $(".bid_min").prop("required", false);
       $(".bid_max").prop("required", false);
     }else{
-      $(".closingPrice").prop("required", true);
       $(".bidRange").css("display", "block");
       $(".bid_min").prop("required", true);
       $(".bid_max").prop("required", true);
@@ -281,3 +279,16 @@
   });
 
   $(".decline-user").tooltip();
+
+  function defaultMaxBid(){
+    var startPrice = $("#stratPrice").val();
+    var maxBid = $("#bid_max").val();
+    
+    if(maxBid == ""){
+      if(startPrice > 100){
+        $("#bid_max").val(Math.round(startPrice/10));
+      }else{
+        $("#bid_max").val(startPrice);
+      }
+    }
+  }

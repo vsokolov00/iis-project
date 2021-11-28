@@ -28,12 +28,12 @@
       <div class="d-md-flex  flex-lg-row my-1">
         <div class="col">
           <label for="startPrice">Počáteční cena</label>
-          <input type="number" class="form-control startPrice" id="stratPrice" name="stratPrice" min="0" required>
+          <input type="number" class="form-control startPrice" id="stratPrice" name="stratPrice" min="0" required onchange="defaultMaxBid()">
           <div id="startPriceError" class="invalid-feedback"></div>
         </div>
         <div class="col">
           <label for="startPrice">Konečná cena</label>
-          <input type="number" class="form-control closingPrice" id="closingPrice" name="closingPrice" min="0" required>
+          <input type="number" class="form-control closingPrice" id="closingPrice" name="closingPrice" min="0">
           <div id="closingPriceError"  class="invalid-feedback"></div>
         </div>
       </div>
@@ -42,8 +42,8 @@
         <div class="col bidRange">
           <label for="bidRange">Rozsah příhozů</label>
           <div class="d-flex bid-range" id="bidRange">
-              <input type="number" class="form-control mr-1 bid_min" id="bid_min" name="bid_min" required>
-              <input type="number" class="form-control bid_max" id="bid_max" name="bid_max" required>
+              <input type="number" class="form-control mr-1 bid_min" id="bid_min" name="bid_min" value="1" required>
+              <input type="number" class="form-control bid_max" id="bid_max" name="bid_max"  required>
           </div>    
           <div id="bidError"  class="invalid-feedback"></div>
         </div>
