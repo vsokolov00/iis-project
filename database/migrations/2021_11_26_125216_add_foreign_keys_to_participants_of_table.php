@@ -14,8 +14,8 @@ class AddForeignKeysToParticipantsOfTable extends Migration
     public function up()
     {
         Schema::table('participants_of', function (Blueprint $table) {
-            $table->foreign(['participant'], 'part_fk')->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['auction'], 'part_of_fk')->references(['id'])->on('auctions')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['participant'], 'part_fk')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['auction'], 'part_of_fk')->references(['id'])->on('auctions')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
