@@ -28,14 +28,6 @@ class AuctionApprovalController extends Controller
         if(!Auth::user()->is_auctioneer() && !Auth::user()->is_admin())
             return redirect('/');
 
-        if(isset($request->deleteItem) && isset($request->id))
-        {
-            $targetAuction = Auction::with('auctionItem')->where('id', $request->id)->first();
-
-            if($targetAuction != NULL)
-                if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin())
-                    Auction::where('id', $request->id)->delete();
-        }
         if(isset($request->name) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
@@ -182,7 +174,7 @@ class AuctionApprovalController extends Controller
                     if ($auction->is_selling) {
                         $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
                     } else {
-                        $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'asc')->first();        
+                        $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'asc')->first();
                     }
                 }
                 if ($request->response) {

@@ -20,7 +20,7 @@ class UserAuctionsController extends Controller
         $this->middleware('auth');
     }
 
-    public function updateAuction(Request $request)
+    public function deleteAuction(Request $request)
     {
         if(isset($request->deleteItem) && isset($request->id))
         {
@@ -28,9 +28,18 @@ class UserAuctionsController extends Controller
 
             if($targetAuction != null)
                 if($targetAuction->auctionItem->owner == Auth::user()->id || Auth::user()->is_admin())
-                    Auction::where('id', $request->id)->delete();
+                {
+                    if($targetAuction->auctionItem != null)
+                        $targetAuction->auctionItem->delete();
+
+                    $targetAuction->delete();
+                }
         }
-        else if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&
+    }
+
+    public function updateAuction(Request $request)
+    {
+        if(isset($request->name) && isset($request->min_bid) && isset($request->max_bid) &&
            isset($request->startPrice) && isset($request->auctionStart) && isset($request->auctionEnd) &&
            isset($request->is_selling) && isset($request->is_open) && isset($request->id))
            {

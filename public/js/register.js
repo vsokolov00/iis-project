@@ -260,7 +260,7 @@ $('#deleteButton').on('click', function(event) {
         });
 
         $.ajax(url, {
-            type: "POST",
+            type: "DELETE",
             data: { "id": $("#id").val(), "deleteItem": true },
             success: function (msg, _, xhr) {
                 location.reload();

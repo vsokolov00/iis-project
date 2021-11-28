@@ -40,6 +40,7 @@ Route::get('/auctions/approved-by-you', [App\Http\Controllers\AuctionApprovalCon
 Route::post('/auctions/approved-by-you', [App\Http\Controllers\AuctionApprovalController::class, 'handleNewRegisteredUser'])->name('approvedByYou');
 Route::post('/auction/approve', [App\Http\Controllers\AuctionApprovalController::class, 'approveAuction'])->name('approveAuction');
 Route::post('/auctions/invalidate', [App\Http\Controllers\AuctionApprovalController::class, 'invalidateAuction'])->name('invalidateAuction');
+Route::delete('/auctions/delete', [App\Http\Controllers\UserAuctionsController::class, 'deleteAuction'])->name('deleteAuction');
 
 Route::get('auctions/selling', [App\Http\Controllers\AllAuctionsController::class, 'sellingAuctions'])->name('sellingAuctions');
 Route::get('auctions/buying', [App\Http\Controllers\AllAuctionsController::class, 'buyingAuctions'])->name('buyingAuctions');
