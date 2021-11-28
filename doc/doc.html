@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0070)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html.cs -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+
     <title>Projekt IIS</title>
     <style type="text/css">
     	table { border-collapse: collapse; }
@@ -15,34 +15,38 @@
 
 <dl>
 	<dt>Autoři</dt>
-	<dd>Gotzman Matěj 
+	<dd>Gotzman Matěj
 	    <a href="mailto:xgotzm00@stud.fit.vutbr.cz">xgotzm00@stud.fit.vutbr.cz</a> -
 		popis činnosti
 	</dd>
-	<dd>Sokolovskii Vladislav 
-	    <a href="mailto:xsokol15@stud.fit.vutbr.cz">xsokol15@stud.fit.vutbr.cz</a> - 
+	<dd>Sokolovskii Vladislav
+	    <a href="mailto:xsokol15@stud.fit.vutbr.cz">xsokol15@stud.fit.vutbr.cz</a> -
 		popis činnosti
 	</dd>
   <dd>Strýček Šimon <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
-	    <a href="mailto:xstryc06@stud.fit.vutbr.cz">xstryc06@stud.fit.vutbr.cz</a> - 
+	    <a href="mailto:xstryc06@stud.fit.vutbr.cz">xstryc06@stud.fit.vutbr.cz</a> -
 		popis činnosti
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://bidmore-iis.herokuapp.com/">http://bidmore-iis.herokuapp.com/</a></dd>
 </dl>
 
-<h2>Uživateli systému pro testování</h2>
+<h2>Uživatelé systému pro testování</h2>
 <table>
 <tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
 <tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
 <tr><td>prodavac</td><td>prodavac</td><td>Liciátor</td></tr>
 <tr><td>franta</td><td>franta</td><td>Uživatel</td></tr>
 </tbody></table>
-<p>IS implementuje všechny role a případy užití definované zadáním až na nějaké drobnosti jako povolení registrace uživatele na aukci.</p>
-<p>Během týmové debaty jsmě přišli k tomu že schvalení registrace každého učastnika je zbýtečné a nelogické ačkoliv jsme implementovali
-	možnost vyhození učastníka z aukce administratorem nebo liciátorem dané aukce.
+<p>
+    IS implementuje všechny role a případy užití definované zadáním až na případné malé odchylky jako povolení registrace uživatele na aukci.
+    Funkce schvalování účasti uživatele na aukci byla záměrně vynechána z důvodu způsobu implementace aukčního systému. V našem případě totiž role liciátora zastáva spíše správu samostatných aukcí.
+    Jeho hlavní zodpovědností je v tomto případě pouze schvalování aukcí a potvrzování jejich výsledků. Možnost odebrání účastníka z aukce byla ovšem ponechána.
 </p>
-<p>Původní diagram případů užití navrhnutý na začatku je možné prohlednout <a href="use_case.pdf">zde</a></p> 
+<p>
+    Původní diagram případů užití navržený před započetím implamantace je možné prohlednout <a href="use_case.pdf">zde</a>.
+    V procesu implementace vznikly drobné odchylky od původního návrhu z důvodu přívětivějšího použití informačního systému.
+</p>
 
 <h2>Implementace</h2>
 <p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
