@@ -146,6 +146,7 @@
       if (status == "success" && is_open == 0){
         $("#inputBid").prop("disabled", true);
         $("#btnBid").prop("disabled", true);
+        $(".auction-detail-panel").append('<h4 class="mt-3" style="color:#42AA1F">Váš příhoz byl zaznamenán.</h4>');
       }
     });
     updatePrice();
