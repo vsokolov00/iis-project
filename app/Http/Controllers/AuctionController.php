@@ -25,6 +25,10 @@ class AuctionController extends Controller
          *   4 - uživatel byl zamítnut liciátorem
          */
         $auction = Auction::with('auctionItem')->where('id', '=', $id)->get()->first();
+
+        if($auction == null)
+            return redirect('/');
+
         if(!Auth::check()) {
             $registered = 0;
         } else{
@@ -78,19 +82,19 @@ class AuctionController extends Controller
                 if ($auction->is_selling) {
                     $last_bid = $participant->last_bid + $req->bid;
                     ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
-                } 
-                else 
+                }
+                else
                 {
                     if($auction->is_open){
                         $participants = Auction::find($req->id)->participants;
-                        
+
                         if(!$participants->isEmpty()) {
                             $price = $participants->sum('last_bid') + $auction->starting_price;
-                        
+
                             if ($price - $req->bid >= 0) {
                                 $last_bid = $participant->last_bid - $req->bid;
                                 ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
-                            } 
+                            }
                         }
                     }else{
                         $last_bid = $participant->last_bid - $req->bid;
