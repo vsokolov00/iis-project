@@ -16,7 +16,7 @@ class PriceController extends Controller
         $participants = Auction::find($id)->participants;
 
         if(!$auction->is_open)
-            return '<div class="yellow-text">'.$auction->starting_price.' Kč</div>';
+            return '<div class="yellow-text" id="price">'.$auction->starting_price.' Kč</div>';
 
         if(!$participants->isEmpty())
         {
@@ -25,13 +25,13 @@ class PriceController extends Controller
 
             if($auction->time_limit > now())
                 if ($auction->is_selling)
-                    return '<div class="yellow-text">'.$price.' Kč</div>
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
                             <div class="green-text">(+'.$lastBid.' Kč)</div>';
                 else 
-                    return '<div class="yellow-text">'.$price.' Kč</div>
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
                         <div class="green-text">('.$lastBid.' Kč)</div>'; 
             else
-                return '<div class="yellow-text">'.$price.' Kč</div>';
+                return '<div class="yellow-text" id="price">'.$price.' Kč</div>';
         }
         else
         {
@@ -39,14 +39,14 @@ class PriceController extends Controller
 
             if($auction->time_limit > now()){
                 if ($auction->is_selling)
-                    return '<div class="yellow-text">'.$price.' Kč</div>
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
                             <div class="green-text">(+0 Kč)</div>';
                 else 
-                    return '<div class="yellow-text">'.$price.' Kč</div>
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
                         <div class="green-text">(-0 Kč)</div>';
             }
             else{ 
-                return '<div class="yellow-text">'.$price.' Kč</div>';
+                return '<div class="yellow-text" id="price">'.$price.' Kč</div>';
             }
            
         }

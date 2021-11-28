@@ -10,10 +10,14 @@
           <img class="img-fluid" src="{{ route('image.displayImage',$auction->auctionItem->image) }}" alt="Položka aukce">
         </div>
         <div class="auction-detail-panel">
+          @if ($auction->is_selling)
+            <h5 class="mainPage-offer">Nabídka</h5>
+          @else
+            <h5 class="mainPage-buy">Poptávka</h5>
+          @endif
           @if ($auction->is_open)
             <h5>Otevřená aukce</h5>
             <h4 id="startTime"></h4>
-           
             <h5 id="priceName"></h5>
           @else
             <h5>Uzavřená aukce</h5>
@@ -26,8 +30,15 @@
             @auth
               @if ($registered !== 2)
                 @if ($registered == 1)
+                
                   <input type="number"  class="form-control font-size-25" value="{{ $auction->bid_min }}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}" id="inputBid" disabled/>
-                  <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
+                  <button class="btn btn-success ml-3" href="#" id="btnBid" role="button" data-toggle="tooltip" title=
+                    @if($auction->is_selling === 0)
+                      "Snižit cenu" 
+                    @else
+                      "Zvýšit cenu"
+                    @endif
+                    onclick="makeBid('{{$auction->is_open}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
                       Přihodit
@@ -75,7 +86,6 @@
     </div>
     </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type= "text/javascript">
     $(document).ready(function() {
       startTimer(new Date("{{$auction->start_time}}"), new Date("{{$auction->time_limit}}"), "{{$auction->id}}");
