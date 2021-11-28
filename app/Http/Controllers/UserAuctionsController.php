@@ -71,8 +71,14 @@ class UserAuctionsController extends Controller
         $items = AuctionItem::select('id')->where('owner','=',Auth::user()->id)->get();
         $auctions = Auction::with('auctionItem')->whereIn('item', $items)->get();
 
+        $actualPrices = [];
+        foreach($auctions as $auction){
+            if($auction->time_limit < now())
+                $actualPrices[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid') + Auction::find($auction->id)->starting_price;
+        }
+
         App::setLocale('cs');
-        return view('user/userAuctions', ["auctions" => $auctions]);
+        return view('user/userAuctions', ["auctions" => $auctions, "actualPrices" => $actualPrices]);
     }
 
     public function wonAuctions() {
