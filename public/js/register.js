@@ -2,6 +2,9 @@ jQuery(function() {
     if($("[data-toggle=popover]").length)
         $("[data-toggle=popover]").popover();
 
+    if($("[data-toggle=tooltip]").length)
+        $("[data-toggle=tooltip]").tooltip();
+
     //LOGIN FORM
     $("#eyeIcon").on("click", function (event) {
         if($("#login-password").attr("type") == "password")

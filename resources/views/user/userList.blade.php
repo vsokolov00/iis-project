@@ -59,7 +59,7 @@
                     @method('delete')
                     @csrf
                     <input type="text" name="userId" value="{{ $user->id }}" hidden>
-                    <button type="submit" class="invalidate dont-propagate deleteUser mr-2">
+                    <button type="submit" class="invalidate dont-propagate deleteUser mr-2" data-toggle="tooltip" data-placement="left" title="Smazat uživatele">
                         <span class="material-icons md-24 mr-3 clickable">delete</span>
                     </button>
                 </form>
