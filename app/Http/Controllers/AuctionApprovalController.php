@@ -109,7 +109,9 @@ class AuctionApprovalController extends Controller
         if(!Auth::user()->is_auctioneer() && !Auth::user()->is_admin())
             return redirect('/');
 
-        $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->where('is_approved', '=', NULL)->get();
+        $relatedItems = AuctionItem::where('owner', '!=', Auth::user()->id)->pluck('id');
+
+        $auctions = Auction::with('auctionItem', 'auctionItem.auctionOwner')->where('is_approved', '=', NULL)->whereIn('item', $relatedItems)->get();
 
         return view('liciator/auction-approval', ["auctions" => $auctions, "title" => "Neschválené aukce"]);
     }
