@@ -33,9 +33,9 @@
 								<h3>{{ $auction->starting_price }} Kč</h3>
 							@endif
 							@if(isset($active))
-							<span>Konec: {{ $auction->time_limit }}</span>
+							<span>Konec: {{date("j. n. Y H:i", strtotime($auction->time_limit))}}</span>
 							@else
-							<span>Začátek: {{ $auction->start_time }}</span>
+							<span>Začátek: {{date("j. n. Y H:i", strtotime($auction->start_time))}}</span>
 							@endif
 						</div>
 					@endforeach
