@@ -76,12 +76,23 @@ class AuctionController extends Controller
                 if ($auction->is_selling) {
                     $last_bid = $participant->last_bid + $req->bid;
                     ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
-                } else {
-                    if ($participant->last_bid - $req->bid > 0) {
+                } 
+                else 
+                {
+                    if($auction->is_open){
+                        $participants = Auction::find($req->id)->participants;
+                        
+                        if(!$participants->isEmpty()) {
+                            $price = $participants->sum('last_bid') + $auction->starting_price;
+                        
+                            if ($price - $req->bid >= 0) {
+                                $last_bid = $participant->last_bid - $req->bid;
+                                ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
+                            } 
+                        }
+                    }else{
                         $last_bid = $participant->last_bid - $req->bid;
                         ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
-                    } else {
-                        return;
                     }
                 }
             }
