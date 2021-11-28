@@ -37,7 +37,6 @@
     outline: none !important;
 }
 
-input { padding-right: 25px !important; }
 body { font-family: Roboto !important; }
 .form-icon { margin-left: -30px; z-index: 3; }
 a.form-icon { margin-top: 5px; color: black; }
