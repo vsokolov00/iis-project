@@ -114,6 +114,14 @@ class UserAuctionsController extends Controller
         return view('allAuctions', ["auctions" => $auctions, "title" => "Vyhrané aukce", "bids" => $bids, "myWonAuctions" => True ]);
     }
 
+    public function userTakesPartIn() {
+        $auctionIDsITakePartIt = Auth::user()->participatesIn->pluck('auction');
+
+        $auctionsITakePartIn = Auction::with('auctionItem')->whereIn('id', $auctionIDsITakePartIt)->get();
+
+        return view('allAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $this->getAllBids($auctionsITakePartIn), "title" => "Aukce, kterych jste se zůčastnil"]);
+    }
+
     private function getAllBids($auctions)
     {
         $bids = [];

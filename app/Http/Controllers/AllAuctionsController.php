@@ -64,12 +64,4 @@ class AllAuctionsController extends Controller
         App::setLocale('cs');
         return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Aktivní aukce", "active" => True]);
     }
-
-    public function userTakesPartIn() {
-        $auctionIDsITakePartIt = Auth::user()->participatesIn->pluck('auction');
-
-        $auctionsITakePartIn = Auction::with('auctionItem')->whereIn('id', $auctionIDsITakePartIt)->get();
-
-        return view('allAuctions', ["auctions" => $auctionsITakePartIn, "bids" => $this->getAllBids($auctionsITakePartIn), "title" => "Aukce, kterych jste se zůčastnil"]);
-    }
 }
