@@ -37,7 +37,7 @@
                             @endif
                         </td>
                         <td class="table-item">
-                           @if($auction->start_time < now())
+                           @if($auction->time_limit < now())
                                 <font color="red">
                             @endif
 
@@ -117,7 +117,7 @@
                                             <div class="col">
                                                 <h5>Konec aukce</h5>
                                                 <b class="ml-2">
-                                                    @if($auction->start_time < now())
+                                                    @if($auction->time_limit < now())
                                                         <font color="red">
                                                     @endif
 
@@ -312,7 +312,7 @@
                                         <tr>
                                             <th scope="row">Konec aukce</th>
                                             <td>
-                                                @if($auction->start_time < now())
+                                                @if($auction->time_limit < now())
                                                     <font color="red">
                                                 @endif
 
@@ -405,7 +405,7 @@
                                                     <b>Konec aukce</b>
                                                 </div>
                                                 <div class="col">
-                                                    @if($auction->start_time < now())
+                                                    @if($auction->time_limit < now())
                                                         <font color="red">
                                                     @endif
 
