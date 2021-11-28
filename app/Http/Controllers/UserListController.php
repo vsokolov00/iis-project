@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserListController extends Controller
 {
@@ -26,11 +27,26 @@ class UserListController extends Controller
                 $user->save();
                 return response('OK', 200);
             }
-            else{ 
+            else{
                 return abort(400);
             }
 
         return abort(403);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        if(isset($request->userId) && Auth::user()->is_admin())
+        {
+            $user = User::find($request->userId);
+
+            if($user != null)
+            {
+                $user->delete();
+            }
+        }
+
+        return $this->index();
     }
 
     public function index()

@@ -200,6 +200,11 @@ jQuery(function() {
             }
         });
     });
+
+    $('.deleteUser').on('click', function(event) {
+        if(!confirm("Opravdu chce smazat uživatele?"))
+            event.preventDefault();
+    });
 });
 
 
