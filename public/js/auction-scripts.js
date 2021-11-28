@@ -217,12 +217,22 @@
     $(".auctionEnd").removeClass("is-invalid");
     $("#auctionEndError").empty();
 
-    if(parseInt($(".startPrice").val()) >= parseInt($(".closingPrice").val())){
-      $("#startPriceError").html("Konečná cena musí být vyšší, než počáteční.");
-      $(".startPrice").addClass("is-invalid");
-      $(".closingPrice").addClass("is-invalid");
-      event.preventDefault();
+    if($(".buy").is(":checked")){
+      if(parseInt($(".startPrice").val()) <= parseInt($(".closingPrice").val())){
+        $("#startPriceError").html("Konečná cena musí být nižší, než počáteční.");
+        $(".startPrice").addClass("is-invalid");
+        $(".closingPrice").addClass("is-invalid");
+        event.preventDefault();
+      }
+    }else{
+      if(parseInt($(".startPrice").val()) >= parseInt($(".closingPrice").val())){
+        $("#startPriceError").html("Konečná cena musí být vyšší, než počáteční.");
+        $(".startPrice").addClass("is-invalid");
+        $(".closingPrice").addClass("is-invalid");
+        event.preventDefault();
+      }
     }
+    
 
     if(parseInt($(".startPrice").val()) < 1){
       $("#startPriceError").html("Počáteční cena musí být alespoň 1.");
@@ -283,7 +293,7 @@
   function defaultMaxBid(){
     var startPrice = $("#stratPrice").val();
     var maxBid = $("#bid_max").val();
-    
+
     if(maxBid == ""){
       if(startPrice > 100){
         $("#bid_max").val(Math.round(startPrice/10));

@@ -88,7 +88,7 @@
                                 <div class="d-flex choose-from-2" id="type">
                                     <div class="col chooseBtn label-green text-center chooseBtn-not-checked" id="btnbuy" onclick="chooseFromClicked('#btnbuy', '#btnsell')">
                                         Nákup
-                                        <input type="radio" name="is_selling" id="buy" class="d-none" value="0" />
+                                        <input type="radio" name="is_selling" id="buy" class="d-none buy" value="0" />
                                     </div>
                                     <div class="col chooseBtn label-yellow text-center" id="btnsell" onclick="chooseFromClicked('#btnsell', '#btnbuy')">
                                         Prodej
