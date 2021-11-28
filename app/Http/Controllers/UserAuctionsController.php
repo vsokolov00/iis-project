@@ -8,6 +8,7 @@ use App\Models\Auction;
 use App\Models\AuctionItem;
 use Auth;
 use App;
+use App\Models\ParticipantsOf;
 use Monolog\Handler\FirePHPHandler;
 
 use function PHPUnit\Framework\isEmpty;
@@ -83,16 +84,25 @@ class UserAuctionsController extends Controller
 
     public function wonAuctions() {
         $wonAuctions = Auction::with('auctionItem')->where('winner', Auth::user()->id)->get();
-        
+        $auctions = [];
+        $bids = [];
+
         foreach ($wonAuctions as $auction) {
-            if ($auction->is_open) {
-                $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
-            } else {
-                $bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->where('auction', $auction->id)->first()->last_bid;
+            $partic = ParticipantsOf::where('participant', Auth::user()->id)->where('auction', $auction->id)->first();
+
+            if($partic != null && $partic->is_approved == 1)
+            {
+                array_push($auctions, $auction);
+
+                if ($auction->is_open) {
+                    $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
+                } else {
+                    $bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->where('auction', $auction->id)->first()->last_bid;
+                }
             }
         }
 
-        return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce", "bids" => $bids]);
+        return view('allAuctions', ["auctions" => $auctions, "title" => "Vyhrané aukce", "bids" => $bids]);
     }
 
     private function getAllBids($auctions)
