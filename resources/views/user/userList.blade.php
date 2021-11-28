@@ -41,14 +41,14 @@
           <tr onclick="openUserModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}')">
             <td class="align-middle">{{ $user->name }}</td>
             <td class="align-middle">
-              <div class="material-switch pull-right mt-1">
+              <div class="material-switch dont-propagate pull-right mt-1">
                 <input class="role type-toggle" id="{{ $user->id }}rlic"  type="checkbox" name="roleLic" data-userid="{{ $user->id }}" data-role="auctioneer"
                 @if($user->is_auctioneer()) checked @endif />
               <label for="{{ $user->id }}rlic" class="label-green"></label>
               </div>
             </td>
             <td class="align-middle">
-              <div class="material-switch pull-right mt-1">
+              <div class="material-switch dont-propagate pull-right mt-1">
                 <input class="role type-toggle" id="{{ $user->id }}radmin" type="checkbox" name="roleAdm" data-userid="{{ $user->id }}" data-role="admin"
                 @if($user->is_admin()) checked @endif />
               <label for="{{ $user->id }}radmin" class="label-yellow"></label>
@@ -83,7 +83,7 @@
                       <tr>
                         <th scope="row">Liciátor</th>
                         <td>
-                            <div class="material-switch pull-right mrole mt-1">
+                            <div class="material-switch dont-propagate pull-right mrole mt-1">
                               <input class="mrole type-toggle" id="{{ $user->id }}rlic-m" type="checkbox" name="roleLic" data-userid="{{ $user->id }}" data-role="auctioneer"
                               @if($user->is_auctioneer()) checked @endif />
                             <label for="{{ $user->id }}rlic-m" class="label-green"></label>
@@ -93,7 +93,7 @@
                       <tr>
                         <th scope="row">Administrátor</th>
                         <td>
-                            <div class="material-switch pull-right mrole mt-1">
+                            <div class="material-switch dont-propagate pull-right mrole mt-1">
                                 <input class="mrole type-toggle" id="{{ $user->id }}radmin-m" type="checkbox" name="roleAdm" data-userid="{{ $user->id }}" data-role="admin"
                                 @if($user->is_admin()) checked @endif />
                               <label for="{{ $user->id }}radmin-m" class="label-yellow"></label>
