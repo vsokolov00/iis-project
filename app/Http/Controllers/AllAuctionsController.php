@@ -62,7 +62,7 @@ class AllAuctionsController extends Controller
             ->where('time_limit', '>', now())->where('is_approved', '=', '1')->get();
 
         App::setLocale('cs');
-        return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Aktivní aukce"]);
+        return view('allAuctions', ["auctions" => $data, "bids" => $this->getAllBids($data), "title" => "Aktivní aukce", "active" => True]);
     }
 
     public function userTakesPartIn() {
