@@ -24,7 +24,11 @@
 								</div>
 							@endif
 							@if(isset($bids) && !is_null($bids))
+								@if(isset($myWonAuctions))
+								<h3>{{ $auction->starting_price + $bids[$auction->id] }} Kč</h3>
+								@else
 								<h3>{{ $auction->is_open ? $auction->starting_price + $bids[$auction->id] : $auction->starting_price }} Kč</h3>
+								@endif
 							@else
 								<h3>{{ $auction->starting_price }} Kč</h3>
 							@endif

@@ -88,11 +88,11 @@ class UserAuctionsController extends Controller
             if ($auction->is_open) {
                 $bids[$auction->id] = Auction::find($auction->id)->participants->sum('last_bid');
             } else {
-                $bid = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->where('auction', $auction->id)->first()->last_bid;
+                $bids[$auction->id] = Auction::find($auction->id)->participants->where('participant', Auth::user()->id)->where('auction', $auction->id)->first()->last_bid;
             }
         }
 
-        return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce", "bids" => $bids]);
+        return view('allAuctions', ["auctions" => $wonAuctions, "title" => "Vyhrané aukce", "bids" => $bids, "myWonAuctions" => True ]);
     }
 
     private function getAllBids($auctions)

@@ -42,7 +42,7 @@
                     </div>
                   </button>
                 @elseif ($registered == 4)
-                <h4 class="mt-3" style="color:#FF0000">Bylo Vám zakázáno zúčastnit se aukce.</h4>
+                  <h4 class="mt-3" style="color:#FF0000">Bylo Vám zakázáno zúčastnit se aukce.</h4>
                 @else
                   <a class="btn btn-success btn-block btn-lg" href="{{ route('registerToAuction', ['id' => $auction->id]) }}" id="btnRegister" role="button" style="display: none;">Registrovat</a>
                 @endif
@@ -56,8 +56,12 @@
             <h4 class="mt-3" style="color:#42AA1F">Váš příhoz byl zaznamenán.</h4>
           @endif 
           @isset($winner)
-              <h4 id="winnerName" class="mt-2" style="color: #42AA1F">Vítěz: {{ $winner->name }}</h4>
-              <h5  style="color: #42AA1F">Kontakt: {{ $winner->email }}</h5>
+              @if($auction->winner == Auth::user()->id)
+                <h4 id="winnerName" class="mt-2" style="color: #42AA1F">Jste vítězem!</h4>
+              @else
+                <h4 id="winnerName" class="mt-2" style="color: #42AA1F">Vítěz: {{ $winner->name }}</h4>
+                <h5  style="color: #42AA1F">Kontakt: {{ $winner->email }}</h5>
+              @endif
           @endisset($winner)
           @isset($auction->results_approved)
             @if($auction->results_approved === 0)
