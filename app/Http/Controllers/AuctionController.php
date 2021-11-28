@@ -73,8 +73,13 @@ class AuctionController extends Controller
         if($auction->start_time < now() && $auction->time_limit > now()){
             $participant = ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->first();
             if (!$participant == null) {
-                $last_bid = $participant->last_bid + $req->bid;
-                ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid, 'date_of_last_bid'=>date('Y-m-d H:i:s')]);
+                if ($auction->is_selling) {
+                    $last_bid = $participant->last_bid + $req->bid;
+                    ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
+                } else {
+                    $last_bid = $participant->last_bid - $req->bid;
+                    ParticipantsOf::where("participant", "=", Auth::user()->id)->where("auction", "=", $req->id)->update(['last_bid'=>$last_bid]);
+                }
             }
         }
     }

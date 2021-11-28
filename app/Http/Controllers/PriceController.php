@@ -24,8 +24,12 @@ class PriceController extends Controller
             $lastBid = $participants->sortBy('date_of_last_bid')->last()->last_bid;
 
             if($auction->time_limit > now())
-                return '<div class="yellow-text">'.$price.' Kč</div>
-                        <div class="green-text">(+'.$lastBid.' Kč)</div>';
+                if ($auction->is_selling)
+                    return '<div class="yellow-text">'.$price.' Kč</div>
+                            <div class="green-text">(+'.$lastBid.' Kč)</div>';
+                else 
+                    return '<div class="yellow-text">'.$price.' Kč</div>
+                        <div class="green-text">('.$lastBid.' Kč)</div>'; 
             else
                 return '<div class="yellow-text">'.$price.' Kč</div>';
         }
@@ -34,8 +38,12 @@ class PriceController extends Controller
             $price = $auction->starting_price;
 
             if($auction->time_limit > now()){
-                return '<div class="yellow-text">'.$price.' Kč</div>
-                        <div class="green-text">(+0 Kč)</div>';
+                if ($auction->is_selling)
+                    return '<div class="yellow-text">'.$price.' Kč</div>
+                            <div class="green-text">(+0 Kč)</div>';
+                else 
+                    return '<div class="yellow-text">'.$price.' Kč</div>
+                        <div class="green-text">(-0 Kč)</div>';
             }
             else{ 
                 return '<div class="yellow-text">'.$price.' Kč</div>';

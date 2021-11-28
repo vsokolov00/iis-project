@@ -29,7 +29,6 @@ Route::get('/auction/${id}', [App\Http\Controllers\AuctionController::class, 'in
 Route::post('/auction/bid', [App\Http\Controllers\AuctionController::class, 'bid'])->name('makeBid');
 Route::get('/auction/${id}/register', [App\Http\Controllers\AuctionController::class, 'register'])->name('registerToAuction');
 Route::get('/auction/time', [App\Http\Controllers\AuctionController::class, 'time'])->name('getTime');
-Route::get('/auction/price', [App\Http\Controllers\AuctionController::class, 'price'])->name('getPrice');
 
 Route::get('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'index'])->name('userAuctions');
 Route::post('/user/auctions', [App\Http\Controllers\UserAuctionsController::class, 'updateAuction'])->name('userAuctions');

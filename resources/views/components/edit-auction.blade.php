@@ -37,7 +37,7 @@
                             </div>
                             <div class="col">
                                 <label for="endPrice">Konečná cena</label>
-                                <input type="number" class="form-control closingPrice" id="edit-endPrice" name="endPrice" required >
+                                <input type="number" class="form-control closingPrice" id="edit-endPrice" name="endPrice">
                                 <div id="closingPriceError"  class="invalid-feedback"></div>
                             </div>
                         </div>
