@@ -15,28 +15,39 @@
 
 <dl>
 	<dt>Autoři</dt>
-	<dd>Gotzman Matěj
+	<dd>
+		<b>Gotzman Matěj</b>
 	    <a href="mailto:xgotzm00@stud.fit.vutbr.cz">xgotzm00@stud.fit.vutbr.cz</a> -
-		popis činnosti
+		návrh vzhlédu a obsahu formulářů, zajištění responzibility a stylování,
+		blaming Simon for silly bugs
 	</dd>
-	<dd>Sokolovskii Vladislav
+	<dd>
+		<b>Sokolovskii Vladislav</b>
 	    <a href="mailto:xsokol15@stud.fit.vutbr.cz">xsokol15@stud.fit.vutbr.cz</a> -
-		popis činnosti
+		návrh ER a UC diagramů, návrh a implementace databáze, počáteční nastavení pro práci s frameworkem,
+		propojení aplikace s AWS S3 bucketem pro persistentní uchovávání obrázků, blaming himself for silly bugs
 	</dd>
-  <dd>Strýček Šimon <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
+  	<dd>
+	 	<b>Strýček Šimon</b>
 	    <a href="mailto:xstryc06@stud.fit.vutbr.cz">xstryc06@stud.fit.vutbr.cz</a> -
-		popis činnosti
+		návrh vzhédu celé aplikace, zajištění responzibility a stylování, blaming Vlad for silly bugs,
+		deployment na Heroku hosting, refactoring
+	</dd>
+
+	<dd>
+		<b>Všichni</b> se podělelí na propojování databáze s business logikou přes ORM, technické zprávě,
+		opravě bugů a testování.
 	</dd>
 	<dt>URL aplikace</dt>
-	<dd><a href="http://bidmore-iis.herokuapp.com/">http://bidmore-iis.herokuapp.com/</a></dd>
+	<dd><a href="http://bidmore-iis.herokuapp.com/" target="_blank">http://bidmore-iis.herokuapp.com/</a></dd>
 </dl>
 
 <h2>Uživatelé systému pro testování</h2>
 <table>
-<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
-<tr><td>prodavac</td><td>prodavac</td><td>Liciátor</td></tr>
-<tr><td>franta</td><td>franta</td><td>Uživatel</td></tr>
+<tbody><tr><th>Email</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin@bidmore.com</td><td>admin</td><td>Administrátor</td></tr>
+<tr><td>liciator@bidmore.com</td><td>password</td><td>Liciátor</td></tr>
+<tr><td>user@gmail.com</td><td>password</td><td>Uživatel</td></tr>
 </tbody></table>
 <p>
     IS implementuje všechny role a případy užití definované zadáním až na případné malé odchylky jako povolení registrace uživatele na aukci.
@@ -44,12 +55,11 @@
     Jeho hlavní zodpovědností je v tomto případě pouze schvalování aukcí a potvrzování jejich výsledků. Možnost odebrání účastníka z aukce byla ovšem ponechána.
 </p>
 <p>
-    Původní diagram případů užití navržený před započetím implamantace je možné prohlednout <a href="use_case.pdf">zde</a>.
+    Původní diagram případů užití navržený před začatkem implementace je možné prohlednout <a href="use_case.pdf">zde</a>.
     V procesu implementace vznikly drobné odchylky od původního návrhu z důvodu přívětivějšího použití informačního systému.
 </p>
 
 <h2>Implementace</h2>
-<p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
 <h3>Databáze, ERD a schéma DB</h3>
 <p>Prvním krokem v návrhu infornačního systému pro dánou úlohu bylo vytvaření ER diagramu, na kterém by se pak stavěl
@@ -83,7 +93,9 @@ návrh databáze.</p>
   </ul>
 
 <h2>Známé problémy</h2>
-<p>Projekt byl převážně koncipován na použití prohlížeče Google Chrome. Na ostatních prohlížečích s omezenější podporou se obsah nemusí správně zobrazovat.</p>
+<p>
+<p>Projekt byl převážně koncipován na použití prohlížeče Google Chrome a Firefox. Na ostatních prohlížečích s omezenější podporou se obsah nemusí správně zobrazovat.</p>
+<p>Pro obnovu hesla je potřebá obratit se na administratora, reset hesla přes email není možný</p>
 
 
 
