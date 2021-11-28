@@ -27,10 +27,8 @@
         <script src="{{ asset('js/register.js') }}" defer></script>
         <!--Auction js script-->
         <script src="{{ asset('js/auction-scripts.js') }}" defer></script>
-        <!-- Navbar styles -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/auction_style.css') }}">
-        <!-- Register form styles -->
-        <link href="{{ asset('css/register.css') }}" rel="stylesheet">
+        <!-- General project styles -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/general.css') }}">
 
         <title>Aukce</title>
     </head>
