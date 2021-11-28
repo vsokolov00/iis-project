@@ -11,10 +11,7 @@
 <style></style></head>
 <body data-new-gr-c-s-check-loaded="14.1039.0" data-gr-ext-installed="">
 
-<!-- Zkontrolujte prosím nastavení k�dov�n� v hlavi�ce dokumentu 
-     podle pou�it�ho editoru -->
-
-<h1>Aukce: prodej a nákup zboží a majetku prostřednictvím dražby</h1> <!-- Nahradte n�zvem sv�ho zad�n� -->
+<h1>Aukce: prodej a nákup zboží a majetku prostřednictvím dražby</h1>
 
 <dl>
 	<dt>Autoři</dt>
@@ -41,27 +38,48 @@
 <tr><td>prodavac</td><td>prodavac</td><td>Liciátor</td></tr>
 <tr><td>franta</td><td>franta</td><td>Uživatel</td></tr>
 </tbody></table>
-
-<p>UCD</p> 
+<p>IS implementuje všechny role a případy užití definované zadáním až na nějaké drobnosti jako povolení registrace uživatele na aukci.</p>
+<p>Během týmové debaty jsmě přišli k tomu že schvalení registrace každého učastnika je zbýtečné a nelogické ačkoliv jsme implementovali
+	možnost vyhození učastníka z aukce administratorem nebo liciátorem dané aukce.
+</p>
+<p>Původní diagram případů užití navrhnutý na začatku je možné prohlednout <a href="use_case.pdf">zde</a></p> 
 
 <h2>Implementace</h2>
 <p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
-<h3>Databáze, ERD a schema DB</h3>
+<h3>Databáze, ERD a schéma DB</h3>
+<p>Prvním krokem v návrhu infornačního systému pro dánou úlohu bylo vytvaření ER diagramu, na kterém by se pak stavěl
+návrh databáze.</p>
+<a href="./database_schema.pdf">Původní ER diagram</a>
 
-Zde vložte grafické schéma relační databáze (tabulek v databázi).
+<p>Během implementace se původní návrh lehce změnil. Ale všechny základní definované na začatku tabulky entit zůstali.</p>
+<img src="./auction_db.png" style="width: 60%">
+
 
 <h2>Instalace</h2>
 
-Stručně popište: 
 <ul>
-<li>postup instalace na server,</li>
-<li>softwarové požadavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
-</ul>
+	<li>Softwarové požadavky pro zprovoznění IS</li>
+		<ol>
+			<li><a href="https://www.php.net/downloads.php" target="_blank">PHP</a>, verze aspoň 7.3</li>
+			<li><a href="https://getcomposer.org/download/" target="_blank">Composer</a></li>
+			<li>Jakakoliv relační databáze, <b>je možné použit předdefinovanou</b> PostgreSQL, viz soubor .env</li>
+			<li>AWS S3 bucket pro persistentní úkladaní obrázků, <b>je možné použit předdefinovaný</b>, viz soubor .env</li>
+		</ol>
+	<li>Postup instalace na server
+	  	<ol>
+			<li>Naklonujtě <a href="https://github.com/vsokolov00/iis-project">repozitař </a><mark><code>git clone https://github.com/vsokolov00/iis-project</code></mark> (repozitář byl zveřejněn po deadlinu)</li>
+			<li>V kořenové složce projektu spusťte <mark><code>composer install</code></mark></li>
+			<li>Upravťě konfigurační soubor <mark><code>.env</code></mark> pokud chcete použit jinou databázi nebo AWS bucket</li>
+			<li>Pokud jste napojili svoji databázi tak spusťte příkaz <mark><code>php artisan migrate</code></mark></li>
+			<li>Vytvořťe soft link pro přístup k obrazkům <mark><code>php artisan storage:link</code></mark></li>
+			<li>Spusťte server příkazem <mark><code>php artisan serve</code></mark></li>
+	 	</ol>
+	</li>
+  </ul>
 
 <h2>Známé problémy</h2>
-<p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &#8222;Z časových důvodů nebyla implementována správa uživatelů.&#8221;</p>
+<p></p>
 
 
 
