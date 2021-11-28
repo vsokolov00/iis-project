@@ -56,7 +56,7 @@
 návrh databáze.</p>
 <a href="./database_schema.pdf">Původní ER diagram</a>
 
-<p>Během implementace se původní návrh lehce změnil. Ale všechny základní definované na začatku tabulky entit zůstali.</p>
+<p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
 <img src="./auction_db.png" style="width: 60%">
 
 
@@ -67,23 +67,23 @@ návrh databáze.</p>
 		<ol>
 			<li><a href="https://www.php.net/downloads.php" target="_blank">PHP</a>, verze aspoň 7.3</li>
 			<li><a href="https://getcomposer.org/download/" target="_blank">Composer</a></li>
-			<li>Jakakoliv relační databáze, <b>je možné použit předdefinovanou</b> PostgreSQL, viz soubor .env</li>
+			<li>Jakakoliv relační databáze, <b>je možné použit předdefinovanou</b> PostgreSQL, viz soubor .env (Projekt byl testován na databázích MySQL a PostreSQL.)</li>
 			<li>AWS S3 bucket pro persistentní úkladaní obrázků, <b>je možné použit předdefinovaný</b>, viz soubor .env</li>
 		</ol>
 	<li>Postup instalace na server
 	  	<ol>
-			<li>Naklonujtě <a href="https://github.com/vsokolov00/iis-project">repozitař </a><mark><code>git clone https://github.com/vsokolov00/iis-project</code></mark> (repozitář byl zveřejněn po deadlinu)</li>
+			<li>Naklonujte <a href="https://github.com/vsokolov00/iis-project">repozitař </a><mark><code>git clone https://github.com/vsokolov00/iis-project</code></mark> (repozitář zveřejněn až po odevzdání)</li>
 			<li>V kořenové složce projektu spusťte <mark><code>composer install</code></mark></li>
-			<li>Upravťě konfigurační soubor <mark><code>.env</code></mark> pokud chcete použit jinou databázi nebo AWS bucket</li>
-			<li>Pokud jste napojili svoji databázi tak spusťte příkaz <mark><code>php artisan migrate</code></mark></li>
-			<li>Vytvořťe soft link pro přístup k obrazkům <mark><code>php artisan storage:link</code></mark></li>
+			<li>Upravte konfigurační soubor <mark><code>.env</code></mark> pokud chcete použit jinou databázi nebo AWS bucket</li>
+			<li>Pokud jste úspěšně připojili svou databázi, spusťte příkaz <mark><code>php artisan migrate</code></mark></li>
+			<li>Vytvořte soft link pro přístup k obrazkům <mark><code>php artisan storage:link</code></mark></li>
 			<li>Spusťte server příkazem <mark><code>php artisan serve</code></mark></li>
 	 	</ol>
 	</li>
   </ul>
 
 <h2>Známé problémy</h2>
-<p></p>
+<p>Projekt byl převážně koncipován na použití prohlížeče Google Chrome. Na ostatních prohlížečích s omezenější podporou se obsah nemusí správně zobrazovat.</p>
 
 
 
