@@ -127,7 +127,11 @@
                                                 <button  type="button" class="btn dont-propagate btn-success" onclick="openModal('{{ $auction->id }}',
                                                 '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`,
                                                 '{{ $auction->starting_price }}', '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}',
-                                                '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')">
+                                                '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')" 
+                                                    @if($auction->is_approved)
+                                                        hidden
+                                                    @endif
+                                                    >
                                                     <div class="d-flex align-content-center">
                                                         <span class="clickable material-icons-outlined md-24 mr-3" style="height: 24px;" >edit</span>
                                                         Upravit aukci
