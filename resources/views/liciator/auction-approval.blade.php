@@ -27,24 +27,24 @@
                         </td>
                         <td class="table-item">
                             @if($auction->start_time < now())
-                                <font color="red">
+                                <span style="color: red">
                             @endif
 
                                 {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                             @if($auction->start_time < now())
-                                </font>
+                                </span>
                             @endif
                         </td>
                         <td class="table-item">
                            @if($auction->time_limit < now())
-                                <font color="red">
+                                <span style="color: red">
                             @endif
 
                                 {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                             @if($auction->start_time < now())
-                                </font>
+                                </span>
                             @endif
                         </td>
                         <td class="text-right table-item">
@@ -104,13 +104,13 @@
                                                 <h5>Začátek aukce</h5>
                                                 <b class="ml-2">
                                                     @if($auction->start_time < now())
-                                                        <font color="red">
+                                                        <span style="color: red">
                                                     @endif
 
                                                         {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                                                     @if($auction->start_time < now())
-                                                        </font>
+                                                        </span>
                                                     @endif
                                                 </b>
                                             </div>
@@ -118,13 +118,13 @@
                                                 <h5>Konec aukce</h5>
                                                 <b class="ml-2">
                                                     @if($auction->time_limit < now())
-                                                        <font color="red">
+                                                        <span style="color: red">
                                                     @endif
 
                                                         {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                                                     @if($auction->start_time < now())
-                                                        </font>
+                                                        </span>
                                                     @endif
                                                 </b>
                                             </div>
@@ -299,13 +299,13 @@
                                             <th scope="row">Začátek aukce</th>
                                             <td>
                                                 @if($auction->start_time < now())
-                                                    <font color="red">
+                                                    <span style="color: red;">
                                                 @endif
 
                                                     {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                                                 @if($auction->start_time < now())
-                                                    </font>
+                                                    </span>
                                                 @endif
                                             </td>
                                         </tr>
@@ -313,13 +313,13 @@
                                             <th scope="row">Konec aukce</th>
                                             <td>
                                                 @if($auction->time_limit < now())
-                                                    <font color="red">
+                                                    <span style="color: red;">
                                                 @endif
 
                                                     {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                                                 @if($auction->start_time < now())
-                                                    </font>
+                                                    </span>
                                                 @endif
                                             </td>
                                         </tr>
@@ -390,12 +390,12 @@
                                                 </div>
                                                 <div class="col">
                                                     @if($auction->start_time < now())
-                                                        <font color="red">
+                                                        <span style="color: red">
                                                     @endif
                                                         {{date("j. n. Y H:i", strtotime($auction->start_time))}}
 
                                                     @if($auction->start_time < now())
-                                                        </font>
+                                                        </span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -406,13 +406,13 @@
                                                 </div>
                                                 <div class="col">
                                                     @if($auction->time_limit < now())
-                                                        <font color="red">
+                                                        <span style="color: red">
                                                     @endif
 
                                                         {{date("j. n. Y H:i", strtotime($auction->time_limit))}}
 
                                                     @if($auction->start_time < now())
-                                                        </font>
+                                                        </span>
                                                     @endif
                                                 </div>
                                             </div>
