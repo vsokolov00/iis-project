@@ -100,7 +100,7 @@
     });
   }
 
-  function makeBid(is_open) {
+  function makeBid(is_open, is_selling) {
     var max = document.getElementById("inputBid").max;
     var min = document.getElementById("inputBid").min;
     var value = document.getElementById("inputBid").value;
@@ -124,6 +124,18 @@
         document.getElementById("wrongRangeError").innerHTML ="";
         document.getElementById("inputBid").classList.remove("is-invalid");
       }  
+    }
+    if(!is_selling){
+      var actualPrice = parseInt($("#price").text());
+      if(actualPrice-value < 0){
+        document.getElementById("wrongRangeError").innerHTML = "Výše příhožu nesmí převyšovat aktuální cenu.";
+        document.getElementById("inputBid").classList.add("is-invalid");
+        $("#wrongRangeError").css("display", "block");
+        return;
+      }else{
+        document.getElementById("wrongRangeError").innerHTML ="";
+        document.getElementById("inputBid").classList.remove("is-invalid");
+      }
     }
     $.ajaxSetup({
       headers: {
@@ -289,6 +301,7 @@
   });
 
   $(".decline-user").tooltip();
+  $("#btnBid").tooltip();
 
   function defaultMaxBid(){
     var startPrice = $("#stratPrice").val();
