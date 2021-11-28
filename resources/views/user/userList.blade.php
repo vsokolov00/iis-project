@@ -83,7 +83,7 @@
                       <tr>
                         <th scope="row">Liciátor</th>
                         <td>
-                            <div class="material-switch pull-right mrole">
+                            <div class="material-switch pull-right mrole mt-1">
                               <input class="mrole type-toggle" id="{{ $user->id }}rlic-m" type="checkbox" name="roleLic" data-userid="{{ $user->id }}" data-role="auctioneer"
                               @if($user->is_auctioneer()) checked @endif />
                             <label for="{{ $user->id }}rlic-m" class="label-green"></label>
@@ -93,7 +93,7 @@
                       <tr>
                         <th scope="row">Administrátor</th>
                         <td>
-                            <div class="material-switch pull-right mrole">
+                            <div class="material-switch pull-right mrole mt-1">
                                 <input class="mrole type-toggle" id="{{ $user->id }}radmin-m" type="checkbox" name="roleAdm" data-userid="{{ $user->id }}" data-role="admin"
                                 @if($user->is_admin()) checked @endif />
                               <label for="{{ $user->id }}radmin-m" class="label-yellow"></label>
@@ -102,6 +102,17 @@
                       </tr>
                       </tbody>
                     </table>
+                    <div class="d-flex justify-content-center mt-3">
+                            <form method="POST" class="mb-0">
+                                @method('delete')
+                                @csrf
+                                <input type="text" name="userId" value="{{ $user->id }}" hidden>
+                                <button type="submit" class="btn btn-danger dont-propagate deleteUser d-flex align-items-middle">
+                                    <span class="material-icons md-24 mr-3 clickable">delete</span>
+                                    Smazat uživatele
+                                </button>
+                            </form>
+                    </div>
                   </td>
             </tr>
             @endforeach
