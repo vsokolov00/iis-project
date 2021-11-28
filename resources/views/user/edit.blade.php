@@ -26,12 +26,15 @@
                 <h5>E-mailová adresa</h5>
                 <div class="d-flex align-items-center">
                     <div class="col-sm-9 col-md-7 col-lg-4">
-                        <input id="email" type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly/>
+                        <input id="email" type="email" name="email" class="form-control" value="{{ isset($email) ? $email : Auth::user()->email }}" @if(!isset($email)) readonly @endif />
                     </div>
                     <button type="submit" class="rounded border d-flex p-1">
-                        <i id="change-email-submit" class="material-icons md-24 color-warning">edit</i>
+                        <i id="change-email-submit" class="material-icons md-24 @if(isset($email)) color-success @else color-warning @endif">@if(isset($email)) done @else edit @endif</i>
                     </button>
                 </div>
+                @if(isset($email))
+                    <span style="color: red;">Účet s danou e-mailovou adresou již existuje.</span>
+                @endif
             </div>
         </form>
 

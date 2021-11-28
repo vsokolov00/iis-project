@@ -32,7 +32,12 @@ class EditUserController extends Controller
         if(isset($request->username))
             User::where('id', Auth::user()->id)->update(['name' => $request->username]);
         else if(isset($request->email))
-            User::where('id', Auth::user()->id)->update(['email' => $request->email]);
+        {
+            if(User::where('email', $request->email)->first() == null)
+                User::where('id', Auth::user()->id)->update(['email' => $request->email]);
+            else
+                return view('user/edit')->with(['email' => $request->email]);
+        }
         else if(isset($request->new_password) && isset($request->old_password) && isset($request->password_confirm))
         {
             if(Hash::check($request->old_password, auth()->user()->password))

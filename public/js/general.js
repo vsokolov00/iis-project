@@ -392,7 +392,7 @@ function GetPasswordStrenght(password)
 
     if(password.length >= 8 && specialCharacterRegex.test(String(password)) && numberRegex.test(String(password)))
         return 1;
-    else if(password.length >= 6 && numberRegex.test(String(password)))
+    else if(password.length >= 8 && numberRegex.test(String(password)))
         return 0;
     else
         return -1;

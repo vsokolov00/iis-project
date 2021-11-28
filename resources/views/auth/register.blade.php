@@ -29,7 +29,7 @@
                 <div class="register">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror text-input" name="email" value="{{ old('email') }}" required autocomplete="email">
                         <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Vaše E-mailová adresa" data-placement="bottom"
-                            data-content="Zadaná adresa bude použita pouze jako možnost obnovy v případě zapomenutého hesla.">
+                            data-content="Zadaná adresa bude v případě výhry zobrazena zadavateli aukce.">
                             <i class="material-icons">alternate_email</i>
                         </a>
                     </input>
@@ -46,7 +46,7 @@
                 <div class="register">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror text-input" name="password" required autocomplete="new-password">
                         <a href="#" class="form-icon" data-toggle="popover" data-trigger="focus" title="Doporučený formát hesla" data-placement="bottom"
-                            data-content="Heslo musí být alespoň 6 znaků dlouhé a obsahovat přinejmenším alespoň jednu číslici. Doporučujeme použít heslo o délce alespoň 8 znaků s použitím speciálních znaků a číslic.">
+                            data-content="Heslo musí být alespoň 8 znaků dlouhé a musí obsahovat přinejmenším alespoň jednu číslici. Doporučujeme také použití speciálních znaků.">
                             <i class="material-icons">password</i>
                         </a>
                     </input>
