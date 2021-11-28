@@ -25,7 +25,7 @@
                             <div class="col">
                                 <label for="name">Název</label>
                                 <input type="text" class="form-control" id="edit-name" name="name" required>
-                                <label for="name">Popis</label>
+                                <label for="name">Popis <span class="font-optional">- nepovinné</span></label>
                                 <textarea class="form-control" id="edit-description" name="description" rows="3"></textarea>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                                 <div id="startPriceError" class="invalid-feedback"></div>
                             </div>
                             <div class="col">
-                                <label for="endPrice">Konečná cena</label>
+                                <label for="endPrice">Konečná cena <span class="font-optional">- nepovinné</span></label>
                                 <input type="number" class="form-control closingPrice" id="edit-endPrice" name="endPrice">
                                 <div id="closingPriceError"  class="invalid-feedback"></div>
                             </div>

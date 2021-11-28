@@ -119,6 +119,12 @@ nav .container{
     font-size:25px;
 }
 
+.font-optional{
+    color: #a6a6a6;
+    font-style:italic;
+    font-size: 0.8rem;
+}
+
 @media (min-width: 768px){
 .table-display-lg{
     display:table;

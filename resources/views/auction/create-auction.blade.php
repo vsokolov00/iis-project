@@ -20,7 +20,7 @@
             <label for="name">Název</label>
             <input type="text" class="form-control" id="name" name="name" required>
 
-            <label for="name">Popis</label>
+            <label for="name">Popis <span class="font-optional">- nepovinné</span></label>
             <textarea class="form-control" id="description" name="description" rows="4"></textarea>
         </div>
       </div>
@@ -32,7 +32,7 @@
           <div id="startPriceError" class="invalid-feedback"></div>
         </div>
         <div class="col">
-          <label for="startPrice">Konečná cena</label>
+          <label for="startPrice">Konečná cena <span class="font-optional">- nepovinné</span></label>
           <input type="number" class="form-control closingPrice" id="closingPrice" name="closingPrice" min="0">
           <div id="closingPriceError"  class="invalid-feedback"></div>
         </div>
