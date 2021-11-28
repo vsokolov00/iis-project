@@ -140,9 +140,15 @@ class AuctionApprovalController extends Controller
                 $current_price = Auction::find($auction->id)->participants->sum('last_bid') + Auction::find($auction->id)->starting_price;
                 $auction_winners[$auction->id] = [$current_winner, $current_price];
             } else {
-                $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
-                $current_price = Auction::find($auction->id)->participants->max('last_bid') + Auction::find($auction->id)->starting_price;
-                $auction_winners[$auction->id] = [$current_winner, $current_price];
+                if ($auction->is_selling) {
+                    $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
+                    $current_price = Auction::find($auction->id)->participants->max('last_bid') + Auction::find($auction->id)->starting_price;
+                    $auction_winners[$auction->id] = [$current_winner, $current_price];
+                } else {
+                    $current_winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'asc')->first();
+                    $current_price = Auction::find($auction->id)->participants->min('last_bid') + Auction::find($auction->id)->starting_price;
+                    $auction_winners[$auction->id] = [$current_winner, $current_price];
+                }
             }
         }
 
@@ -173,7 +179,11 @@ class AuctionApprovalController extends Controller
                 if($auction->is_open) {
                     $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->where('last_bid', '!=', 0)->orderBy('date_of_last_bid', 'desc')->first();
                 } else {
-                    $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
+                    if ($auction->is_selling) {
+                        $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'desc')->first();
+                    } else {
+                        $winner = ParticipantsOf::with('user')->where('auction', $auction->id)->where('is_approved', 1)->orderBy('last_bid', 'asc')->first();        
+                    }
                 }
                 if ($request->response) {
                     if ($winner != null)
