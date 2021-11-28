@@ -108,7 +108,7 @@
                                         @endif
 
                                         <h3>{{ $auction->is_open ? $auction->starting_price + $bids[$auction->id] : $auction->starting_price }} Kč</h3>
-                                        <span>Začátek: {{ $auction->start_time }}</span>
+                                        <span>Konec: {{ $auction->time_limit }}</span>
                                 </div>
                             @endforeach
                             </div>

@@ -32,7 +32,11 @@
 							@else
 								<h3>{{ $auction->starting_price }} Kč</h3>
 							@endif
+							@if(isset($active))
+							<span>Konec: {{ $auction->time_limit }}</span>
+							@else
 							<span>Začátek: {{ $auction->start_time }}</span>
+							@endif
 						</div>
 					@endforeach
 					<!-- divs to fill free space-->

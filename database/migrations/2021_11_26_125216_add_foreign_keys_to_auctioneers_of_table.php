@@ -14,8 +14,8 @@ class AddForeignKeysToAuctioneersOfTable extends Migration
     public function up()
     {
         Schema::table('auctioneers_of', function (Blueprint $table) {
-            $table->foreign(['auction'], 'auction_fk')->references(['id'])->on('auctions')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['user'], 'auctioneer_fk')->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['auction'], 'auction_fk')->references(['id'])->on('auctions')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['user'], 'auctioneer_fk')->references(['id'])->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
