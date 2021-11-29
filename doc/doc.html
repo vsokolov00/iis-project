@@ -109,14 +109,18 @@
 	na AWS S3 bucket. Naštěstí implementace nebyla těžká, jelikož má Laravel dobré rozhrání pro komunikaci s S3.
 </p>
 
-<h4>Server-side</h3>
-<p>
-    Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend informačního systému ale také generování html obsahu stránek dle daných okolností.
-	Použitý framework podporuje architekturu stránek ve formě návrhového vzoru MVC. Ke správě uživatelů byl využit middleware poskytovaný samotným frameworkem.
+<h4>Synchronizace času a aktuální ceny v zobrazení detailu aukce</h4>
+<p>V zobrazení detailu aukce si uživatelé mohou nejen zobrazit podrobnější informace o nabízeném produktu, ale probíhá zde také aukce samotná.
+	Pro přívětivější UX se jednotlivé informace, jako jsou čas spuštění a ukončení aukce, aktuální cena, nebo zda daný uživatel momentálně vyhrává,
+	mění automaticky bez nutnosti aktualizovat stránku. Využívá se k tomu technnologie AJAX. Možnost přihazovat je řízená časem, kdy je tlačíkto
+	přihodit aktivní pouze v době mezi začátkem a koncem aukce. Aby uživatel nemohl toto opatření obejít změnou systémového času, řídí se časem na serveru. 
+	V období hodinu před začátkem/koncem aukce se již nezobrazuje datum a čas, ale odpočet v minutách, v poslední minutě ve vteřinách. Interval synchronizace času
+	se mění v závislosti na zbývajícím času k příští změně stavu. <br>
+	Cena a aktuální stav uživatele (vyhrává/prohrává) se synchronizuje v pravidelných intervalech v průběhu aukce a také okamžitě po příhozu.<br>
+	Pokud se jedná o uzavřenou aukci, zobrazuje se pouze počáteční cena a uživatel smí přihodit pouze jednou. Poté je již tlačítko vždy deaktivováno 
+	a zobrazuje se pouze hláška o úspěšném zaznamenání příhozu. <br>
+	Po ukončení aukce a schválení výsledků liciátorem se vypíše výherce. 
 </p>
-
-<h4>Client-side</h3>
-<p>Na straně klienta byla použita javascriptová knihovna jQuery. Provádí se zde validace zadaných dat ve formulářích, asynchronní komunikace se serverem a různé grafické animace.</p>
 
 <h3>Vzhled</h3>
 <p>Většina stylů byla implementovaná s pomocí frameworku Boostrap a doplněna vlastními styly v souboru general.css. Pro responzivní rozložení byl využit flexbox. 
