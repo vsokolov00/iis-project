@@ -59,14 +59,14 @@
 
 <h2>Implementace</h2>
 <p>Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend ale také generování html obsahu stránek dle daných okolností.
-	Využívá se zde MVC model.</p>
+	Využívá se zde vzor MVC.</p>
 <img src="laravel_diagram.png" style="width: 50%">
 
 <h3>Struktura projektu</h3>
 <ul>
 	<li>app/ - Obsahuje jádro naší aplikace a zahrnuje všechny různé komponenty od kontrolerů až po vlastní události</li>
 	<li>Console/ obsahuje Kernel pro interakci s aplikací pomocí <code>artisan</code> skriptu (vygenerováno frameworkem)</li>
-	<li>Exceptions/ obsahuje vyjímky (vygenerováno frameworkem)</li>
+	<li>Exceptions/ obsahuje definice výjimek (vygenerováno frameworkem)</li>
 	<li>Http/ - Obsahuje business logiku zpracovávající požadavky</li>
 		<ul>
 			<li>Controllers/ - Kontrolery, které jsou zprostředkovatelem mezi Views a Models (naše práce)</li>
@@ -105,12 +105,12 @@
 
 <h4>Neperzistentní <code>/storage</code> uložiště na zvoleném hostingu</h4>
 <p>Během testování aplikace na Heroku hostingu jsme narazili na problem že Heroku pravidelně máže obrazky, které jsme
-	úkladali do složky <code>/storage/app/public/images</code>.<br> Bylo rozhodnuté napojít neperzistentní uložiště
-	na AWS S3 bucket, naštěstí implementace nebyla těžká jelikož Laravel má dobré rozhrání pro komunikaci s S3.
+	úkladali do adresáře <code>/storage/app/public/images</code>.<br> Bylo proto úložiště převedeno z neperzistentního uložiště
+	na AWS S3 bucket, naštěstí implementace nebyla příliž složitá, jelikož je framework uzpůsoben s komunikaci s S3.
 </p>
 
 <h3>Databáze, ERD a schéma DB</h3>
-<p>Prvním krokem v návrhu infornačního systému pro dánou úlohu bylo vytvaření ER diagramu, na kterém by se pak stavěl
+<p>Prvním krokem v návrhu infornačního systému pro danou úlohu bylo vytvaření ER diagramu, na základě kterého byl následně sestaven
 návrh databáze.</p>
 <a href="./database_schema.pdf">Původní ER diagram</a>
 
