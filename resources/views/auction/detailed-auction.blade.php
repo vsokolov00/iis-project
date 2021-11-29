@@ -92,7 +92,9 @@
 
   <script type= "text/javascript">
     $(document).ready(function() {
-      startTimer(new Date("{{$auction->start_time}}"), new Date("{{$auction->time_limit}}"), "{{$auction->id}}");
+      start_time = "{{$auction->start_time}}".replace(/ /g,"T");
+      end_time = "{{$auction->time_limit}}".replace(/ /g,"T");
+      startTimer(new Date(start_time), new Date(end_time), "{{$auction->id}}");
     });
   </script>
 @endsection('content')
