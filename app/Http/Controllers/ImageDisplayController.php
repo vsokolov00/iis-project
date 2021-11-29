@@ -11,7 +11,7 @@ use Storage;
 class ImageDisplayController extends Controller
 {
     public function displayImage($filename) {
-        return  Storage::disk('local')->response("public/images/empty.png");
+        return  Storage::disk('local')->response("public/storage/images/empty.png");
         // if (Storage::disk('local')->has("public/images/" . $filename)) {
         //     return  Storage::disk('local')->response("public/images/" . $filename);
         // }
