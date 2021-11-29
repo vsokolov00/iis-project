@@ -38,11 +38,6 @@
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://bidmore-iis.herokuapp.com/" target="_blank">http://bidmore-iis.herokuapp.com/</a></dd>
-	<p>V případě že by něco se stalo s Heroku byla vytvořena záložná kopie projektu, ačkoliv velmi nedoporučujeme k ni přistupovat<br>
-	v případě že aplikace na tomto URL je funkční, záloha je vhodne použit jako poslední možnost. Záložná kopie nepodporuje<br>
-	vkladání obrázku a je teměr netestována.
-	<dd><b>Záložná kopie aplikace: </b><a href="https://www.stud.fit.vutbr.cz/~xsokol15/bidmore-zaloha/" target="_blank">https://www.stud.fit.vutbr.cz/~xsokol15/bidmore-zaloha/</a></dd>
-	</p>
 </dl>
 
 <h2>Uživatelé systému pro testování</h2>
@@ -70,7 +65,7 @@
 <h3>Struktura projektu</h3>
 <ul>
 	<li>app/ - Obsahuje jádro naší aplikace a zahrnuje všechny různé komponenty od kontrolerů až po vlastní události</li>
-	<li>Console/ obsahuje Kernel pro interakci s aplikací pomocí <code>artisan</code> skriptu (vygenerováno frameworkem)</li>
+	<li>Console/ obsahuje jádro pro interakci s aplikací pomocí <code>artisan</code> skriptu (vygenerováno frameworkem)</li>
 	<li>Exceptions/ obsahuje definice výjimek (vygenerováno frameworkem)</li>
 	<li>Http/ - Obsahuje business logiku zpracovávající požadavky</li>
 		<ul>
@@ -78,7 +73,7 @@
 			<li>Middleware/ - Jednotlivé middleware třídy (vygenerováno frameworkem)</li>
 		</ul>
 	<li>Models/ - Modely, vytvořené na zakladě Laravel Eloquent ORM, odstíňují tabulky databáze (naše práce)</li>
-	<li>Providers/ - Obsahuje třídy, které se nám starají o registrování vlastních událostí nebo nastavení zpracovávání požadavků (vygenerováno frameworkem)</li>
+	<li>Providers/ - Obsahuje třídy, které se starají o registrování vlastních událostí nebo nastavení zpracovávání požadavků (vygenerováno frameworkem)</li>
 	<li>bootstrap/ - Obsahuje zavádějící soubor frameworku a cache (vygenerováno frameworkem)</li>
 	<li>config/ - Obsahuje konfiguraci projektu</li>
 	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovany pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">tohoto</a> open source nástroje</li>
@@ -96,40 +91,46 @@
 			<li>sass/- Nezkompilované SCSS soubory</li>
 			<li>views/ - Pohledy</li>
 		</ul>
-	<li>routes/ - Routování koncových bodů webu</li>
+	<li>routes/ - Směrování koncových bodů webu</li>
 	<li>storage/ - Obsahuje souborové relace uživatelů, logy, možné skladiště pro námi vygenerované soubory a mezipaměť vygenerovaných Blade pohledů a dalších souborů.</li>
 		<ul>
-			<li>app/public/images – Použiváme pro cachování obrázků, které byly stažene z AWS S3 bucket uložiště</li>
+			<li>app/public/images – Použiváme pro cachování obrázků, které byly staženy z AWS S3 bucket uložiště</li>
 		</ul>
 	<li>vendor/ - Knihovny spravované prostřednictvím nástroje Composer</li>
 	<li>.env – Globální konfigurace aplikace a přístupové údaje pro propojení aplikace s externímy službami jako databáze nebo email server</li>
 	<li>composer.json – Soubor obsahující všechny závislosti projektu</li>
 </ul>
 
-<h3>Zajimavá řešení problemů, na které jsme narázili</h3>
+<h3>Zajímavá řešení problemů, na které jsme narázili</h3>
 
 <h4>Neperzistentní <code>/storage</code> uložiště na zvoleném hostingu</h4>
-<p>Během testování aplikace na Heroku hostingu jsme narazili na problém, že Heroku pravidelně maže obrázky, které jsme
-	ukládali do složky <code>/storage/app/public/images</code>.<br> Bylo rozhodnuto napojit neperzistentní úložiště
-	na AWS S3 bucket. Naštěstí implementace nebyla těžká, jelikož má Laravel dobré rozhrání pro komunikaci s S3.
+<p>Během testování aplikace na hostingu Heroku jsme narazili na problém, kdy služba pravidelně mazala obrázky, které byly
+	uloženy v adresáři <code>/storage/app/public/images</code>.<br> Toto neperzistentní úložiště
+	bylo tedy nahrazeno za AWS S3 bucket.
+</p>
+
+<h4>Kompatibilita databází MySQL a PostgreSQL</h4>
+<p>
+    Při pokusu o publikování informačního systému u poskytovatele Heroku jsme narazili na nekompatibilitu návrhu databáze mezi technologiemi MySQL a PostgreSQL.
+    V rámci zajištění kompatibility s dosavadně testovanou lokální databází MySQL byl použit ústupek v podobě odstranění složených primárních klíčů.
 </p>
 
 <h4>Synchronizace času a aktuální ceny v zobrazení detailu aukce</h4>
 <p>V zobrazení detailu aukce si uživatelé mohou nejen zobrazit podrobnější informace o nabízeném produktu, ale probíhá zde také aukce samotná.
 	Pro přívětivější UX se jednotlivé informace, jako jsou čas spuštění a ukončení aukce, aktuální cena, nebo zda daný uživatel momentálně vyhrává,
 	mění automaticky bez nutnosti aktualizovat stránku. Využívá se k tomu technnologie AJAX. Možnost přihazovat je řízená časem, kdy je tlačíkto
-	přihodit aktivní pouze v době mezi začátkem a koncem aukce. Aby uživatel nemohl toto opatření obejít změnou systémového času, řídí se časem na serveru. 
+	přihodit aktivní pouze v době mezi začátkem a koncem aukce. Aby uživatel nemohl toto opatření obejít změnou systémového času, řídí se časem serveru.
 	V období hodinu před začátkem/koncem aukce se již nezobrazuje datum a čas, ale odpočet v minutách, v poslední minutě ve vteřinách. Interval synchronizace času
 	se mění v závislosti na zbývajícím času k příští změně stavu. <br>
 	Cena a aktuální stav uživatele (vyhrává/prohrává) se synchronizuje v pravidelných intervalech v průběhu aukce a také okamžitě po příhozu.<br>
-	Pokud se jedná o uzavřenou aukci, zobrazuje se pouze počáteční cena a uživatel smí přihodit pouze jednou. Poté je již tlačítko vždy deaktivováno 
+	Pokud se jedná o uzavřenou aukci, zobrazuje se pouze počáteční cena a uživatel smí přihodit pouze jednou. Poté je již tlačítko vždy deaktivováno
 	a zobrazuje se pouze hláška o úspěšném zaznamenání příhozu. <br>
-	Po ukončení aukce a schválení výsledků liciátorem se vypíše výherce. 
+	Po ukončení aukce a schválení výsledků liciátorem se vypíše výherce.
 </p>
 
 <h3>Vzhled</h3>
-<p>Většina stylů byla implementovaná s pomocí frameworku Boostrap a doplněna vlastními styly v souboru general.css. Pro responzivní rozložení byl využit flexbox. 
-	Nehodil se ovšem na responzivní zobrazení seznamů, kde byly implementované dvě verze zobrazení a to pro desktop a pro mobilní zařizení. 
+<p>Většina stylů byla implementovaná s pomocí frameworku Boostrap a doplněna vlastními styly v souboru general.css. Pro responzivní rozložení byl využit flexbox.
+	Nehodil se ovšem na responzivní zobrazení seznamů, kde byly implementované dvě verze zobrazení a to pro desktop a pro mobilní zařizení.
 	Pro přepínání mezi těmito zobrazeními bylo využito query @media. Při návrhu designu byla nejdříve zvolena základní barevná paleta a od ní se odvíjel návrh jednotlivých zobrazení.
 	Ikony a font byly použity z knihovny Google Fonts. Snahou bylo vytvořit čisté a jednoduché grafické rozhraní podle principů Material Design.
 </p>
@@ -137,7 +138,6 @@
 	<img src="./images/desktop.png" alt="Zobrazení pro desktop" style=" object-fit: contain;">
 	<img src="./images/mobile.png" alt="Zobrazení pro mobilní zařízení" style="object-fit: contain;">
 </div>
-<img src="./images/vzhled.png" style="width: 50%">
 
 <h3>Připady použití</h3>
 <ul>
@@ -189,7 +189,7 @@ návrh databáze.</p>
 		<ol>
 			<li><a href="https://www.php.net/downloads.php" target="_blank">PHP</a>, verze aspoň 7.3</li>
 			<li><a href="https://getcomposer.org/download/" target="_blank">Composer</a></li>
-			<li>Jakakoliv relační databáze, <b>je možné použit předdefinovanou</b> PostgreSQL, viz soubor .env (Projekt byl testován na databázích MySQL a PostreSQL.)</li>
+			<li>Databáze MySQL či PostreSQL.</li>
 			<li>AWS S3 bucket pro persistentní úkladaní obrázků, <b>je možné použit předdefinovaný</b>, viz soubor .env</li>
 		</ol>
 	<li>Postup instalace na server
