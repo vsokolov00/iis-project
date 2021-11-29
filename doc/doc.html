@@ -76,7 +76,7 @@
 	<li>Providers/ - Obsahuje třídy, které se nám starají o registrování vlastních událostí nebo nastavení zpracovávání požadavků (100 % laravel soubor)</li>
 	<li>bootstrap/ - Obsahuje zavádějící soubor frameworku a cache (100% laravel soubor)</li>
 	<li>config/ - Obsahuje konfiguraci projektu</li>
-	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovany pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">dáného</a> open source nástroje</li>
+	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovany pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">daného</a> open source nástroje</li>
 	<li>doc/ - Obsahuje soubory pro vytvoření dané dokumentace a README</li>
 	<li>public/ - Kořenový adresář celého webu. Také obsahuje soubor index.php, který zpracovává všechny požadavky na web</li>
 		<ul>
@@ -94,36 +94,32 @@
 	<li>routes/ - Routování našeho webu</li>
 	<li>storage/ - Obsahuje souborové relace uživatelů, logy, možné skladiště pro námi vygenerované soubory a mezipaměť vygenerovaných Blade pohledů a dalších souborů.</li>
 		<ul>
-			<li>app/public/images – Použiváme pro cachování obrýzků, které byly stažene z AWS S3 bucket uložiště</li>
+			<li>app/public/images – Používáme pro cachování obrázků, které byly staženy z AWS S3 bucket úložiště</li>
 		</ul>
 	<li>vendor/ - Knihovny spravované přes Composer</li>
-	<li>.env – Credentials pro propojení aplikace s externímy službami jako databáze nebo email server</li>
+	<li>.env – Credentials pro propojení aplikace s externími službami jako databáze nebo email server</li>
 	<li>composer.json – Soubor obsahující všechny závislosti projektu</li>
 </ul>
 
 <h3>Zajimavá řešení problemů, na které jsme narázili</h3>
 
 <h4>Neperzistentní <code>/storage</code> uložiště na zvoleném hostingu</h4>
-<p>Během testování aplikace na Heroku hostingu jsme narazili na problem že Heroku pravidelně máže obrazky, které jsme
-	úkladali do složky <code>/storage/app/public/images</code>.<br> Bylo rozhodnuté napojít neperzistentní uložiště
-	na AWS S3 bucket, naštěstí implementace nebyla těžká jelikož Laravel má dobré rozhrání pro komunikaci s S3.
+<p>Během testování aplikace na Heroku hostingu jsme narazili na problém, že Heroku pravidelně maže obrázky, které jsme
+	ukládali do složky <code>/storage/app/public/images</code>.<br> Bylo rozhodnuto napojit neperzistentní úložiště
+	na AWS S3 bucket. Naštěstí implementace nebyla těžká, jelikož má Laravel dobré rozhrání pro komunikaci s S3.
 </p>
 
 
 
 
 <h3>Databáze, ERD a schéma DB</h3>
-<p>Prvním krokem v návrhu infornačního systému pro dánou úlohu bylo vytvaření ER diagramu, na kterém by se pak stavěl
+<p>Prvním krokem v návrhu informačního systému pro danou úlohu bylo vytváření ER diagramu, na kterém by se pak stavěl
 návrh databáze.</p>
 <a href="./database_schema.pdf">Původní ER diagram</a>
 
 <p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
 <img src="./auction_db.png" style="width: 50%">
 
-<h3>Server-side</h3>
-<p>Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend ale také generování html obsahu stránek dle daných okolností.
-	Využívá se zde MVC model......
-</p>
 
 <h3>Client-side</h3>
 <p>Na straně klienta byla použita javascriptová knihovna jQuery. Provádí se zde validace zadaných dat ve formulářích, asynchronní komunikace se serverem a různé grafické animace.</p>
@@ -131,9 +127,13 @@ návrh databáze.</p>
 <h3>Vzhled</h3>
 <p>Většina stylů byla implementovaná s pomocí frameworku Boostrap a doplněna vlastními styly v souboru general.css. Pro responzivní rozložení byl využit flexbox. 
 	Nehodil se ovšem na responzivní zobrazení seznamů, kde byly implementované dvě verze zobrazení a to pro desktop a pro mobilní zařizení. 
-	Pro přepínání mezi těmito zobrazeními bylo využito query @media. Při návrhu designu byla nejdříve zvolena základní barevná paleta a od ní se odvíjel návrh jednolivých zobrazení.
+	Pro přepínání mezi těmito zobrazeními bylo využito query @media. Při návrhu designu byla nejdříve zvolena základní barevná paleta a od ní se odvíjel návrh jednotlivých zobrazení.
 	Ikony a font byly použity z knihovny Google Fonts. Snahou bylo vytvořit čisté a jednoduché grafické rozhraní podle principů Material Design.
 </p>
+<div style="display:flex; width:50%; height:400px">
+	<img src="./desktop.png" alt="Zobrazení pro desktop" style=" object-fit: contain;">
+	<img src="./mobile.png" alt="Zobrazení pro mobilní zařízení" style="object-fit: contain;">
+</div>
 
 <h3>Připady použití</h3>
 <ul>
