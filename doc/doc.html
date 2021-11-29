@@ -109,29 +109,22 @@
 	na AWS S3 bucket, naštěstí implementace nebyla příliž složitá, jelikož je framework uzpůsoben s komunikaci s S3.
 </p>
 
-<h3>Databáze, ERD a schéma DB</h3>
-<p>Prvním krokem v návrhu infornačního systému pro danou úlohu bylo vytvaření ER diagramu, na základě kterého byl následně sestaven
-návrh databáze.</p>
-<a href="./database_schema.pdf">Původní ER diagram</a>
-
-<p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
-<img src="./auction_db.png" style="width: 50%">
-
-<h3>Server-side</h3>
+<h4>Server-side</h3>
 <p>
     Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend informačního systému ale také generování html obsahu stránek dle daných okolností.
 	Použitý framework podporuje architekturu stránek ve formě návrhového vzoru MVC. Ke správě uživatelů byl využit middleware poskytovaný samotným frameworkem.
 </p>
 
-<h3>Client-side</h3>
+<h4>Client-side</h3>
 <p>Na straně klienta byla použita javascriptová knihovna jQuery. Provádí se zde validace zadaných dat ve formulářích, asynchronní komunikace se serverem a různé grafické animace.</p>
 
-<h3>Vzhled</h3>
+<h4>Vzhled</h3>
 <p>Většina stylů byla implementovaná s pomocí frameworku Boostrap a doplněna vlastními styly v souboru general.css. Pro responzivní rozložení byl využit flexbox.
-	Nehodil se ovšem na responzivní zobrazení seznamů, kde byly implementované dvě verze zobrazení a to pro desktop a pro mobilní zařizení.
+	Nehodil se ovšem na responzivní zobrazení seznamů, kde <b>byly implementované dvě verze zobrazení a to pro desktop a pro mobilní zařizení.</b>
 	Pro přepínání mezi těmito zobrazeními bylo využito query @media. Při návrhu designu byla nejdříve zvolena základní barevná paleta a od ní se odvíjel návrh jednolivých zobrazení.
 	Ikony a font byly použity z knihovny Google Fonts. Snahou bylo vytvořit čisté a jednoduché grafické rozhraní podle principů Material Design.
 </p>
+<img src="vzhled.png" style="width: 50%">
 
 <h3>Připady použití</h3>
 <ul>
@@ -166,6 +159,16 @@ návrh databáze.</p>
 		</ul>
 	</li>
 </ul>
+
+<h3>Databáze, ERD a schéma DB</h3>
+<p>Prvním krokem v návrhu infornačního systému pro danou úlohu bylo vytvaření ER diagramu, na základě kterého byl následně sestaven
+návrh databáze.</p>
+<a href="./database_schema.pdf">Původní ER diagram</a>
+
+<p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
+<p>SQL skript pro vytvoření a inicializaci schématu databáze se nachází v <code>./database/create_tables.sql</code>.</p>
+<img src="./auction_db.png" style="width: 50%">
+
 <h2>Instalace</h2>
 
 <ul>
