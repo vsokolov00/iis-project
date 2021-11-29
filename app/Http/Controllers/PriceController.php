@@ -25,29 +25,26 @@ class PriceController extends Controller
             $lastBid = $lastPartc->last_bid;
             
             if (Auth::check()) {
-                $youWinning = $lastPartc->participant == Auth::user()->id && $lastBid != 0;
+                if(!$participants->where("participant", Auth::user()->id)->isEmpty())
+                    $youWinning = $lastPartc->participant == Auth::user()->id && $lastBid != 0;
             }
 
             if($auction->time_limit > now()) {
                 if ($auction->is_selling) {
                     if(isset($youWinning)) {
                         if ($youWinning) {
-                            return '<div class="green-text" id="winStatus">Aktualně vyhrávate</div>
-                                    <div class="yellow-text" id="price">'.$price.' Kč</div>
-                                    <div class="green-text">(+'.$lastBid.' Kč)</div>';
+                            return '<div class="yellow-text" id="price">'.$price.' Kč</div>
+                                    <div class="green-text" id="winStatus">(vyhráváte)</div>';
                         } else {
-                            return '<div class="green-text" id="winStatus">Aktualně vyhrává někdo jiný</div>
-                                    <div class="yellow-text" id="price">'.$price.' Kč</div>
-                                    <div class="green-text">(+'.$lastBid.' Kč)</div>';
+                            return '<div class="yellow-text" id="price">'.$price.' Kč</div>
+                                    <div class="red-loosing" id="winStatus">(prohráváte)</div>';
                         }
                     } else {
-                        return '<div class="yellow-text" id="price">'.$price.' Kč</div>
-                                <div class="green-text">(+'.$lastBid.' Kč)</div>';
+                        return '<div class="yellow-text" id="price">'.$price.' Kč</div>';
                     }
                 }
                 else {
-                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
-                        <div class="green-text">('.$lastBid.' Kč)</div>'; 
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>'; 
                 }
             }
             else
@@ -59,11 +56,9 @@ class PriceController extends Controller
 
             if($auction->time_limit > now()){
                 if ($auction->is_selling)
-                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
-                            <div class="green-text">(+0 Kč)</div>';
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>';
                 else 
-                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>
-                        <div class="green-text">(-0 Kč)</div>';
+                    return '<div class="yellow-text" id="price">'.$price.' Kč</div>';
             }
             else{ 
                 return '<div class="yellow-text" id="price">'.$price.' Kč</div>';

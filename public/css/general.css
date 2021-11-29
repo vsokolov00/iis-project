@@ -82,7 +82,13 @@ h4{
 .green-text{
     color: #42AA1F;
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.5em;
+}
+
+.red-loosing{
+    color: #FF261B;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 h4{
