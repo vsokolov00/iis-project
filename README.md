@@ -30,4 +30,4 @@ SQL skript pro vytvoření a inicializaci schématu databáze se nachází v [`.
 6. Spusťte server příkazem `php artisan serve`
 
 ### Vzhled aplikace
-![Očekavaný vzhled aplikace (po naplnění data)](doc/vzhled.png?raw=true "Vzhled")
+![Očekavaný vzhled aplikace (po naplnění data)](doc/images/desktop.png?raw=true "Vzhled")
