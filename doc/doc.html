@@ -82,6 +82,39 @@ návrh databáze.</p>
 	Ikony a font byly použity z knihovny Google Fonts. Snahou bylo vytvořit čisté a jednoduché grafické rozhraní podle principů Material Design.
 </p>
 
+<h3>Připady použití</h3>
+<ul>
+	<li>Neregistrovaný uživatel
+		<ul>
+			<li><b>Registrace</b> - RegisterController.php, register.blade.php, validace na straně klienta v souboru general.js</li>
+			<li><b>Zobrazení úvodní stránky</b> - HomeController.php, home.blade.php, animace posuvu seznamů v souborech general.js a general.css</li>
+			<li><b>Zobrazení aukcí podle typu</b> - AllAuctionsController.php, allAuctions.blade.php</li>
+			<li><b>Zobrazení detailu aukce</b> - AuctionController.php, detailed-auction.blade.php, synchronizace času a aktuální ceny pomocí AJAX v general.js</li>
+		</ul>
+	</li>	
+	<li>Registrovaný uživatel
+		<ul>
+			<li><b>Přihlášení</b> - LoginController.php, login.blade.php, validace na straně klienta v souboru general.js</li>
+			<li><b>Změna hesla?? Šimon pls doplň </b></li>
+			<li><b>Vytvoření nové aukce</b> - CreateAuctionFormController.php, create-auction.blade.php, validace na straně klienta v souboru general.js</li>
+			<li><b>Zobrazení seznamu vytvořených aukcí</b> - UserAuctionsController.php, userAuctions.blade.php</li>
+			<li><b>Upravení aukce (před schválením)</b> - UserAuctionsController.php, edit-auction.blade.php, validace na straně klienta v souboru general.js</li>
+			<li><b>Registrace na aukci, přihazovat na aukci</b> - AuctionController.php, detailed-auction.blade.php, synchronizace času a aktuální ceny pomocí AJAX v general.js. Obsluha tačítek "registrovat" a přihodit také pomocí AJAX v general.js. Validace v general.js</li>
+			<li><b>Zobrazení registrovaných aukcí, zobrazení vítězných aukcí</b> - UserAuctionsController.php, AllAuctions.blade.php</li>
+		</ul>
+	</li>
+	<li>Liciátor
+		<ul>
+			<li><b>Zobrazení neschávelných aukcí, schválení aukce</b> - AuctionApprovalController.php, auction-approval.blade.php</li>
+			<li><b>Zobrazení schválených aukcí, účastníky aukce, možnost odebrat účastníka, schválení výsledku aukce</b> - AuctionApprovalController.php, auction-approval.blade.php</li>
+		</ul>
+	</li>
+	<li>Administrátor
+		<ul>
+			<li><b>Správa uživatelů</b> - UserListController.php, userList.blade.php, validace na straně klienta v souboru general.js</li>
+		</ul>
+	</li>	
+</ul>
 <h2>Instalace</h2>
 
 <ul>
