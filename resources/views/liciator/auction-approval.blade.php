@@ -52,8 +52,11 @@
                         </td>
                         <td style="padding-right: 0; text-align: right;" class="table-item">
                             @if($auction->is_approved)
-                                <span type="submit" class="material-icons-outlined md-24 mr-3 invalidate dont-propagate clickable" style="height: 24px; width: 24px;" onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')"
-                                    data-toggle="tooltip" data-placement="left" title="Zrušit schválení aukce">
+                                <span type="submit" class="material-icons-outlined md-24 mr-3 {{ $auction->start_time > now() ? 'invalidate' : 'invalidate-inactive' }} dont-propagate clickable" style="height: 24px; width: 24px;"
+                                    @if($auction->start_time > now())
+                                        onclick="invalidateAuction('{{ route('invalidateAuction') }}', '{{$auction->id}}')"
+                                    @endif
+                                    data-toggle="tooltip" data-placement="left" title="{{ $auction->start_time > now() ? 'Zrušit schválení aukce' : 'Nelze zrušit schválení již probíhající aukce'}}">
                                     close
                                 </span>
                             @else
@@ -330,10 +333,14 @@
                                     </tbody>
                                 </table>
 
-                                <div class="d-flex justify-content-center mt-3 mb-3">
+                                <div class="d-flex justify-content-center mt-3">
                                     <button type="button" class="btn dont-propagate {{ $auction->is_approved ? 'btn-danger' : 'btn-success'}}"
                                         @if($auction->is_approved)
-                                            onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')"
+                                            @if($auction->start_time > now())
+                                                onclick="invalidateAuction('<?=route('invalidateAuction')?>', '{{$auction->id}}')"
+                                            @else
+                                                disabled
+                                            @endif
                                         @else
                                             onclick="openModal('{{ $auction->id }}', '{{ route('image.displayImage',$auction->auctionItem->image) }}', '{{ $auction->auctionItem->item_name }}', `{{ $auction->auctionItem->description }}`, '{{ $auction->starting_price }}',
                                             '{{ $auction->closing_price }}', '{{ $auction->is_approved }}', '{{ $auction->bid_min }}', '{{ $auction->bid_max }}', '{{ $auction->start_time }}', '{{ $auction->time_limit }}', '{{ $auction->is_open  }}', '{{ $auction->is_selling }}')"
@@ -349,6 +356,11 @@
                                             @endif
                                         </div>
                                     </button>
+                                </div>
+                                <div class="d-flex justify-content-center mb-3 font-optional">
+                                    @if($auction->is_approved && $auction->start_time <= now())
+                                        Nelze zrušit schválení, aukce již probíhá.
+                                    @endif
                                 </div>
                             </td>
                         </tr>
