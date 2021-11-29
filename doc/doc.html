@@ -49,11 +49,11 @@
 </tbody></table>
 <p>
     IS implementuje všechny role a případy užití definované zadáním až na případné malé odchylky jako povolení registrace uživatele na aukci.
-    Funkce schvalování účasti uživatele na aukci byla záměrně vynechána z důvodu způsobu implementace aukčního systému. V našem případě totiž role liciátora zastáva spíše správu samostatných aukcí.
+    Funkce schvalování účasti uživatele na aukci byla záměrně vynechána z důvodu způsobu implementace aukčního systému. V našem případě totiž role liciátora zastává spíše správu samostatných aukcí.
     Jeho hlavní zodpovědností je v tomto případě pouze schvalování aukcí a potvrzování jejich výsledků. Možnost odebrání účastníka z aukce byla ovšem ponechána.
 </p>
 <p>
-    Původní diagram případů užití navržený před začatkem implementace je možné prohlednout <a href="./images/use_case.pdf">zde</a>.
+    Původní diagram případů užití navržený před začátkem implementace je možné prohlédnout <a href="./images/use_case.pdf">zde</a>.
     V procesu implementace vznikly drobné odchylky od původního návrhu z důvodu přívětivějšího použití informačního systému.
 </p>
 
@@ -64,19 +64,19 @@
 
 <h3>Struktura projektu</h3>
 <ul>
-	<li>app/ - Obsahuje jádro naší aplikace a zahrnuje všechny různé komponenty od kontrolerů až po vlastní události</li>
+	<li>app/ - Obsahuje jádro naší aplikace a zahrnuje všechny různé komponenty od kontrolérů až po vlastní události</li>
 	<li>Console/ obsahuje jádro pro interakci s aplikací pomocí <code>artisan</code> skriptu (vygenerováno frameworkem)</li>
 	<li>Exceptions/ obsahuje definice výjimek (vygenerováno frameworkem)</li>
 	<li>Http/ - Obsahuje business logiku zpracovávající požadavky</li>
 		<ul>
-			<li>Controllers/ - Kontrolery, které jsou zprostředkovatelem mezi Views a Models (naše práce)</li>
+			<li>Controllers/ - Kontroléry, které jsou zprostředkovatelem mezi Views a Models (naše práce)</li>
 			<li>Middleware/ - Jednotlivé middleware třídy (vygenerováno frameworkem)</li>
 		</ul>
-	<li>Models/ - Modely, vytvořené na zakladě Laravel Eloquent ORM, odstíňují tabulky databáze (naše práce)</li>
+	<li>Models/ - Modely, vytvořené na základě Laravel Eloquent ORM, odstiňují tabulky databáze (naše práce)</li>
 	<li>Providers/ - Obsahuje třídy, které se starají o registrování vlastních událostí nebo nastavení zpracovávání požadavků (vygenerováno frameworkem)</li>
 	<li>bootstrap/ - Obsahuje zavádějící soubor frameworku a cache (vygenerováno frameworkem)</li>
 	<li>config/ - Obsahuje konfiguraci projektu</li>
-	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovany pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">tohoto</a> open source nástroje</li>
+	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovány pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">tohoto</a> open source nástroje</li>
 	<li>doc/ - Obsahuje soubory s dokumentací a soubor README</li>
 	<li>public/ - Kořenový adresář celého webu. Také obsahuje soubor index.php, který zpracovává požadavky na web</li>
 		<ul>
@@ -97,11 +97,11 @@
 			<li>app/public/images – Použiváme pro cachování obrázků, které byly staženy z AWS S3 bucket uložiště</li>
 		</ul>
 	<li>vendor/ - Knihovny spravované prostřednictvím nástroje Composer</li>
-	<li>.env – Globální konfigurace aplikace a přístupové údaje pro propojení aplikace s externímy službami jako databáze nebo email server</li>
+	<li>.env – Globální konfigurace aplikace a přístupové údaje pro propojení aplikace s externími službami jako databáze nebo email server</li>
 	<li>composer.json – Soubor obsahující všechny závislosti projektu</li>
 </ul>
 
-<h3>Zajímavá řešení problemů, na které jsme narázili</h3>
+<h3>Zajímavá řešení problemů, na které jsme narazili</h3>
 
 <h4>Neperzistentní <code>/storage</code> uložiště na zvoleném hostingu</h4>
 <p>Během testování aplikace na hostingu Heroku jsme narazili na problém, kdy služba pravidelně mazala obrázky, které byly
@@ -118,7 +118,7 @@
 <h4>Synchronizace času a aktuální ceny v zobrazení detailu aukce</h4>
 <p>V zobrazení detailu aukce si uživatelé mohou nejen zobrazit podrobnější informace o nabízeném produktu, ale probíhá zde také aukce samotná.
 	Pro přívětivější UX se jednotlivé informace, jako jsou čas spuštění a ukončení aukce, aktuální cena, nebo zda daný uživatel momentálně vyhrává,
-	mění automaticky bez nutnosti aktualizovat stránku. Využívá se k tomu technnologie AJAX. Možnost přihazovat je řízená časem, kdy je tlačíkto
+	mění automaticky bez nutnosti aktualizovat stránku. Využívá se k tomu technologie AJAX. Možnost přihazovat je řízená časem, kdy je tlačítko
 	přihodit aktivní pouze v době mezi začátkem a koncem aukce. Aby uživatel nemohl toto opatření obejít změnou systémového času, řídí se časem serveru.
 	V období hodinu před začátkem/koncem aukce se již nezobrazuje datum a čas, ale odpočet v minutách, v poslední minutě ve vteřinách. Interval synchronizace času
 	se mění v závislosti na zbývajícím času k příští změně stavu. <br>
@@ -130,7 +130,7 @@
 
 <h3>Vzhled</h3>
 <p>Většina stylů byla implementovaná s pomocí frameworku Boostrap a doplněna vlastními styly v souboru general.css. Pro responzivní rozložení byl využit flexbox.
-	Nehodil se ovšem na responzivní zobrazení seznamů, kde byly implementované dvě verze zobrazení a to pro desktop a pro mobilní zařizení.
+	Nehodil se ovšem na responzivní zobrazení seznamů, kde byly implementovány dvě verze zobrazení a to pro desktop a pro mobilní zařízení.
 	Pro přepínání mezi těmito zobrazeními bylo využito query @media. Při návrhu designu byla nejdříve zvolena základní barevná paleta a od ní se odvíjel návrh jednotlivých zobrazení.
 	Ikony a font byly použity z knihovny Google Fonts. Snahou bylo vytvořit čisté a jednoduché grafické rozhraní podle principů Material Design.
 </p>
@@ -174,7 +174,7 @@
 </ul>
 
 <h3>Databáze, ERD a schéma DB</h3>
-<p>Prvním krokem v návrhu infornačního systému pro danou úlohu bylo vytvaření ER diagramu, na základě kterého byl následně sestaven
+<p>Prvním krokem v návrhu informačního systému pro danou úlohu bylo vytváření ER diagramu, na základě kterého byl následně sestaven
 návrh databáze.</p>
 <a href="./images/database_schema.pdf">Původní ER diagram</a>
 
@@ -194,7 +194,7 @@ návrh databáze.</p>
 		</ol>
 	<li>Postup instalace na server
 	  	<ol>
-			<li>Naklonujte <a href="https://github.com/vsokolov00/iis-project">repozitař </a><mark><code>git clone https://github.com/vsokolov00/iis-project</code></mark> (repozitář zveřejněn až po odevzdání)</li>
+			<li>Naklonujte <a href="https://github.com/vsokolov00/iis-project">repozitář </a><mark><code>git clone https://github.com/vsokolov00/iis-project</code></mark> (repozitář zveřejněn až po odevzdání)</li>
 			<li>V kořenové složce projektu spusťte <mark><code>composer install</code></mark></li>
 			<li>Upravte konfigurační soubor <mark><code>.env</code></mark> pokud chcete použit jinou databázi nebo AWS bucket</li>
 			<li>Pokud jste úspěšně připojili svou databázi, spusťte příkaz <mark><code>php artisan migrate</code></mark></li>
@@ -206,7 +206,7 @@ návrh databáze.</p>
 
 <h2>Známé problémy</h2>
 <p>Veškerá funkcionalita specifikovaná v zadání je implementovaná.</p>
-<p>Pro obnovu hesla je potřebá obratit se na administratora, reset hesla přes email není možný</p>
+<p>Pro obnovu hesla je potřebé obrátit se na administrátora, reset hesla prostřednictvím zaslání emailu není možný</p>
 
 
 
