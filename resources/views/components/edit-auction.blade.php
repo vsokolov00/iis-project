@@ -19,7 +19,7 @@
                                     <label for="image" class="addImgBtn">
                                         <span class="material-icons-outlined md-36">add</span>
                                     </label>
-                                    <input class="d-none" type="file" accept="image/*" name="image" id="image" onchange="showPreview(this)">
+                                    <input class="d-none" type="file" accept="image/*" name="image" id="image" onchange="showPreview(this)" disabled>
                                 </div>
                             </div>
                             <div class="col">
