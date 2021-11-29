@@ -38,6 +38,11 @@
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://bidmore-iis.herokuapp.com/" target="_blank">http://bidmore-iis.herokuapp.com/</a></dd>
+	<p>V případě že by něco se stalo s Heroku byla vytvořena záložná kopie projektu, ačkoliv velmi nedoporučujeme k ni přistupovat<br>
+	v případě že aplikace na tomto URL je funkční, záloha je vhodne použit jako poslední možnost. Záložná kopie nepodporuje<br>
+	vkladání obrázku a je teměr netestována.
+	<dd><b>Záložná kopie aplikace: </b><a href="https://www.stud.fit.vutbr.cz/~xsokol15/bidmore-zaloha/" target="_blank">https://www.stud.fit.vutbr.cz/~xsokol15/bidmore-zaloha/</a></dd>
+	</p>
 </dl>
 
 <h2>Uživatelé systému pro testování</h2>
@@ -53,14 +58,14 @@
     Jeho hlavní zodpovědností je v tomto případě pouze schvalování aukcí a potvrzování jejich výsledků. Možnost odebrání účastníka z aukce byla ovšem ponechána.
 </p>
 <p>
-    Původní diagram případů užití navržený před začatkem implementace je možné prohlednout <a href="use_case.pdf">zde</a>.
+    Původní diagram případů užití navržený před začatkem implementace je možné prohlednout <a href="./images/use_case.pdf">zde</a>.
     V procesu implementace vznikly drobné odchylky od původního návrhu z důvodu přívětivějšího použití informačního systému.
 </p>
 
 <h2>Implementace</h2>
 <p>Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend ale také generování html obsahu stránek dle daných okolností.
 	Využívá se zde vzor MVC.</p>
-<img src="laravel_diagram.png" style="width: 50%">
+<img src="./images/laravel_diagram.png" style="width: 50%">
 
 <h3>Struktura projektu</h3>
 <ul>
@@ -129,10 +134,10 @@
 	Ikony a font byly použity z knihovny Google Fonts. Snahou bylo vytvořit čisté a jednoduché grafické rozhraní podle principů Material Design.
 </p>
 <div style="display:flex; width:50%; height:400px">
-	<img src="./desktop.png" alt="Zobrazení pro desktop" style=" object-fit: contain;">
-	<img src="./mobile.png" alt="Zobrazení pro mobilní zařízení" style="object-fit: contain;">
+	<img src="./images/desktop.png" alt="Zobrazení pro desktop" style=" object-fit: contain;">
+	<img src="./images/mobile.png" alt="Zobrazení pro mobilní zařízení" style="object-fit: contain;">
 </div>
-<img src="vzhled.png" style="width: 50%">
+<img src="./images/vzhled.png" style="width: 50%">
 
 <h3>Připady použití</h3>
 <ul>
@@ -171,11 +176,11 @@
 <h3>Databáze, ERD a schéma DB</h3>
 <p>Prvním krokem v návrhu infornačního systému pro danou úlohu bylo vytvaření ER diagramu, na základě kterého byl následně sestaven
 návrh databáze.</p>
-<a href="./database_schema.pdf">Původní ER diagram</a>
+<a href="./images/database_schema.pdf">Původní ER diagram</a>
 
 <p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
 <p>SQL skript pro vytvoření a inicializaci schématu databáze se nachází v <code>./database/create_tables.sql</code>.</p>
-<img src="./auction_db.png" style="width: 50%">
+<img src="./images/auction_db.png" style="width: 50%">
 
 <h2>Instalace</h2>
 
