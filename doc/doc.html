@@ -59,28 +59,28 @@
 
 <h2>Implementace</h2>
 <p>Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend ale také generování html obsahu stránek dle daných okolností.
-	Využívá se zde MVC model.</p>
+	Využívá se zde vzor MVC.</p>
 <img src="laravel_diagram.png" style="width: 50%">
 
 <h3>Struktura projektu</h3>
 <ul>
 	<li>app/ - Obsahuje jádro naší aplikace a zahrnuje všechny různé komponenty od kontrolerů až po vlastní události</li>
-	<li>Console/ obsahuje Kernel pro interakci s aplikací pomocí <code>artisan</code> skriptu (100% laravel soubor)</li>
-	<li>Exceptions/ obsahuje vyjímky (100% laravel soubor)</li>
+	<li>Console/ obsahuje Kernel pro interakci s aplikací pomocí <code>artisan</code> skriptu (vygenerováno frameworkem)</li>
+	<li>Exceptions/ obsahuje definice výjimek (vygenerováno frameworkem)</li>
 	<li>Http/ - Obsahuje business logiku zpracovávající požadavky</li>
 		<ul>
 			<li>Controllers/ - Kontrolery, které jsou zprostředkovatelem mezi Views a Models (naše práce)</li>
-			<li>Middleware/ - Middleware třídy (100% laravel soubor)</li>
+			<li>Middleware/ - Jednotlivé middleware třídy (vygenerováno frameworkem)</li>
 		</ul>
-	<li>Models/ - Modely, vytvořené na zakladě Laravel Eloquent ORM, odstíňují tabulky databází (naše práce)</li>
-	<li>Providers/ - Obsahuje třídy, které se nám starají o registrování vlastních událostí nebo nastavení zpracovávání požadavků (100 % laravel soubor)</li>
-	<li>bootstrap/ - Obsahuje zavádějící soubor frameworku a cache (100% laravel soubor)</li>
+	<li>Models/ - Modely, vytvořené na zakladě Laravel Eloquent ORM, odstíňují tabulky databáze (naše práce)</li>
+	<li>Providers/ - Obsahuje třídy, které se nám starají o registrování vlastních událostí nebo nastavení zpracovávání požadavků (vygenerováno frameworkem)</li>
+	<li>bootstrap/ - Obsahuje zavádějící soubor frameworku a cache (vygenerováno frameworkem)</li>
 	<li>config/ - Obsahuje konfiguraci projektu</li>
-	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovany pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">daného</a> open source nástroje</li>
-	<li>doc/ - Obsahuje soubory pro vytvoření dané dokumentace a README</li>
-	<li>public/ - Kořenový adresář celého webu. Také obsahuje soubor index.php, který zpracovává všechny požadavky na web</li>
+	<li>database/ - Obsahuje databázové migrace a SQL skript pro vytvoření a inicializaci schématu databáze, migrace byly vygenerovany pomocí <a href="https://github.com/kitloong/laravel-migrations-generator">tohoto</a> open source nástroje</li>
+	<li>doc/ - Obsahuje soubory s dokumentací a soubor README</li>
+	<li>public/ - Kořenový adresář celého webu. Také obsahuje soubor index.php, který zpracovává požadavky na web</li>
 		<ul>
-			<li>css/ - CSS soubory pro sylování</li>
+			<li>css/ - soubory kaskádových stylů (CSS)</li>
 			<li>js/ - JavaScript soubory</li>
 		</ul>
 	<li>resources/ - Obsahuje nezkompilované zdrojové soubory pro front-end a překlady aplikace</li>
@@ -91,13 +91,13 @@
 			<li>sass/- Nezkompilované SCSS soubory</li>
 			<li>views/ - Pohledy</li>
 		</ul>
-	<li>routes/ - Routování našeho webu</li>
+	<li>routes/ - Routování koncových bodů webu</li>
 	<li>storage/ - Obsahuje souborové relace uživatelů, logy, možné skladiště pro námi vygenerované soubory a mezipaměť vygenerovaných Blade pohledů a dalších souborů.</li>
 		<ul>
-			<li>app/public/images – Používáme pro cachování obrázků, které byly staženy z AWS S3 bucket úložiště</li>
+			<li>app/public/images – Použiváme pro cachování obrázků, které byly stažene z AWS S3 bucket uložiště</li>
 		</ul>
-	<li>vendor/ - Knihovny spravované přes Composer</li>
-	<li>.env – Credentials pro propojení aplikace s externími službami jako databáze nebo email server</li>
+	<li>vendor/ - Knihovny spravované prostřednictvím nástroje Composer</li>
+	<li>.env – Globální konfigurace aplikace a přístupové údaje pro propojení aplikace s externímy službami jako databáze nebo email server</li>
 	<li>composer.json – Soubor obsahující všechny závislosti projektu</li>
 </ul>
 
@@ -109,19 +109,13 @@
 	na AWS S3 bucket. Naštěstí implementace nebyla těžká, jelikož má Laravel dobré rozhrání pro komunikaci s S3.
 </p>
 
+<h4>Server-side</h3>
+<p>
+    Pro implementaci webové aplikace jsme zvolili framework Laravel. Je zde implementován backend informačního systému ale také generování html obsahu stránek dle daných okolností.
+	Použitý framework podporuje architekturu stránek ve formě návrhového vzoru MVC. Ke správě uživatelů byl využit middleware poskytovaný samotným frameworkem.
+</p>
 
-
-
-<h3>Databáze, ERD a schéma DB</h3>
-<p>Prvním krokem v návrhu informačního systému pro danou úlohu bylo vytváření ER diagramu, na kterém by se pak stavěl
-návrh databáze.</p>
-<a href="./database_schema.pdf">Původní ER diagram</a>
-
-<p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
-<img src="./auction_db.png" style="width: 50%">
-
-
-<h3>Client-side</h3>
+<h4>Client-side</h3>
 <p>Na straně klienta byla použita javascriptová knihovna jQuery. Provádí se zde validace zadaných dat ve formulářích, asynchronní komunikace se serverem a různé grafické animace.</p>
 
 <h3>Vzhled</h3>
@@ -134,6 +128,7 @@ návrh databáze.</p>
 	<img src="./desktop.png" alt="Zobrazení pro desktop" style=" object-fit: contain;">
 	<img src="./mobile.png" alt="Zobrazení pro mobilní zařízení" style="object-fit: contain;">
 </div>
+<img src="vzhled.png" style="width: 50%">
 
 <h3>Připady použití</h3>
 <ul>
@@ -144,11 +139,11 @@ návrh databáze.</p>
 			<li><b>Zobrazení aukcí podle typu</b> - AllAuctionsController.php, allAuctions.blade.php</li>
 			<li><b>Zobrazení detailu aukce</b> - AuctionController.php, detailed-auction.blade.php, synchronizace času a aktuální ceny pomocí AJAX v general.js</li>
 		</ul>
-	</li>	
+	</li>
 	<li>Registrovaný uživatel
 		<ul>
 			<li><b>Přihlášení</b> - LoginController.php, login.blade.php, validace na straně klienta v souboru general.js</li>
-			<li><b>Změna hesla?? Šimon pls doplň </b></li>
+			<li><b>Změna hesla</b> - využívá některých funkcí vytvořených pro validaci hesla během registrace, editace profilu včetně změny hesla je možné nalézt v souborech EditUserController.php a edit.blade.php</li>
 			<li><b>Vytvoření nové aukce</b> - CreateAuctionFormController.php, create-auction.blade.php, validace na straně klienta v souboru general.js</li>
 			<li><b>Zobrazení seznamu vytvořených aukcí</b> - UserAuctionsController.php, userAuctions.blade.php</li>
 			<li><b>Upravení aukce (před schválením)</b> - UserAuctionsController.php, edit-auction.blade.php, validace na straně klienta v souboru general.js</li>
@@ -166,8 +161,18 @@ návrh databáze.</p>
 		<ul>
 			<li><b>Správa uživatelů</b> - UserListController.php, userList.blade.php, validace na straně klienta v souboru general.js</li>
 		</ul>
-	</li>	
+	</li>
 </ul>
+
+<h3>Databáze, ERD a schéma DB</h3>
+<p>Prvním krokem v návrhu infornačního systému pro danou úlohu bylo vytvaření ER diagramu, na základě kterého byl následně sestaven
+návrh databáze.</p>
+<a href="./database_schema.pdf">Původní ER diagram</a>
+
+<p>Během implementace se původní návrh lehce pozměnil, ovšem všechny důležité prvky entit a samotná struktura zůstaly.</p>
+<p>SQL skript pro vytvoření a inicializaci schématu databáze se nachází v <code>./database/create_tables.sql</code>.</p>
+<img src="./auction_db.png" style="width: 50%">
+
 <h2>Instalace</h2>
 
 <ul>

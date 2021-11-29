@@ -2,7 +2,9 @@
 ## Aukce: prodej a nákup zboží a majetku prostřednictvím dražby
 ### Autoři
 – Gotzman Matěj xgotzm00@stud.fit.vutbr.cz
+
 – Sokolovskii Vladislav xsokol15@stud.fit.vutbr.cz
+
 – Strýček Šimon xstryc06@stud.fit.vutbr.cz
 
 ### Dokumentace
