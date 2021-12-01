@@ -572,9 +572,9 @@ function makeBid(is_open, is_selling) {
             document.getElementById("inputBid").classList.remove("is-invalid");
         }
     }
-    if(!is_selling){
+    if(is_selling != 1){
         var actualPrice = parseInt($("#price").text());
-        if(actualPrice-value < 0){
+        if(Number(actualPrice) - Number(value) < 0){
             document.getElementById("wrongRangeError").innerHTML = "Výše příhožu nesmí převyšovat aktuální cenu.";
             document.getElementById("inputBid").classList.add("is-invalid");
             $("#wrongRangeError").css("display", "block");
