@@ -38,7 +38,7 @@
                     @else
                       "Zvýšit cenu"
                     @endif
-                    onclick="makeBid('{{$auction->is_open}}')" disabled>
+                    onclick="makeBid('{{$auction->is_open}}', '{{$auction->is_selling}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
                       Přihodit
@@ -46,7 +46,7 @@
                   </button>
                 @elseif ($registered == 3)
                   <input type="number"  class="form-control font-size-25" value="{{ $default_bid }}" min="{{$auction->bid_min}}" max="{{$auction->bid_max}}"  disabled/>
-                  <button class="btn btn-success ml-3" href="#"  role="button" onclick="makeBid('{{$auction->is_open}}')" disabled>
+                  <button class="btn btn-success ml-3" href="#"  role="button" onclick="makeBid('{{$auction->is_open}}', '{{$auction->is_selling}}')" disabled>
                     <div class="d-flex align-items-center">
                       <span class="material-icons-outlined md-36">done</span>
                       Přihodit
